@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".gameActivity"></activity>
         <activity
             android:name=".HelpMenuActivity"
-            android:screenOrientation="sensorLandscape"></activity>
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".Game_Menu"
             android:screenOrientation="sensorLandscape"
