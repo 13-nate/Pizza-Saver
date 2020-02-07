@@ -11,7 +11,10 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".HelpMenuActivity"
-            android:screenOrientation="sensorLandscape"></activity>
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:screenOrientation="sensorLandscape"
+            android:name=".PlayGameActivity"/>
         <activity
             android:name=".Game_Menu"
             android:screenOrientation="sensorLandscape"
