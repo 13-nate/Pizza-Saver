@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -23,9 +24,11 @@ public class PlayGameActivity extends AppCompatActivity {
     private static final int NUM_COLS = 3;
     private static final int NUM_BOMBS = 3;
 
+
     // save buttons when creating
     Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
-
+    // keeps track of exlopsive cells
+    Boolean[][] isExplosive;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +41,9 @@ public class PlayGameActivity extends AppCompatActivity {
         // when a matched is found place a bomb on click
         int[][]  bombs = new int [NUM_BOMBS][2];
         for(int i = 0; i < NUM_BOMBS; i++) {
-            bombs[i][0] =  (int)(Math.random()*((NUM_ROWS)+1));
-            bombs[i][1]= (int)(Math.random()*((NUM_COLS)+1));
+            // minus one so that the random number max is the max index
+            bombs[i][0] =  (int)(Math.random()*((NUM_ROWS-1)+1));
+            bombs[i][1]= (int)(Math.random()*((NUM_COLS-1)+1));
         }
 
 
@@ -55,6 +59,7 @@ public class PlayGameActivity extends AppCompatActivity {
                     1.0f           //scaleing weight of 1 so it knows how to scale
             ));
             table.addView(tableRow);
+
             for (int col = 0; col < NUM_COLS; col++){
                 // to be used inside the anomnous class
                 final int FINAL_COL = col;
@@ -75,43 +80,48 @@ public class PlayGameActivity extends AppCompatActivity {
                 //creates anominous class
 
                 // check if one of the random number sets
-                for(int i = 0; i < NUM_BOMBS; i++) {
+                for(int i = 0; i < NUM_BOMBS-1; i++) {
                     if (row == bombs[i][0] && col == bombs[i][1]) {
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                // all buttons call same thing, make function
-                                // cant use a varaible that is outside of this class if it is not final
-                                gridButtonClicked(FINAL_ROW, FINAL_COL);
-                            }
-                        });
+                        isExplosive[row][col] = true;
                     }
+                    isExplosive[row][col] = false;
                 }
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // all buttons call same thing, make function
+                        // cant use a varaible that is outside of this class if it is not final
+                        gridButtonClicked(FINAL_ROW, FINAL_COL);
+
+                    }
+                });
+
                 tableRow.addView(button);
                 buttons[row][col] = button;
+                Log.i("Cheats","" + Arrays.deepToString(bombs));
 
             }
         }
     }
 
     private void gridButtonClicked(int row, int col) {
-        Toast.makeText(this, "Button clicked: " + row + ", " + col,
+        Toast.makeText(this, "Button clicked: " + row + ", " + col + isExplosive,
                 Toast.LENGTH_SHORT).show();
 
-        Button button = buttons[row][col];
-        //does not scale button
-        //button.setBackgroundResource(R.drawable.baby_yoda);
-
-        //lock Button size
-        lockButtonSizes();
-        //scale image to button
-        int newWidth = button.getWidth();
-        int newHeight = button.getHeight();
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bomb);
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
-        Resources resource = getResources();
-        button.setBackground(new BitmapDrawable(resource, scaledBitmap));
-
+        if(isExplosive[row][col]) {
+            Button button = buttons[row][col];
+            //does not scale button
+            //button.setBackgroundResource(R.drawable.baby_yoda);
+            //lock Button size
+            lockButtonSizes();
+            //scale image to button
+            int newWidth = button.getWidth();
+            int newHeight = button.getHeight();
+            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bomb);
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+            Resources resource = getResources();
+            button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+        }
     }
 
     private void lockButtonSizes() {
