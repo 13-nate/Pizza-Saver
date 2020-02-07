@@ -14,6 +14,8 @@ public class Game_Menu extends AppCompatActivity {
 
     private Button helpButton;
 
+    private Button playGameButton;
+
 
 
 
@@ -30,9 +32,16 @@ public class Game_Menu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Game_Menu.this, HelpMenuActivity.class);
                 startActivity(intent);
-
             }
         });
+
+        playGameButton = findViewById(R.id.playGame_button);
+
+        playGameButton.setOnClickListener(view -> {
+            Intent intent = PlayGameActivity.makeIntentPlayGameActivity(Game_Menu.this);
+            startActivity(intent);
+        });
+
 
     }
 
