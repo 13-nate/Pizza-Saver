@@ -19,6 +19,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     private TextView authorLogo;
     private ImageButton skipButton;
     final private static int ANIMATION_TIME_OUT = 6000;
+    final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +31,9 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         authorLogo = findViewById(R.id.author_textView);
         skipButton = findViewById(R.id.skip_imageButton);
 
-
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(WelcomeScreenActivity.this, Game_Menu.class);
-                startActivity(intent);
-                finish();
-
-
-            }
-        }, ANIMATION_TIME_OUT);
-
+        startAnimationDelay();
         startAnimation();
+
 
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,9 +42,20 @@ public class WelcomeScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 handler.removeCallbacksAndMessages(null );
                 finish();
-
             }
         });
+    }
+
+    private void startAnimationDelay() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(WelcomeScreenActivity.this, Game_Menu.class);
+                startActivity(intent);
+                finish();
+            }
+        }, ANIMATION_TIME_OUT);
+
 
     }
 
@@ -65,8 +66,5 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         textLogo.startAnimation(topAnim);
         logo.startAnimation(logoAnim);
         authorLogo.startAnimation(authorAnim);
-
     }
-
-
 }

@@ -10,7 +10,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Game_Menu extends AppCompatActivity {
 
@@ -39,7 +38,7 @@ public class Game_Menu extends AppCompatActivity {
         playGameButton.setOnClickListener(view -> {
             Intent intent = PlayGameActivity.makeIntentPlayGameActivity(Game_Menu.this);
             startActivity(intent);
-            
+
         });
 
         optionButton = findViewById(R.id.options_button);
@@ -50,6 +49,7 @@ public class Game_Menu extends AppCompatActivity {
                 startActivity(intent);
 
             }
+
         });
 
 
@@ -58,13 +58,10 @@ public class Game_Menu extends AppCompatActivity {
     private void startAnimation() {
 
         Animation menuAnimation = AnimationUtils.loadAnimation(this, R.anim.lefttoright);
-        Animation logoAnimation = AnimationUtils.loadAnimation(this,R.anim.explosionlogoanim);
-        explosionLogo = findViewById(R.id.explosionLogo_imageView);
         TextView menu = findViewById(R.id.mainMenu_textView);
         Button playButton = findViewById(R.id.playGame_button);
         Button optionButton = findViewById(R.id.options_button);
         Button helpButton = findViewById(R.id.help_button);
-        explosionLogo.startAnimation(logoAnimation);
         menu.startAnimation(menuAnimation);
         playButton.startAnimation(menuAnimation);
         optionButton.startAnimation(menuAnimation);
