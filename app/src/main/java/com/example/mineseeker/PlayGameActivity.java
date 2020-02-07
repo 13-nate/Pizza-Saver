@@ -28,7 +28,7 @@ public class PlayGameActivity extends AppCompatActivity {
     // save buttons when creating
     Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
     // keeps track of exlopsive cells
-    Boolean[][] isExplosive;
+    boolean[][] isExplosive = new boolean[NUM_ROWS][NUM_COLS];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +40,53 @@ public class PlayGameActivity extends AppCompatActivity {
         //generate random sets of row/col pairs to be checked as buttons are generated
         // when a matched is found place a bomb on click
         int[][]  bombs = new int [NUM_BOMBS][2];
-        for(int i = 0; i < NUM_BOMBS; i++) {
-            // minus one so that the random number max is the max index
-            bombs[i][0] =  (int)(Math.random()*((NUM_ROWS-1)+1));
-            bombs[i][1]= (int)(Math.random()*((NUM_COLS-1)+1));
+        //initilize to all false
+        for (int row = 0; row < NUM_ROWS; row++){
+            for (int col = 0; col < NUM_COLS; col++) {
+                isExplosive[row][col] = false;
+            }
         }
+
+
+        for(int i = 0; i < NUM_BOMBS; i++) {
+            // minus one so that the random numbers max is the max index for the array
+            int tempRow = (int)(Math.random()*((NUM_ROWS-1)+1));
+            int tempCol = (int)(Math.random()*((NUM_COLS-1)+1));
+            // check that the new random set of numbers is unique
+            for (int k = 0; k < i; k++){
+                if(tempRow == bombs[k][0] && tempCol == bombs[k][1]){
+                    tempRow = (int)(Math.random()*((NUM_ROWS-1)+1));
+                    tempCol = (int)(Math.random()*((NUM_COLS-1)+1));
+                    // restart loop and look again with new numbers
+                    k = -1;
+                }
+            }
+            bombs[i][0] = tempRow;
+            bombs[i][1]= tempCol;
+        }
+
+        // makes sure there is no duplicates
+        boolean noDuplicates = false;
+
+        for (int i = 0; i < NUM_BOMBS; i++) {
+            int tempRow = bombs[i][0];
+            int tempCol = bombs[i][1];
+            // find a duplicate radomize again
+            int k = i + 1;
+            if (k == NUM_BOMBS) {
+                k--;
+            } boolean isSameCol = true;
+            while(isSameCol) {
+                if (tempRow == bombs[k][0] && tempCol == bombs[k][1]) {
+                    bombs[i][1] = (int) (Math.random() * ((NUM_COLS - 1) + 1));
+                }
+                isSameCol = false;
+            }
+        }
+
+
+        Log.i("Cheats","" + Arrays.deepToString(bombs));
+
 
 
         TableLayout table = findViewById(R.id.tableForButtons);
@@ -80,11 +122,10 @@ public class PlayGameActivity extends AppCompatActivity {
                 //creates anominous class
 
                 // check if one of the random number sets
-                for(int i = 0; i < NUM_BOMBS-1; i++) {
+                for(int i = 0; i < NUM_BOMBS; i++) {
                     if (row == bombs[i][0] && col == bombs[i][1]) {
                         isExplosive[row][col] = true;
                     }
-                    isExplosive[row][col] = false;
                 }
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -92,20 +133,17 @@ public class PlayGameActivity extends AppCompatActivity {
                         // all buttons call same thing, make function
                         // cant use a varaible that is outside of this class if it is not final
                         gridButtonClicked(FINAL_ROW, FINAL_COL);
-
                     }
                 });
 
                 tableRow.addView(button);
                 buttons[row][col] = button;
-                Log.i("Cheats","" + Arrays.deepToString(bombs));
-
             }
         }
     }
 
     private void gridButtonClicked(int row, int col) {
-        Toast.makeText(this, "Button clicked: " + row + ", " + col + isExplosive,
+        Toast.makeText(this, "Button clicked: " + row + ", " + col,
                 Toast.LENGTH_SHORT).show();
 
         if(isExplosive[row][col]) {
