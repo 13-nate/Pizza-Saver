@@ -116,7 +116,6 @@ public class PlayGameActivity extends AppCompatActivity {
                         1.0f
                 ));
 
-                button.setText("" + row + "," + col);
                 // make text not clip on small buttons
                 button.setPadding(0,0,0,0);
                 //creates anominous class
@@ -159,7 +158,24 @@ public class PlayGameActivity extends AppCompatActivity {
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+        }else{
+            scan(row, col);
         }
+    }
+
+    private void scan(int row, int col) {
+        int countBombs= 0;
+        for (int i = 0; i < NUM_ROWS; i++){
+            for (int j = 0; j < NUM_COLS; j++) {
+                // isExplosize is a bool already,
+                if(isExplosive[i][j] &&(i == row || j == col)){
+                    countBombs++;
+                }
+            }
+        }
+        Button button = buttons[row][col];
+        button.setText(""+ countBombs);
+
     }
 
     private void lockButtonSizes() {
