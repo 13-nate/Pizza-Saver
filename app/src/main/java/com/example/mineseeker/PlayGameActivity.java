@@ -21,15 +21,18 @@ import java.util.Arrays;
 
 public class PlayGameActivity extends AppCompatActivity {
 
-    private static final int NUM_ROWS = 3;
-    private static final int NUM_COLS = 3;
-    private static final int NUM_BOMBS = 3;
+    private static final int NUM_ROWS = 5;
+    private static final int NUM_COLS = 5;
+    private static final int NUM_BOMBS = 5;
 
 
     // save buttons when creating
     Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
     // keeps track of exlopsive cells
     boolean[][] isExplosive = new boolean[NUM_ROWS][NUM_COLS];
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,7 @@ public class PlayGameActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("PLAY");
 
         populateButtons();
+
     }
     private void populateButtons() {
         //generate random sets of row/col pairs to be checked as buttons are generated
@@ -46,9 +50,9 @@ public class PlayGameActivity extends AppCompatActivity {
         for (int row = 0; row < NUM_ROWS; row++){
             for (int col = 0; col < NUM_COLS; col++) {
                 isExplosive[row][col] = false;
+
             }
         }
-
 
         for(int i = 0; i < NUM_BOMBS; i++) {
             // minus one so that the random numbers max is the max index for the array
@@ -88,8 +92,6 @@ public class PlayGameActivity extends AppCompatActivity {
 
 
         Log.i("Cheats","" + Arrays.deepToString(bombs));
-
-
 
         TableLayout table = findViewById(R.id.tableForButtons);
 
@@ -177,7 +179,6 @@ public class PlayGameActivity extends AppCompatActivity {
         }
         Button button = buttons[row][col];
         button.setText(""+ countBombs);
-
     }
 
     private void lockButtonSizes() {
@@ -195,7 +196,6 @@ public class PlayGameActivity extends AppCompatActivity {
             }
         }
     }
-
     public static Intent makeIntentPlayGameActivity(Context context) {
         return new Intent(context, PlayGameActivity.class);
     }

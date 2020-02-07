@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    android:background="#FFD53B"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView1"
@@ -13,11 +14,12 @@
         android:id="@+id/tableForButtons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
+        android:layout_alignStart="@+id/textView1"
+        android:layout_alignLeft="@+id/textView1"
         android:layout_marginTop="0dp"
-        android:stretchColumns="*"
-        android:layout_alignStart="@+id/textView1">
+        android:background="#FFD53B"
+        android:stretchColumns="*">
 
     </TableLayout>
 
