@@ -3,6 +3,7 @@ package com.example.mineseeker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -19,14 +20,14 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     private TextView textLogo;
     private TextView authorLogo;
     private ImageButton skipButton;
-    final private static int ANIMATION_TIME_OUT = 8000;
+    final private static int ANIMATION_TIME_OUT = 6000;
     final Handler handler = new Handler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
-
         logo = findViewById(R.id.logo);
         textLogo = findViewById(R.id.welcomeLogo_textView);
         authorLogo = findViewById(R.id.author_textView);

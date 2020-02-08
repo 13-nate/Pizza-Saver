@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.088" />
+        app:layout_constraintVertical_bias="0.045" />
 
     <TextView
         android:id="@+id/boardSize_label"
@@ -34,10 +34,10 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_label"
-        app:layout_constraintVertical_bias="0.103" />
+        app:layout_constraintVertical_bias="0.072" />
 
     <TextView
         android:id="@+id/numberOfMines_label"
@@ -49,17 +49,16 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_label"
-        app:layout_constraintVertical_bias="0.584" />
+        app:layout_constraintVertical_bias="0.072" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.33" />
+        app:layout_constraintGuide_percent="0.24" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
@@ -73,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.39" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -81,7 +80,7 @@
         android:layout_height="62dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.028"
         app:layout_constraintStart_toEndOf="@+id/settings_label"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.045"
@@ -92,16 +91,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.18" />
+        app:layout_constraintGuide_percent="0.39" />
 
     <RadioGroup
         android:id="@+id/radio_group_grid_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:background="#FFD53B"
         app:layout_constraintBottom_toTopOf="@+id/numberOfMines_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.015"
+        app:layout_constraintEnd_toEndOf="@+id/boardSize_label"
+        app:layout_constraintHorizontal_bias="0.102"
         app:layout_constraintStart_toStartOf="@+id/boardSize_label"
-        app:layout_constraintTop_toBottomOf="@+id/boardSize_label" />
+        app:layout_constraintTop_toBottomOf="@+id/boardSize_label"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <RadioGroup
+        android:id="@+id/radio_group_mines_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/numberOfMines_label"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="@+id/numberOfMines_label"
+        app:layout_constraintTop_toBottomOf="@+id/numberOfMines_label"
+        app:layout_constraintVertical_bias="0.113" />
 </androidx.constraintlayout.widget.ConstraintLayout>
