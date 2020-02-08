@@ -3,6 +3,7 @@ package com.example.mineseeker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class WelcomeScreenActivity extends AppCompatActivity {
 
@@ -21,42 +23,40 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     final private static int ANIMATION_TIME_OUT = 6000;
     final Handler handler = new Handler();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
-
         logo = findViewById(R.id.logo);
         textLogo = findViewById(R.id.welcomeLogo_textView);
         authorLogo = findViewById(R.id.author_textView);
         skipButton = findViewById(R.id.skip_imageButton);
 
-        startAnimationDelay();
         startAnimation();
-
+        delayAnimation();
 
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomeScreenActivity.this, Game_Menu.class);
+                Intent intent =  new Intent(WelcomeScreenActivity.this, Game_Menu.class);
                 startActivity(intent);
-                handler.removeCallbacksAndMessages(null );
-                finish();
+                handler.removeCallbacksAndMessages(null);
+
             }
         });
     }
+    private void delayAnimation() {
 
-    private void startAnimationDelay() {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(WelcomeScreenActivity.this, Game_Menu.class);
                 startActivity(intent);
-                finish();
+                handler.removeCallbacksAndMessages(null);
+
             }
         }, ANIMATION_TIME_OUT);
-
-
     }
 
     private void startAnimation() {
@@ -66,5 +66,8 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         textLogo.startAnimation(topAnim);
         logo.startAnimation(logoAnim);
         authorLogo.startAnimation(authorAnim);
+
     }
+
+
 }

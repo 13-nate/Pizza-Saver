@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Game_Menu extends AppCompatActivity {
 
@@ -17,12 +18,12 @@ public class Game_Menu extends AppCompatActivity {
     private Button playGameButton;
     private Button optionButton;
     private ImageView explosionLogo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game__menu);
         startAnimation();
-
 
         playGameButton = findViewById(R.id.playGame_button);
         playGameButton.setOnClickListener(view -> {
@@ -39,6 +40,7 @@ public class Game_Menu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         helpButton = findViewById(R.id.help_button);
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,14 +50,12 @@ public class Game_Menu extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void startAnimation() {
 
         Animation menuAnimation = AnimationUtils.loadAnimation(this, R.anim.lefttoright);
-        Animation explosionLogoAnimation = AnimationUtils.loadAnimation(this,R.anim.explosion_logo);
-
+        Animation explotionAnimation = AnimationUtils.loadAnimation(this,R.anim.explosion_logo_animation);
 
         explosionLogo = findViewById(R.id.explosionLogo_imageView);
         TextView menu = findViewById(R.id.mainMenu_textView);
@@ -63,11 +63,10 @@ public class Game_Menu extends AppCompatActivity {
         Button optionButton = findViewById(R.id.options_button);
         Button helpButton = findViewById(R.id.help_button);
 
-
         menu.startAnimation(menuAnimation);
         playButton.startAnimation(menuAnimation);
         optionButton.startAnimation(menuAnimation);
         helpButton.startAnimation(menuAnimation);
-        explosionLogo.startAnimation(explosionLogoAnimation);
+        explosionLogo.startAnimation(explotionAnimation);
     }
 }
