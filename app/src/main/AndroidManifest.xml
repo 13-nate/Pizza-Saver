@@ -17,8 +17,9 @@
             android:name=".HelpMenuActivity"
             android:screenOrientation="sensorLandscape" />
         <activity
-            android:screenOrientation="sensorLandscape"
-            android:name=".PlayGameActivity"/>
+
+            android:name=".PlayGameActivity"
+            android:screenOrientation="sensorLandscape"/>
         <activity
             android:name=".Game_Menu"
             android:screenOrientation="sensorLandscape"
@@ -26,7 +27,8 @@
         <activity
             android:name=".WelcomeScreenActivity"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +39,8 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:enabled="false"/>
 
         <meta-data
             android:name="preloaded_fonts"
