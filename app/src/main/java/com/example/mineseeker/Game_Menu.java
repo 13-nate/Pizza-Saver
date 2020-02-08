@@ -46,8 +46,6 @@ public class Game_Menu extends AppCompatActivity {
         optionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Game_Menu.this, OptionsActivity.class);
-                startActivity(intent);
 
             }
         });
@@ -58,16 +56,18 @@ public class Game_Menu extends AppCompatActivity {
     private void startAnimation() {
 
         Animation menuAnimation = AnimationUtils.loadAnimation(this, R.anim.lefttoright);
-        Animation logoAnimation = AnimationUtils.loadAnimation(this,R.anim.explosionlogoanim);
+        Animation explotionAnimation = AnimationUtils.loadAnimation(this,R.anim.explosion_logo_animation);
+
         explosionLogo = findViewById(R.id.explosionLogo_imageView);
         TextView menu = findViewById(R.id.mainMenu_textView);
         Button playButton = findViewById(R.id.playGame_button);
         Button optionButton = findViewById(R.id.options_button);
         Button helpButton = findViewById(R.id.help_button);
-        explosionLogo.startAnimation(logoAnimation);
+
         menu.startAnimation(menuAnimation);
         playButton.startAnimation(menuAnimation);
         optionButton.startAnimation(menuAnimation);
         helpButton.startAnimation(menuAnimation);
+        explosionLogo.startAnimation(explotionAnimation);
     }
 }
