@@ -23,13 +23,13 @@ public class OptionsActivity extends AppCompatActivity {
         RadioGroup group = findViewById(R.id.radio_group_grid_size);
 
         //create radiobuttons
-        int[] numGrids = getResources().getIntArray(R.array.grid_dimensions);
+        String[] numGrids = getResources().getStringArray(R.array.grid_dimensions);
 
         for (int i = 0; i < numGrids.length; i++){
-            int numGrid = numGrids[i];
+            String numGrid = numGrids[i];
 
             RadioButton button = new RadioButton(this);
-            button.setText("4 x 6");
+            button.setText(numGrid);
             group.addView(button);
 
         }

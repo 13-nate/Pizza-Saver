@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".OptionsActivity"
+            android:screenOrientation="sensorLandscape">
+        </activity>
+        <activity
             android:name=".HelpMenuActivity"
             android:screenOrientation="sensorLandscape" />
         <activity

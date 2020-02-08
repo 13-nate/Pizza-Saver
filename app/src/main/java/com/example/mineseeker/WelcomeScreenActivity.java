@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class WelcomeScreenActivity extends AppCompatActivity {
 
@@ -18,7 +19,8 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     private TextView textLogo;
     private TextView authorLogo;
     private ImageButton skipButton;
-    final private static int ANIMATION_TIME_OUT = 6000;
+    final private static int ANIMATION_TIME_OUT = 8000;
+    final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,32 +32,30 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         authorLogo = findViewById(R.id.author_textView);
         skipButton = findViewById(R.id.skip_imageButton);
 
+        startAnimation();
+        delayAnimation();
 
-        final Handler handler = new Handler();
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(WelcomeScreenActivity.this, Game_Menu.class);
+                startActivity(intent);
+                handler.removeCallbacksAndMessages(null);
+
+            }
+        });
+    }
+    private void delayAnimation() {
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(WelcomeScreenActivity.this, Game_Menu.class);
                 startActivity(intent);
-                finish();
-
+                handler.removeCallbacksAndMessages(null);
 
             }
         }, ANIMATION_TIME_OUT);
-
-        startAnimation();
-
-        skipButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(WelcomeScreenActivity.this, Game_Menu.class);
-                startActivity(intent);
-                handler.removeCallbacksAndMessages(null );
-                finish();
-
-            }
-        });
-
     }
 
     private void startAnimation() {
