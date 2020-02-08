@@ -41,7 +41,6 @@
         android:id="@+id/author_textView"
         android:layout_width="158dp"
         android:layout_height="64dp"
-        android:fontFamily="@font/annie_use_your_telescope"
         android:singleLine="false"
         android:text="By: Kevin Chen Su and  Nathan Simms"
         android:textSize="18sp"
