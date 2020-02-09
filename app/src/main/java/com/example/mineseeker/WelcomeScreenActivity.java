@@ -39,7 +39,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =  new Intent(WelcomeScreenActivity.this, Game_Menu.class);
+                Intent intent = Game_Menu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
                 startActivity(intent);
                 handler.removeCallbacksAndMessages(null);
 
@@ -51,7 +51,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(WelcomeScreenActivity.this, Game_Menu.class);
+                Intent intent = Game_Menu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
                 startActivity(intent);
                 handler.removeCallbacksAndMessages(null);
 

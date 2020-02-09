@@ -1,13 +1,15 @@
 package com.example.mineseeker;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,29 +17,35 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Arrays;
 
 public class PlayGameActivity extends AppCompatActivity {
 
-    private static final int NUM_ROWS = 5;
-    private static final int NUM_COLS = 5;
-    private static final int NUM_BOMBS = 5;
+    private static final int NUM_ROWS = 3;
+    private static final int NUM_COLS = 3;
+    private static final int NUM_BOMBS = 3;
+    int scans = 0;
+    int bombsFound = 0;
 
 
     // save buttons when creating
     Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
     // keeps track of exlopsive cells
     boolean[][] isExplosive = new boolean[NUM_ROWS][NUM_COLS];
-
-
+    boolean[][] bombIsShowing = new boolean[NUM_ROWS][NUM_COLS];
+    boolean[][] cellScanned = new boolean[NUM_ROWS][NUM_COLS];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         getSupportActionBar().setTitle("PLAY");
+
+        TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
+        NbrOfBombsTxt.setText("Bombs Found " + bombsFound +" of " + NUM_BOMBS);
 
         populateButtons();
 
@@ -50,6 +58,8 @@ public class PlayGameActivity extends AppCompatActivity {
         for (int row = 0; row < NUM_ROWS; row++){
             for (int col = 0; col < NUM_COLS; col++) {
                 isExplosive[row][col] = false;
+                bombIsShowing[row][col] = false;
+                cellScanned[row][col] = false;
 
             }
         }
@@ -70,26 +80,6 @@ public class PlayGameActivity extends AppCompatActivity {
             bombs[i][0] = tempRow;
             bombs[i][1]= tempCol;
         }
-
-        // makes sure there is no duplicates
-        boolean noDuplicates = false;
-
-        for (int i = 0; i < NUM_BOMBS; i++) {
-            int tempRow = bombs[i][0];
-            int tempCol = bombs[i][1];
-            // find a duplicate radomize again
-            int k = i + 1;
-            if (k == NUM_BOMBS) {
-                k--;
-            } boolean isSameCol = true;
-            while(isSameCol) {
-                if (tempRow == bombs[k][0] && tempCol == bombs[k][1]) {
-                    bombs[i][1] = (int) (Math.random() * ((NUM_COLS - 1) + 1));
-                }
-                isSameCol = false;
-            }
-        }
-
 
         Log.i("Cheats","" + Arrays.deepToString(bombs));
 
@@ -146,14 +136,31 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void gridButtonClicked(int row, int col) {
-        Toast.makeText(this, "Button clicked: " + row + ", " + col,
-                Toast.LENGTH_SHORT).show();
+      /*  Toast.makeText(this, "Button clicked: " + row + ", " + col,
+                Toast.LENGTH_SHORT).show();*/
 
+        //if it is a bomb show the bomb
         if(isExplosive[row][col]) {
+            bombsFound++;
+            TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
+            NbrOfBombsTxt.setText("Bombs Found " + bombsFound +" of " + NUM_BOMBS);
+
+            if (bombsFound == NUM_BOMBS){
+             //display msg to let user they've won
+                displayWinMessage();
+
+
+            }
+
+
+           // if the bomb is showing and clicked do a scan
+            if(bombIsShowing[row][col]){
+                scan(row,col);
+            }
+
+            //shows bomb
             Button button = buttons[row][col];
-            //does not scale button
-            //button.setBackgroundResource(R.drawable.baby_yoda);
-            //lock Button size
+            //locks Button size
             lockButtonSizes();
             //scale image to button
             int newWidth = button.getWidth();
@@ -162,22 +169,64 @@ public class PlayGameActivity extends AppCompatActivity {
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, scaledBitmap));
-            
-        }else{
+            //keeps track od showing bombs
+            bombIsShowing[row][col] = true;
+
+
+            // works for a bomb being found after a cell scanned
+            //doesnt work for a new cell after a bomb is found
+
+        //decrement  related cells when the button is reveild
+            for(int i = 0; i < NUM_ROWS; i++){
+                for(int j = 0; j < NUM_COLS; j++){
+                    if(cellScanned[i][j] && (i == row || j == col)) {
+                        Button btnScanned = buttons[i][j];
+                        String btnText = btnScanned.getText().toString();
+                        int btnNumber = Integer.parseInt(btnText);
+                        // stops decrementing related cells once bomb is revield
+                        if(!cellScanned[row][col]){
+                            btnNumber--;
+                        }
+
+                        btnScanned.setText("" + btnNumber);
+                    }
+                }
+            }
+            //not a bomb so scan row and col
+        }
+        else{
             scan(row, col);
         }
     }
 
+    private void displayWinMessage() {
+
+        FragmentManager manager = getSupportFragmentManager();
+        MessageFragment dialog = new MessageFragment();
+        dialog.show(manager, "MessageDialog");
+
+        Log.i("TAG", "Show dialog");
+    }
+
+
     private void scan(int row, int col) {
+        scans++;
+        TextView scansTxt = findViewById(R.id.txtScansUsed);
+        scansTxt.setText("Scans Used: " + scans);
         int countBombs= 0;
         for (int i = 0; i < NUM_ROWS; i++){
             for (int j = 0; j < NUM_COLS; j++) {
-                // isExplosize is a bool already,
                 if(isExplosive[i][j] &&(i == row || j == col)){
                     countBombs++;
                 }
+                //cells act like they know a related bomb is showing
+                if(bombIsShowing[i][j] && (i == row || j == col)){
+                    countBombs --;
+                }
             }
         }
+        //keeps track of cells  scaned so thet can be changed once a bomb is revield
+        cellScanned[row][col]= true;
         Button button = buttons[row][col];
         button.setText(""+ countBombs);
     }
