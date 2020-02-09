@@ -30,7 +30,7 @@ public class PlayGameActivity extends AppCompatActivity {
     Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
     // keeps track of exlopsive cells
     boolean[][] isExplosive = new boolean[NUM_ROWS][NUM_COLS];
-
+    boolean[][] isClicked = new boolean[NUM_ROWS][NUM_COLS];
 
 
     @Override
@@ -50,7 +50,7 @@ public class PlayGameActivity extends AppCompatActivity {
         for (int row = 0; row < NUM_ROWS; row++){
             for (int col = 0; col < NUM_COLS; col++) {
                 isExplosive[row][col] = false;
-
+                isClicked[row][col] = false;
             }
         }
 
@@ -150,6 +150,10 @@ public class PlayGameActivity extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
 
         if(isExplosive[row][col]) {
+            if(isClicked[row][col]){
+                scan(row,col);
+            }
+
             Button button = buttons[row][col];
             //does not scale button
             //button.setBackgroundResource(R.drawable.baby_yoda);
@@ -162,6 +166,7 @@ public class PlayGameActivity extends AppCompatActivity {
             Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+            isClicked[row][col] = true;
         }else{
             scan(row, col);
         }
