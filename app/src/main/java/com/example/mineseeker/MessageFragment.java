@@ -25,12 +25,11 @@ public class MessageFragment extends AppCompatDialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-
             }
         };
 
         return new AlertDialog.Builder(getActivity()).setTitle("GAME OVER")
-                .setMessage("Congratulations You have won!")
+                .setMessage("Congratulations You won!")
                 .setView(v)
                 .setPositiveButton(android.R.string.ok, listener)
                 .create();

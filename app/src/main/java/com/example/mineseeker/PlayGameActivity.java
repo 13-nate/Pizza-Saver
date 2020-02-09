@@ -148,8 +148,6 @@ public class PlayGameActivity extends AppCompatActivity {
             if (bombsFound == NUM_BOMBS){
              //display msg to let user they've won
                 displayWinMessage();
-
-
             }
 
 
@@ -205,7 +203,6 @@ public class PlayGameActivity extends AppCompatActivity {
         MessageFragment dialog = new MessageFragment();
         dialog.show(manager, "MessageDialog");
 
-        Log.i("TAG", "Show dialog");
     }
 
 
