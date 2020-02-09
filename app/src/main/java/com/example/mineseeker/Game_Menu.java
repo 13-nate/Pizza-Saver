@@ -2,6 +2,7 @@ package com.example.mineseeker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,7 @@ public class Game_Menu extends AppCompatActivity {
         playGameButton.setOnClickListener(view -> {
             Intent intent = PlayGameActivity.makeIntentPlayGameActivity(Game_Menu.this);
             startActivity(intent);
+            finish();
 
         });
 
@@ -38,6 +40,7 @@ public class Game_Menu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Game_Menu.this, OptionsActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -47,8 +50,10 @@ public class Game_Menu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Game_Menu.this, HelpMenuActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
+
 
     }
 
@@ -68,5 +73,9 @@ public class Game_Menu extends AppCompatActivity {
         optionButton.startAnimation(menuAnimation);
         helpButton.startAnimation(menuAnimation);
         explosionLogo.startAnimation(explotionAnimation);
+    }
+
+    public static Intent makeIntentGame_Menue(Context context) {
+        return new Intent(context, PlayGameActivity.class);
     }
 }

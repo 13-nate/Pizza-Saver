@@ -1,6 +1,7 @@
 package com.example.mineseeker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,9 +22,9 @@ import java.util.Arrays;
 
 public class PlayGameActivity extends AppCompatActivity {
 
-    private static final int NUM_ROWS = 5;
-    private static final int NUM_COLS = 5;
-    private static final int NUM_BOMBS = 5;
+    private static final int NUM_ROWS = 3;
+    private static final int NUM_COLS = 3;
+    private static final int NUM_BOMBS = 3;
     int scans = 0;
     int bombsFound = 0;
 
@@ -138,11 +139,15 @@ public class PlayGameActivity extends AppCompatActivity {
 
         //if it is a bomb show the bomb
         if(isExplosive[row][col]) {
-            bombsFound++;
-            TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
-            NbrOfBombsTxt.setText("Bombs Found " + bombsFound +" of " + NUM_BOMBS);
+            //stops increasing the number of bombs found by clicking the found bomb
+            if(!bombIsShowing [row][col]){
+                bombsFound++;
+                TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
+                NbrOfBombsTxt.setText("Bombs Found " + bombsFound +" of " + NUM_BOMBS);
+            }
 
-           // if the bomb is showing and clicked do a scan
+
+            // if the bomb is showing and clicked do a scan
             if(bombIsShowing[row][col]){
                 scan(row,col);
             }
@@ -180,16 +185,38 @@ public class PlayGameActivity extends AppCompatActivity {
                     }
                 }
             }
+            // win condition met
+            if(bombsFound == NUM_BOMBS) {
+                //all cells to show zero
+                for (int i = 0; i < NUM_ROWS; i++) {
+                    for (int j = 0; j < NUM_COLS; j++) {
+                        Button btnScanned = buttons[i][j];
+                        btnScanned.setText("" + 0);
+                    }
+                }
+                //connect fragment
+                setUpWinMessage();
+            }
             //not a bomb so scan row and col
         }else{
             scan(row, col);
         }
     }
 
+    private void setUpWinMessage() {
+        FragmentManager manager = getSupportFragmentManager();
+        winFragment dialog = new winFragment();
+        dialog.show(manager, "MessageDialog");
+    }
+
     private void scan(int row, int col) {
-        scans++;
-        TextView scansTxt = findViewById(R.id.txtScansUsed);
-        scansTxt.setText("Scans Used: " + scans);
+        // stops multiple scans of the same cell
+        if(!cellScanned[row][col]){
+            scans++;
+            TextView scansTxt = findViewById(R.id.txtScansUsed);
+            scansTxt.setText("Scans Used: " + scans);
+        }
+
         int countBombs= 0;
         for (int i = 0; i < NUM_ROWS; i++){
             for (int j = 0; j < NUM_COLS; j++) {
