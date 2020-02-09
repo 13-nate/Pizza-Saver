@@ -31,7 +31,7 @@ public class PlayGameActivity extends AppCompatActivity {
     // keeps track of exlopsive cells
     boolean[][] isExplosive = new boolean[NUM_ROWS][NUM_COLS];
     boolean[][] isClicked = new boolean[NUM_ROWS][NUM_COLS];
-
+    boolean[][] isScanned = new boolean[NUM_ROWS][NUM_COLS];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,8 @@ public class PlayGameActivity extends AppCompatActivity {
             for (int col = 0; col < NUM_COLS; col++) {
                 isExplosive[row][col] = false;
                 isClicked[row][col] = false;
+                isScanned[row][col] = false;
+
             }
         }
 
@@ -70,26 +72,6 @@ public class PlayGameActivity extends AppCompatActivity {
             bombs[i][0] = tempRow;
             bombs[i][1]= tempCol;
         }
-
-        // makes sure there is no duplicates
-        boolean noDuplicates = false;
-
-        for (int i = 0; i < NUM_BOMBS; i++) {
-            int tempRow = bombs[i][0];
-            int tempCol = bombs[i][1];
-            // find a duplicate radomize again
-            int k = i + 1;
-            if (k == NUM_BOMBS) {
-                k--;
-            } boolean isSameCol = true;
-            while(isSameCol) {
-                if (tempRow == bombs[k][0] && tempCol == bombs[k][1]) {
-                    bombs[i][1] = (int) (Math.random() * ((NUM_COLS - 1) + 1));
-                }
-                isSameCol = false;
-            }
-        }
-
 
         Log.i("Cheats","" + Arrays.deepToString(bombs));
 
@@ -167,6 +149,22 @@ public class PlayGameActivity extends AppCompatActivity {
             Resources resource = getResources();
             button.setBackground(new BitmapDrawable(resource, scaledBitmap));
             isClicked[row][col] = true;
+
+            // works for a bomb being found after a cell scanned
+            //doesnt work for a new cell after a bomb is found
+            for(int i = 0; i < NUM_ROWS; i++){
+                for(int j = 0; j < NUM_COLS; j++){
+                    if(isScanned[i][j] && (i == row || j == col)) {
+                        Button btnScanned = buttons[i][j];
+                        String btnText = btnScanned.getText().toString();
+                        int btnNumber = Integer.parseInt(btnText);
+                        btnNumber--;
+                        btnScanned.setText("" + btnNumber);
+                    }
+                }
+            }
+
+
         }else{
             scan(row, col);
         }
@@ -180,8 +178,13 @@ public class PlayGameActivity extends AppCompatActivity {
                 if(isExplosive[i][j] &&(i == row || j == col)){
                     countBombs++;
                 }
+                // keeps track of the bombs showing so that it shows the new total of not shown bombs
+                if(isClicked[i][j] && (i == row || j == col)){
+                    countBombs --;
+                }
             }
         }
+        isScanned[row][col]= true;
         Button button = buttons[row][col];
         button.setText(""+ countBombs);
     }
