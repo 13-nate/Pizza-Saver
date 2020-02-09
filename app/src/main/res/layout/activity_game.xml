@@ -5,22 +5,40 @@
     android:background="#FFD53B"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <TableLayout
         android:id="@+id/tableForButtons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView1"
-        android:layout_alignStart="@+id/textView1"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="63dp"
         android:background="#FFD53B"
         android:stretchColumns="*">
 
     </TableLayout>
+
+    <TextView
+        android:id="@+id/txtBombsFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tableForButtons"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="37dp"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="-33dp"
+        android:text="Bombs found 0 of "
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/txtScansUsed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tableForButtons"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-33dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginRight="34dp"
+        android:text="Scans used: 0"
+        android:textSize="24sp" />
 
 </RelativeLayout>
