@@ -1,9 +1,11 @@
 package com.example.mineseeker;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -172,6 +174,7 @@ public class PlayGameActivity extends AppCompatActivity {
             //keeps track od showing bombs
             bombIsShowing[row][col] = true;
 
+
             // works for a bomb being found after a cell scanned
             //doesnt work for a new cell after a bomb is found
 
@@ -204,18 +207,20 @@ public class PlayGameActivity extends AppCompatActivity {
                 setUpWinMessage();
             }
             //not a bomb so scan row and col
-        }else{
+        }
+        else{
             scan(row, col);
         }
     }
 
-    private void setUpWinMessage() {
-        gameBoard = GameBoard.getInstance();
+    private void displayWinMessage() {
 
         FragmentManager manager = getSupportFragmentManager();
-        winFragment dialog = new winFragment();
+        MessageFragment dialog = new MessageFragment();
         dialog.show(manager, "MessageDialog");
+
     }
+
 
     private void scan(int row, int col) {
         // stops multiple scans of the same cell

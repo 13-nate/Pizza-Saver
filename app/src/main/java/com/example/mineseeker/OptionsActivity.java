@@ -2,6 +2,8 @@ package com.example.mineseeker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
@@ -102,5 +104,8 @@ public class OptionsActivity extends AppCompatActivity {
         }
 
 
+    }
+    public static Intent makeIntentOptionsActivity(Context context){
+        return new Intent(context, OptionsActivity.class);
     }
 }

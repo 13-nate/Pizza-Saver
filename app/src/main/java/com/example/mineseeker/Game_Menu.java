@@ -37,9 +37,8 @@ public class Game_Menu extends AppCompatActivity {
         optionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Game_Menu.this, OptionsActivity.class);
-                startActivity(intent);
-
+               Intent intent = OptionsActivity.makeIntentOptionsActivity(Game_Menu.this);
+               startActivity(intent);
             }
         });
 
@@ -47,7 +46,7 @@ public class Game_Menu extends AppCompatActivity {
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Game_Menu.this, HelpMenuActivity.class);
+                Intent intent = HelpMenuActivity.makeIntentHelpActivity(Game_Menu.this);
                 startActivity(intent);
             }
         });
@@ -72,8 +71,7 @@ public class Game_Menu extends AppCompatActivity {
         helpButton.startAnimation(menuAnimation);
         explosionLogo.startAnimation(explotionAnimation);
     }
-
-    public static Intent makeIntentGame_Menue(Context context) {
-        return new Intent(context, PlayGameActivity.class);
+    public static Intent makeIntentGameMenuActivity(Context context){
+        return new Intent(context, Game_Menu.class);
     }
 }
