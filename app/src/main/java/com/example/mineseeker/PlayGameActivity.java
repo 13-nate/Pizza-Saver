@@ -26,15 +26,22 @@ public class PlayGameActivity extends AppCompatActivity {
     int scans = 0;
     int bombsFound = 0;
     // save buttons when creating
-    Button buttons[][] = new Button[gameBoard.getNumRows()][ gameBoard.getNumCol()];
+    Button buttons[][];
     // keeps track of exlopsive cells
-    boolean[][] isExplosive = new boolean[gameBoard.getNumRows()][ gameBoard.getNumCol()];
-    boolean[][] bombIsShowing = new boolean[gameBoard.getNumRows()][ gameBoard.getNumCol()];
-    boolean[][] cellScanned = new boolean[gameBoard.getNumRows()][ gameBoard.getNumCol()];
+    boolean[][] isExplosive;
+    boolean[][] bombIsShowing;
+    boolean[][] cellScanned;
 
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        gameBoard = GameBoard.getInstance();
+        buttons = new Button[gameBoard.getNumRows()][gameBoard.getNumCol()];
+        isExplosive = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
+        bombIsShowing  = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
+        cellScanned  = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         getSupportActionBar().setTitle("PLAY");

@@ -35,7 +35,6 @@ public class WelcomeScreenActivity extends AppCompatActivity {
 
         startAnimation();
         delayAnimation();
-
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

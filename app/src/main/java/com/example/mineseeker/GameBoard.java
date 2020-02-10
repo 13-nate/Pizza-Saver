@@ -8,10 +8,7 @@ public class GameBoard {
     private int numRows;
     private int numCol;
 
-
-
     // singleton support
-
 
     private static GameBoard instance;
 
@@ -26,6 +23,10 @@ public class GameBoard {
     }
 
     public int getNumMines() {
+        //default values for start
+        if(numMines == 0 ){
+            numMines = 6;
+        }
         return numMines;
     }
 
@@ -34,6 +35,10 @@ public class GameBoard {
     }
 
     public int getNumRows() {
+        //default values for start
+        if(numRows == 0 ){
+            numRows = 4;
+        }
         return numRows;
     }
 
@@ -42,6 +47,10 @@ public class GameBoard {
     }
 
     public int getNumCol() {
+        //default values for start
+        if(numCol == 0 ){
+            numCol = 6;
+        }
         return numCol;
     }
 
