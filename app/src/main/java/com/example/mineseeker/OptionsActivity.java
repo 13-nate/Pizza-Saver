@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 public class OptionsActivity extends AppCompatActivity {
 
+    // singleton support
+    private GameBoard gameBoard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +21,7 @@ public class OptionsActivity extends AppCompatActivity {
         createGridRadioButtons();
 
         createNumberOfMinesRadioButton();
+        //getSingleton
     }
 
     private void createNumberOfMinesRadioButton() {
@@ -28,6 +31,8 @@ public class OptionsActivity extends AppCompatActivity {
         for (int i = 0; i < numMines.length; i++){
             int numMine = numMines[i];
 
+            gameBoard = GameBoard.getInstance();
+            gameBoard.setNumMines(numMine);
             RadioButton button = new RadioButton(this);
             button.setText(numMine + " mines");
             groupMines.addView(button);
@@ -43,6 +48,17 @@ public class OptionsActivity extends AppCompatActivity {
 
         for (int i = 0; i < numGrids.length; i++){
             String numGrid = numGrids[i];
+
+            //get the row and col from text
+            char rows = numGrid.charAt(0);
+            char colls = numGrid.charAt(4);
+
+            gameBoard = GameBoard.getInstance();
+            gameBoard.setNumRows(rows);
+            gameBoard.setNumCol(colls);
+
+            //change txt to ints to be passed into singleton
+
 
             RadioButton button = new RadioButton(this);
             button.setText(numGrid);
