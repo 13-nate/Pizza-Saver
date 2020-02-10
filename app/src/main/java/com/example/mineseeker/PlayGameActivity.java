@@ -21,7 +21,7 @@ import android.widget.Toast;
 import java.util.Arrays;
 
 public class PlayGameActivity extends AppCompatActivity {
-    
+
     GameBoard gameBoard;
     int scans = 0;
     int bombsFound = 0;
