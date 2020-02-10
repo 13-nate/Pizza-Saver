@@ -24,28 +24,32 @@ import java.util.Arrays;
 
 public class PlayGameActivity extends AppCompatActivity {
 
-    private static final int NUM_ROWS = 3;
-    private static final int NUM_COLS = 3;
-    private static final int NUM_BOMBS = 3;
+    GameBoard gameBoard;
     int scans = 0;
     int bombsFound = 0;
-
-
     // save buttons when creating
-    Button buttons[][] = new Button[NUM_ROWS][NUM_COLS];
+    Button buttons[][];
     // keeps track of exlopsive cells
-    boolean[][] isExplosive = new boolean[NUM_ROWS][NUM_COLS];
-    boolean[][] bombIsShowing = new boolean[NUM_ROWS][NUM_COLS];
-    boolean[][] cellScanned = new boolean[NUM_ROWS][NUM_COLS];
+    boolean[][] isExplosive;
+    boolean[][] bombIsShowing;
+    boolean[][] cellScanned;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        gameBoard = GameBoard.getInstance();
+        buttons = new Button[gameBoard.getNumRows()][gameBoard.getNumCol()];
+        isExplosive = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
+        bombIsShowing  = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
+        cellScanned  = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         getSupportActionBar().setTitle("PLAY");
 
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
-        NbrOfBombsTxt.setText("Bombs Found " + bombsFound +" of " + NUM_BOMBS);
+        NbrOfBombsTxt.setText("Bombs Found " + bombsFound +" of " + gameBoard.getNumMines());
 
         populateButtons();
 
@@ -53,10 +57,11 @@ public class PlayGameActivity extends AppCompatActivity {
     private void populateButtons() {
         //generate random sets of row/col pairs to be checked as buttons are generated
         // when a matched is found place a bomb on click
-        int[][]  bombs = new int [NUM_BOMBS][2];
+        gameBoard = GameBoard.getInstance();
+        int[][]  bombs = new int [gameBoard.getNumMines()][2];
         //initilize to all false
-        for (int row = 0; row < NUM_ROWS; row++){
-            for (int col = 0; col < NUM_COLS; col++) {
+        for (int row = 0; row < gameBoard.getNumRows(); row++){
+            for (int col = 0; col <  gameBoard.getNumCol(); col++) {
                 isExplosive[row][col] = false;
                 bombIsShowing[row][col] = false;
                 cellScanned[row][col] = false;
@@ -64,15 +69,15 @@ public class PlayGameActivity extends AppCompatActivity {
             }
         }
 
-        for(int i = 0; i < NUM_BOMBS; i++) {
+        for(int i = 0; i < gameBoard.getNumMines(); i++) {
             // minus one so that the random numbers max is the max index for the array
-            int tempRow = (int)(Math.random()*((NUM_ROWS-1)+1));
-            int tempCol = (int)(Math.random()*((NUM_COLS-1)+1));
+            int tempRow = (int)(Math.random()*((gameBoard.getNumRows()-1)+1));
+            int tempCol = (int)(Math.random()*(( gameBoard.getNumCol()-1)+1));
             // check that the new random set of numbers is unique
             for (int k = 0; k < i; k++){
                 if(tempRow == bombs[k][0] && tempCol == bombs[k][1]){
-                    tempRow = (int)(Math.random()*((NUM_ROWS-1)+1));
-                    tempCol = (int)(Math.random()*((NUM_COLS-1)+1));
+                    tempRow = (int)(Math.random()*((gameBoard.getNumRows()-1)+1));
+                    tempCol = (int)(Math.random()*(( gameBoard.getNumCol()-1)+1));
                     // restart loop and look again with new numbers
                     k = -1;
                 }
@@ -85,7 +90,7 @@ public class PlayGameActivity extends AppCompatActivity {
 
         TableLayout table = findViewById(R.id.tableForButtons);
 
-        for (int row = 0; row < NUM_ROWS; row++){
+        for (int row = 0; row < gameBoard.getNumRows(); row++){
             TableRow tableRow = new TableRow(this);
             //control how it layouts
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
@@ -96,7 +101,7 @@ public class PlayGameActivity extends AppCompatActivity {
             ));
             table.addView(tableRow);
 
-            for (int col = 0; col < NUM_COLS; col++){
+            for (int col = 0; col <  gameBoard.getNumCol(); col++){
                 // to be used inside the anomnous class
                 final int FINAL_COL = col;
                 final int FINAL_ROW = row;
@@ -115,7 +120,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 //creates anominous class
 
                 // check if one of the random number sets
-                for(int i = 0; i < NUM_BOMBS; i++) {
+                for(int i = 0; i < gameBoard.getNumMines(); i++) {
                     if (row == bombs[i][0] && col == bombs[i][1]) {
                         isExplosive[row][col] = true;
                     }
@@ -136,22 +141,21 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void gridButtonClicked(int row, int col) {
-      /*  Toast.makeText(this, "Button clicked: " + row + ", " + col,
-                Toast.LENGTH_SHORT).show();*/
+        gameBoard = GameBoard.getInstance();
+        Toast.makeText(this, "Button clicked: " + row + ", " + col,
+                Toast.LENGTH_SHORT).show();
 
         //if it is a bomb show the bomb
         if(isExplosive[row][col]) {
-            bombsFound++;
-            TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
-            NbrOfBombsTxt.setText("Bombs Found " + bombsFound +" of " + NUM_BOMBS);
-
-            if (bombsFound == NUM_BOMBS){
-             //display msg to let user they've won
-                displayWinMessage();
+            //stops increasing the number of bombs found by clicking the found bomb
+            if(!bombIsShowing [row][col]){
+                bombsFound++;
+                TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
+                NbrOfBombsTxt.setText("Bombs Found " + bombsFound +" of " + gameBoard.getNumMines());
             }
 
 
-           // if the bomb is showing and clicked do a scan
+            // if the bomb is showing and clicked do a scan
             if(bombIsShowing[row][col]){
                 scan(row,col);
             }
@@ -175,8 +179,8 @@ public class PlayGameActivity extends AppCompatActivity {
             //doesnt work for a new cell after a bomb is found
 
         //decrement  related cells when the button is reveild
-            for(int i = 0; i < NUM_ROWS; i++){
-                for(int j = 0; j < NUM_COLS; j++){
+            for(int i = 0; i < gameBoard.getNumRows(); i++){
+                for(int j = 0; j <  gameBoard.getNumCol(); j++){
                     if(cellScanned[i][j] && (i == row || j == col)) {
                         Button btnScanned = buttons[i][j];
                         String btnText = btnScanned.getText().toString();
@@ -189,6 +193,18 @@ public class PlayGameActivity extends AppCompatActivity {
                         btnScanned.setText("" + btnNumber);
                     }
                 }
+            }
+            // win condition met
+            if(bombsFound == gameBoard.getNumMines()) {
+                //all cells to show zero
+                for (int i = 0; i < gameBoard.getNumRows(); i++) {
+                    for (int j = 0; j <  gameBoard.getNumCol(); j++) {
+                        Button btnScanned = buttons[i][j];
+                        btnScanned.setText("" + 0);
+                    }
+                }
+                //connect fragment
+                setUpWinMessage();
             }
             //not a bomb so scan row and col
         }
@@ -207,12 +223,16 @@ public class PlayGameActivity extends AppCompatActivity {
 
 
     private void scan(int row, int col) {
-        scans++;
-        TextView scansTxt = findViewById(R.id.txtScansUsed);
-        scansTxt.setText("Scans Used: " + scans);
+        // stops multiple scans of the same cell
+        if(!cellScanned[row][col]){
+            scans++;
+            TextView scansTxt = findViewById(R.id.txtScansUsed);
+            scansTxt.setText("Scans Used: " + scans);
+        }
+
         int countBombs= 0;
-        for (int i = 0; i < NUM_ROWS; i++){
-            for (int j = 0; j < NUM_COLS; j++) {
+        for (int i = 0; i < gameBoard.getNumRows(); i++){
+            for (int j = 0; j <  gameBoard.getNumCol(); j++) {
                 if(isExplosive[i][j] &&(i == row || j == col)){
                     countBombs++;
                 }
@@ -229,8 +249,9 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void lockButtonSizes() {
-        for (int row = 0; row < NUM_ROWS; row++) {
-            for (int col = 0; col < NUM_COLS; col++) {
+        gameBoard = GameBoard.getInstance();
+        for (int row = 0; row < gameBoard.getNumRows(); row++) {
+            for (int col = 0; col <  gameBoard.getNumCol(); col++) {
                 Button button = buttons[row][col];
 
                 int width = button.getWidth();

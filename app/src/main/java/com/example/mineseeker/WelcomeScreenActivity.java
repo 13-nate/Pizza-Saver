@@ -35,14 +35,12 @@ public class WelcomeScreenActivity extends AppCompatActivity {
 
         startAnimation();
         delayAnimation();
-
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = Game_Menu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
                 startActivity(intent);
                 handler.removeCallbacksAndMessages(null);
-
             }
         });
     }
