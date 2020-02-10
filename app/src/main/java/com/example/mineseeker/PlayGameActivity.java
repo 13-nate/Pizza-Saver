@@ -142,8 +142,7 @@ public class PlayGameActivity extends AppCompatActivity {
 
     private void gridButtonClicked(int row, int col) {
         gameBoard = GameBoard.getInstance();
-        Toast.makeText(this, "Button clicked: " + row + ", " + col,
-                Toast.LENGTH_SHORT).show();
+        
 
         //if it is a bomb show the bomb
         if(isExplosive[row][col]) {
@@ -204,7 +203,7 @@ public class PlayGameActivity extends AppCompatActivity {
                     }
                 }
                 //connect fragment
-                setUpWinMessage();
+                displayWinMessage();
             }
             //not a bomb so scan row and col
         }

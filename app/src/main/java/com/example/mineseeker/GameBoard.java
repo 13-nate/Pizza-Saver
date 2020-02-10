@@ -7,26 +7,32 @@ public class GameBoard {
     private int numMines;
     private int numRows;
     private int numCol;
+    private static final int defaultNumMines = 6;
+    private static final int defaultNumRows= 4;
+    private static final int defaultNumMCols = 6;
+
+
 
     // singleton support
-
     private static GameBoard instance;
 
+    //default values for start
     private GameBoard() {
         //private to prevent anyone else from extentianting
+        this.numMines = defaultNumMines;
+        this.numRows = defaultNumRows;
+        this.numCol = defaultNumMCols;
     }
     public static GameBoard getInstance() {
         if(instance == null){
             instance = new GameBoard();
         }
+
         return instance;
     }
 
+
     public int getNumMines() {
-        //default values for start
-        if(numMines == 0 ){
-            numMines = 6;
-        }
         return numMines;
     }
 
@@ -35,10 +41,6 @@ public class GameBoard {
     }
 
     public int getNumRows() {
-        //default values for start
-        if(numRows == 0 ){
-            numRows = 4;
-        }
         return numRows;
     }
 
@@ -47,10 +49,6 @@ public class GameBoard {
     }
 
     public int getNumCol() {
-        //default values for start
-        if(numCol == 0 ){
-            numCol = 6;
-        }
         return numCol;
     }
 
