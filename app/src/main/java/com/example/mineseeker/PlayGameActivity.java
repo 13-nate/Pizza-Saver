@@ -156,6 +156,7 @@ public class PlayGameActivity extends AppCompatActivity {
         /*Toast.makeText(this, "Button clicked: " + row + ", " + col,
                 Toast.LENGTH_SHORT).show();*/
 
+
         //if it is a bomb show the bomb
         if(isExplosive[row][col]) {
             //stops increasing the number of bombs found by clicking the found bomb

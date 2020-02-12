@@ -14,9 +14,9 @@ public class GameBoard {
 
 
     // singleton support
-
     private static GameBoard instance;
 
+    //default values for start
     private GameBoard() {
         //default values
        this.numMines = NUM_MINES;
@@ -27,8 +27,10 @@ public class GameBoard {
         if(instance == null){
             instance = new GameBoard();
         }
+
         return instance;
     }
+
 
     public int getNumMines() {
 
