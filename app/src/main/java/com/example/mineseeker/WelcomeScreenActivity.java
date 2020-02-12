@@ -41,6 +41,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
                 Intent intent = Game_Menu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
                 startActivity(intent);
                 handler.removeCallbacksAndMessages(null);
+                finish();
             }
         });
     }
@@ -52,6 +53,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
                 Intent intent = Game_Menu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
                 startActivity(intent);
                 handler.removeCallbacksAndMessages(null);
+                finish();
 
             }
         }, ANIMATION_TIME_OUT);

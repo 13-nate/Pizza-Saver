@@ -1,11 +1,15 @@
 package com.example.mineseeker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -14,6 +18,7 @@ public class OptionsActivity extends AppCompatActivity {
 
     // singleton support
     private GameBoard gameBoard;
+    private Button clear;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +28,26 @@ public class OptionsActivity extends AppCompatActivity {
         createGridRadioButtons();
 
         createNumberOfMinesRadioButton();
+
+        clear = findViewById(R.id.clear_button);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearData();
+            }
+        });
+
+
+
+
         //getSingleton
+    }
+
+    public void clearData() {
+        SharedPreferences clearData = getSharedPreferences("COUNT", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = clearData.edit();
+        editor.clear().commit();
+
     }
 
     private void createNumberOfMinesRadioButton() {

@@ -1,12 +1,11 @@
 package com.example.mineseeker;
 
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,7 +17,7 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import java.util.Arrays;
 
@@ -27,13 +26,14 @@ public class PlayGameActivity extends AppCompatActivity {
     GameBoard gameBoard;
     int scans = 0;
     int bombsFound = 0;
+    int count = 0;
     // save buttons when creating
     Button buttons[][];
     // keeps track of exlopsive cells
     boolean[][] isExplosive;
     boolean[][] bombIsShowing;
     boolean[][] cellScanned;
-
+    TextView text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +48,20 @@ public class PlayGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         getSupportActionBar().setTitle("PLAY");
 
+
+
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
         NbrOfBombsTxt.setText("Bombs Found " + bombsFound +" of " + gameBoard.getNumMines());
 
+        text =findViewById(R.id.timesPlayed);
+
+        updateDate();
         populateButtons();
 
     }
+
+
+
     private void populateButtons() {
         //generate random sets of row/col pairs to be checked as buttons are generated
         // when a matched is found place a bomb on click
@@ -138,12 +146,15 @@ public class PlayGameActivity extends AppCompatActivity {
                 buttons[row][col] = button;
             }
         }
+        getData();
     }
+
+
 
     private void gridButtonClicked(int row, int col) {
         gameBoard = GameBoard.getInstance();
-        Toast.makeText(this, "Button clicked: " + row + ", " + col,
-                Toast.LENGTH_SHORT).show();
+        /*Toast.makeText(this, "Button clicked: " + row + ", " + col,
+                Toast.LENGTH_SHORT).show();*/
 
         //if it is a bomb show the bomb
         if(isExplosive[row][col]) {
@@ -204,7 +215,7 @@ public class PlayGameActivity extends AppCompatActivity {
                     }
                 }
                 //connect fragment
-                setUpWinMessage();
+                displayWinMessage();
             }
             //not a bomb so scan row and col
         }
@@ -214,11 +225,9 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void displayWinMessage() {
-
         FragmentManager manager = getSupportFragmentManager();
         MessageFragment dialog = new MessageFragment();
         dialog.show(manager, "MessageDialog");
-
     }
 
 
@@ -264,7 +273,23 @@ public class PlayGameActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
     public static Intent makeIntentPlayGameActivity(Context context) {
         return new Intent(context, PlayGameActivity.class);
+    }
+
+    private void getData() {
+        count ++;
+        SharedPreferences preferences = getSharedPreferences("COUNT", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("key", count);
+        editor.commit();
+    }
+    private void updateDate() {
+        SharedPreferences myScore = this.getSharedPreferences("COUNT", Context.MODE_PRIVATE);
+        count = myScore.getInt("key", 0);
+        text.setText("Times Played: " + count);
     }
 }

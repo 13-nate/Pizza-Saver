@@ -24,6 +24,9 @@ public class MessageFragment extends AppCompatDialogFragment {
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Intent intent = Game_Menu.makeIntentGameMenuActivity(getActivity());
+                startActivity(intent);
+                getActivity().finish();
 
             }
         };

@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFD53B"
-    tools:context=".MainActivity">
+    android:background="#FFD53B">
 
     <TableLayout
         android:id="@+id/tableForButtons"
@@ -43,6 +42,22 @@
         android:text="Scans used: 0"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#3F51B5"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/timesPlayed"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txtScansUsed"
+        android:layout_marginStart="54dp"
+        android:layout_marginLeft="54dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
+        android:layout_marginBottom="1dp"
+        android:layout_toStartOf="@+id/txtScansUsed"
+        android:layout_toLeftOf="@+id/txtScansUsed"
+        android:layout_toEndOf="@+id/txtBombsFound"
+        android:layout_toRightOf="@+id/txtBombsFound"
         android:textSize="24sp" />
 
 </RelativeLayout>
