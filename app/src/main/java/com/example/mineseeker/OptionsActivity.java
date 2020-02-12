@@ -33,22 +33,16 @@ public class OptionsActivity extends AppCompatActivity {
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearData();
+                FragmentManager manager = getSupportFragmentManager();
+                WarningFragment dialog = new WarningFragment();
+                dialog.show(manager, "Message");
             }
         });
-
-
-
 
         //getSingleton
     }
 
-    public void clearData() {
-        SharedPreferences clearData = getSharedPreferences("COUNT", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = clearData.edit();
-        editor.clear().commit();
 
-    }
 
     private void createNumberOfMinesRadioButton() {
         gameBoard = GameBoard.getInstance();

@@ -5,8 +5,21 @@
 
     <ImageView
         android:id="@+id/imageView2"
+        android:layout_width="117dp"
+        android:layout_height="105dp"
+        app:srcCompat="@drawable/ic_warning_red_24dp" />
+
+    <TextView
+        android:id="@+id/warningLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_warning_red_24dp" />
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/imageView2"
+        android:layout_toRightOf="@+id/imageView2"
+        android:text="ARE YOU SURE ?"
+        android:textSize="30sp" />
 
 </RelativeLayout>
