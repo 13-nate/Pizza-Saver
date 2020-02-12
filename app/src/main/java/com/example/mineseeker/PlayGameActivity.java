@@ -34,6 +34,8 @@ public class PlayGameActivity extends AppCompatActivity {
     boolean[][] bombIsShowing;
     boolean[][] cellScanned;
     TextView text;
+    GameLogic logic = new GameLogic();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,35 +68,8 @@ public class PlayGameActivity extends AppCompatActivity {
         //generate random sets of row/col pairs to be checked as buttons are generated
         // when a matched is found place a bomb on click
         gameBoard = GameBoard.getInstance();
-        int[][]  bombs = new int [gameBoard.getNumMines()][2];
-        //initilize to all false
-        for (int row = 0; row < gameBoard.getNumRows(); row++){
-            for (int col = 0; col <  gameBoard.getNumCol(); col++) {
-                isExplosive[row][col] = false;
-                bombIsShowing[row][col] = false;
-                cellScanned[row][col] = false;
 
-            }
-        }
 
-        for(int i = 0; i < gameBoard.getNumMines(); i++) {
-            // minus one so that the random numbers max is the max index for the array
-            int tempRow = (int)(Math.random()*((gameBoard.getNumRows()-1)+1));
-            int tempCol = (int)(Math.random()*(( gameBoard.getNumCol()-1)+1));
-            // check that the new random set of numbers is unique
-            for (int k = 0; k < i; k++){
-                if(tempRow == bombs[k][0] && tempCol == bombs[k][1]){
-                    tempRow = (int)(Math.random()*((gameBoard.getNumRows()-1)+1));
-                    tempCol = (int)(Math.random()*(( gameBoard.getNumCol()-1)+1));
-                    // restart loop and look again with new numbers
-                    k = -1;
-                }
-            }
-            bombs[i][0] = tempRow;
-            bombs[i][1]= tempCol;
-        }
-
-        Log.i("Cheats","" + Arrays.deepToString(bombs));
 
         TableLayout table = findViewById(R.id.tableForButtons);
 
@@ -127,12 +102,6 @@ public class PlayGameActivity extends AppCompatActivity {
                 button.setPadding(0,0,0,0);
                 //creates anominous class
 
-                // check if one of the random number sets
-                for(int i = 0; i < gameBoard.getNumMines(); i++) {
-                    if (row == bombs[i][0] && col == bombs[i][1]) {
-                        isExplosive[row][col] = true;
-                    }
-                }
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -146,6 +115,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 buttons[row][col] = button;
             }
         }
+        logic.makeRandomBombs();
         getData();
     }
 
@@ -155,74 +125,17 @@ public class PlayGameActivity extends AppCompatActivity {
         gameBoard = GameBoard.getInstance();
         /*Toast.makeText(this, "Button clicked: " + row + ", " + col,
                 Toast.LENGTH_SHORT).show();*/
+        logic.btnClicked(row,col);
+        Button btnClicked = buttons[row][col];
+        btnClicked.setText(logic.getBtnTxt());
 
 
-        //if it is a bomb show the bomb
-        if(isExplosive[row][col]) {
-            //stops increasing the number of bombs found by clicking the found bomb
-            if(!bombIsShowing [row][col]){
-                bombsFound++;
-                TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
-                NbrOfBombsTxt.setText("Bombs Found " + bombsFound +" of " + gameBoard.getNumMines());
-            }
+        //update display txt on each click
+        TextView scansTxt = findViewById(R.id.txtScansUsed);
+        scansTxt.setText("Scans Used: " + logic.getScans());
+        TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
+        NbrOfBombsTxt.setText("Bombs Found " + logic.getBombsFound() +" of " + gameBoard.getNumMines());
 
-
-            // if the bomb is showing and clicked do a scan
-            if(bombIsShowing[row][col]){
-                scan(row,col);
-            }
-
-            //shows bomb
-            Button button = buttons[row][col];
-            //locks Button size
-            lockButtonSizes();
-            //scale image to button
-            int newWidth = button.getWidth();
-            int newHeight = button.getHeight();
-            Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.bomb);
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
-            Resources resource = getResources();
-            button.setBackground(new BitmapDrawable(resource, scaledBitmap));
-            //keeps track od showing bombs
-            bombIsShowing[row][col] = true;
-
-
-            // works for a bomb being found after a cell scanned
-            //doesnt work for a new cell after a bomb is found
-
-        //decrement  related cells when the button is reveild
-            for(int i = 0; i < gameBoard.getNumRows(); i++){
-                for(int j = 0; j <  gameBoard.getNumCol(); j++){
-                    if(cellScanned[i][j] && (i == row || j == col)) {
-                        Button btnScanned = buttons[i][j];
-                        String btnText = btnScanned.getText().toString();
-                        int btnNumber = Integer.parseInt(btnText);
-                        // stops decrementing related cells once bomb is revield
-                        if(!cellScanned[row][col]){
-                            btnNumber--;
-                        }
-
-                        btnScanned.setText("" + btnNumber);
-                    }
-                }
-            }
-            // win condition met
-            if(bombsFound == gameBoard.getNumMines()) {
-                //all cells to show zero
-                for (int i = 0; i < gameBoard.getNumRows(); i++) {
-                    for (int j = 0; j <  gameBoard.getNumCol(); j++) {
-                        Button btnScanned = buttons[i][j];
-                        btnScanned.setText("" + 0);
-                    }
-                }
-                //connect fragment
-                displayWinMessage();
-            }
-            //not a bomb so scan row and col
-        }
-        else{
-            scan(row, col);
-        }
     }
 
     private void displayWinMessage() {
