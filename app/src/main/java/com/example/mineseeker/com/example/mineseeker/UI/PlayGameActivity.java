@@ -119,9 +119,15 @@ public class PlayGameActivity extends AppCompatActivity {
             displayBomb(buttons[row][col]);
             // check for win condition when a bomb is found
             if(logic.winCondition()) {
+                for(int i = 0; i < gameBoard.getNumRows();i++) {
+                    for(int j = 0; j < gameBoard.getNumCol();j++) {
+                        Button button = buttons[i][j];
+                        button.setText("" + logic.getHiddenBombs(i, j));
+                    }
+                }
                 // connect fragment
                 displayWinMessage();
-            }
+                }
         }
     }
 
