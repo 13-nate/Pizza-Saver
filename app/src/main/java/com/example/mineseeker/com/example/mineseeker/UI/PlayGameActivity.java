@@ -1,4 +1,4 @@
-package com.example.mineseeker;
+package com.example.mineseeker.com.example.mineseeker.UI;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,12 +18,17 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+
+import com.example.mineseeker.model.GameBoard;
+import com.example.mineseeker.model.GameLogic;
+import com.example.mineseeker.R;
+
 public class PlayGameActivity extends AppCompatActivity {
 
     GameBoard gameBoard;
     int count = 0;
-    // save buttons when creating
-    Button buttons[][];
+    Button buttons[][]; // save buttons when creating
+    TextView text;
     // keeps track of exlopsive cells
     TextView counterText;
 
@@ -42,12 +47,9 @@ public class PlayGameActivity extends AppCompatActivity {
         winSound = MediaPlayer.create(this,R.raw.wininng);
         laserSound = MediaPlayer.create(this, R.raw.laser);
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         getSupportActionBar().setTitle("PLAY");
-
-
 
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
         NbrOfBombsTxt.setText("Bombs Found " + logic.getBombsFound() + " of " + gameBoard.getNumMines());
@@ -56,25 +58,18 @@ public class PlayGameActivity extends AppCompatActivity {
 
         updateDate();
         populateButtons();
-
     }
 
-
-
     private void populateButtons() {
-        //generate random sets of row/col pairs to be checked as buttons are generated
-        // when a matched is found place a bomb on click
-
-                TableLayout table = findViewById(R.id.tableForButtons);
-
+        TableLayout table = findViewById(R.id.tableForButtons);
         for (int row = 0; row < gameBoard.getNumRows(); row++){
             TableRow tableRow = new TableRow(this);
-            //control how it layouts
+            // control how it layouts
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
-                    //how to match the parent Width and height
+                    // how to match the parent Width and height
                     TableLayout.LayoutParams.MATCH_PARENT,
                     TableLayout.LayoutParams.MATCH_PARENT,
-                    1.0f           //scaleing weight of 1 so it knows how to scale
+                    1.0f           // scaling weight of 1 so it knows how to scale
             ));
             table.addView(tableRow);
 
@@ -85,30 +80,29 @@ public class PlayGameActivity extends AppCompatActivity {
 
                 Button button = new Button(this);
                 button.setLayoutParams(new TableRow.LayoutParams(
-                        //how to match the parent Width and height
+                        // how to match the parent Width and height
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
-                        //scaleing weight of 1 so it knows how to scale
+                        // scaling weight of 1 so it knows how to scale
                         1.0f
                 ));
 
-                // make counterText not clip on small buttons
+                // make text not clip on small buttons
                 button.setPadding(0,0,0,0);
-                //creates anominous class
-
+                // creates anominous class
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // all buttons call same thing, make function
-                        // cant use a varaible that is outside of this class if it is not final
+                        // cant use a variable that is outside of this class if it is not final
                         gridButtonClicked(FINAL_ROW, FINAL_COL);
                     }
                 });
-
                 tableRow.addView(button);
                 buttons[row][col] = button;
             }
         }
+        //create random bombs with in the game board
         logic.makeRandomBombs();
         getData();
     }
@@ -116,9 +110,8 @@ public class PlayGameActivity extends AppCompatActivity {
     private void gridButtonClicked(int row, int col) {
         laserSound.start();
         gameBoard = GameBoard.getInstance();
-        /*Toast.makeText(this, "Button clicked: " + row + ", " + col,
-                Toast.LENGTH_SHORT).show();*/
         logic.btnClicked(row,col);
+        // update display txt on each click
 
         //update display txt on each click
         TextView scansTxt = findViewById(R.id.txtScansUsed);
@@ -126,6 +119,8 @@ public class PlayGameActivity extends AppCompatActivity {
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
         NbrOfBombsTxt.setText("Bombs Found " + logic.getBombsFound() +" of " + gameBoard.getNumMines());
 
+        // sets the text for each button, the text should only be displayed if a scan has
+        // been performed
         for(int i = 0; i < gameBoard.getNumRows();i++) {
             for(int j = 0; j < gameBoard.getNumCol();j++) {
                 Button button = buttons[i][j];
@@ -134,26 +129,19 @@ public class PlayGameActivity extends AppCompatActivity {
                 }
             }
         }
+        // if the cell is a bomb display the image
 
         if(logic.getIsExplosive(row, col)) {
             displayBomb(buttons[row][col]);
+            // check for win condition when a bomb is found
             laserSound.pause();
             bombSound.start();
 
             if(logic.winCondition()) {
-                //all cells to show zero
-                for (int i = 0; i < gameBoard.getNumRows(); i++) {
-                    for (int j = 0; j <  gameBoard.getNumCol(); j++) {
-                        Button btnScanned = buttons[i][j];
-                        btnScanned.setText("" + 0);
-                    }
-                }
-                //connect fragment
+                // connect fragment
                 displayWinMessage();
             }
-
         }
-
     }
 
     private void displayBomb(Button button1) {
@@ -168,15 +156,6 @@ public class PlayGameActivity extends AppCompatActivity {
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
     }
-
-    private void displayWinMessage() {
-        FragmentManager manager = getSupportFragmentManager();
-        MessageFragment dialog = new MessageFragment();
-        dialog.show(manager, "MessageDialog");
-        winSound.start();
-    }
-
-
 
     private void lockButtonSizes() {
         gameBoard = GameBoard.getInstance();
@@ -195,7 +174,12 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-
+    private void displayWinMessage() {
+        FragmentManager manager = getSupportFragmentManager();
+        MessageFragment dialog = new MessageFragment();
+        dialog.show(manager, "MessageDialog");
+        winSound.start();
+    }
 
     public static Intent makeIntentPlayGameActivity(Context context) {
         return new Intent(context, PlayGameActivity.class);
@@ -213,6 +197,4 @@ public class PlayGameActivity extends AppCompatActivity {
         count = myScore.getInt("key", 0);
         counterText.setText("Times Played: " + count);
     }
-
-
 }

@@ -1,7 +1,8 @@
-package com.example.mineseeker;
+package com.example.mineseeker.com.example.mineseeker.UI;
 
 import android.os.Bundle;
 
+import com.example.mineseeker.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 

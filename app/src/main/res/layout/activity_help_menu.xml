@@ -5,6 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFD53B"
-    tools:context=".HelpMenuActivity">
+    tools:context=".com.example.mineseeker.UI.HelpMenuActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.example.mineseeker;
+package com.example.mineseeker.com.example.mineseeker.UI;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.example.mineseeker.R;
+
 public class WarningFragment extends AppCompatDialogFragment {
 
     @NonNull
@@ -32,7 +34,7 @@ public class WarningFragment extends AppCompatDialogFragment {
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
                         editor.clear().commit();
-                        Intent intent = Game_Menu.makeIntentGameMenuActivity(getActivity());
+                        Intent intent = GameMenu.makeIntentGameMenuActivity(getActivity());
                         startActivity(intent);
                         getActivity().finish();
                         break;

@@ -1,18 +1,18 @@
-package com.example.mineseeker;
+package com.example.mineseeker.com.example.mineseeker.UI;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import com.example.mineseeker.R;
 
 public class MessageFragment extends AppCompatDialogFragment {
 
@@ -24,7 +24,7 @@ public class MessageFragment extends AppCompatDialogFragment {
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = Game_Menu.makeIntentGameMenuActivity(getActivity());
+                Intent intent = GameMenu.makeIntentGameMenuActivity(getActivity());
                 startActivity(intent);
                 getActivity().finish();
 

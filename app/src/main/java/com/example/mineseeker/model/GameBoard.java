@@ -1,6 +1,11 @@
-package com.example.mineseeker;
+package com.example.mineseeker.model;
 
+/**
+ * Game board keeps track of the basic states of the game like its rows, collumns and number of
+ * bombs, it also impolemtes a singleton to keep the data consistent
+ */
 public class GameBoard {
+    // start up values for the first play of the game
     public static final int NUM_MINES = 6;
     public static final int NUM_ROWS = 4;
     public static final int NUM_COL = 6;
@@ -8,12 +13,10 @@ public class GameBoard {
     private int numRows;
     private int numCol;
 
-
-
     // singleton support
     private static GameBoard instance;
 
-    //default values for start
+    // default values for start
     private GameBoard() {
         //default values
        this.numMines = NUM_MINES;
@@ -24,12 +27,10 @@ public class GameBoard {
         if(instance == null){
             instance = new GameBoard();
         }
-
         return instance;
     }
 
     public int getNumMines() {
-
         return numMines;
     }
 
@@ -38,7 +39,6 @@ public class GameBoard {
     }
 
     public int getNumRows() {
-
         return numRows;
     }
 
