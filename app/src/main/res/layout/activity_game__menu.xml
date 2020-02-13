@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFD53B"
-    tools:context=".Game_Menu">
+    tools:context=".com.example.mineseeker.UI.GameMenu">
 
     <TextView
         android:id="@+id/mainMenu_textView"

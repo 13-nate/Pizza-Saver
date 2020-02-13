@@ -1,9 +1,8 @@
-package com.example.mineseeker;
+package com.example.mineseeker.com.example.mineseeker.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -12,7 +11,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.mineseeker.R;
 
 public class WelcomeScreenActivity extends AppCompatActivity {
 
@@ -38,7 +38,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = Game_Menu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
+                Intent intent = GameMenu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
                 startActivity(intent);
                 handler.removeCallbacksAndMessages(null);
                 finish();
@@ -50,7 +50,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = Game_Menu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
+                Intent intent = GameMenu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
                 startActivity(intent);
                 handler.removeCallbacksAndMessages(null);
                 finish();

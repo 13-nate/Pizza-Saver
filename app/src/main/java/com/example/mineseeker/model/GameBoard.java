@@ -1,8 +1,9 @@
-package com.example.mineseeker;
+package com.example.mineseeker.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * Game board keeps track of the basic states of the game like its rows, collumns and number of
+ * bombs, it also impolemtes a singleton to keep the data consistent
+ */
 public class GameBoard {
     public static final int NUM_MINES = 6;
     public static final int NUM_ROWS = 4;

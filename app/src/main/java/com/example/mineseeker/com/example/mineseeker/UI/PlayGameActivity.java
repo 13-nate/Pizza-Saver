@@ -1,4 +1,4 @@
-package com.example.mineseeker;
+package com.example.mineseeker.com.example.mineseeker.UI;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +11,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -19,7 +18,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 
-import java.util.Arrays;
+import com.example.mineseeker.model.GameBoard;
+import com.example.mineseeker.model.GameLogic;
+import com.example.mineseeker.R;
 
 public class PlayGameActivity extends AppCompatActivity {
 
