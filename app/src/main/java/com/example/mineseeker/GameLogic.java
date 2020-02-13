@@ -121,12 +121,21 @@ public class GameLogic {
             bombs[i][0] = tempRow;
             bombs[i][1] = tempCol;
             isExplosive[tempRow][tempCol] = true;
+            //for each temp row and temp coll go thow and increment the number of hidden bombs
+            // that relate to each temp row or coll
+            for(int row = 0; row < gameBoard.getNumRows(); row++) {
+                for(int col = 0; col < gameBoard.getNumCol(); col++) {
+                    if(row == tempRow || col == tempCol) {
+                        hiddenBombs[row][col]++;
+                    }
+                }
+            }
         }
             Log.i("Cheats","" + Arrays.deepToString(bombs));
         //for each cell go through all  other cells and increment the cell within the
         // first loop for each bomb found related to it
         //maybe make simpler by incrementing all rows and cols related to the temp row and col
-            for (int row = 0; row < gameBoard.getNumRows(); row++) {
+           /* for (int row = 0; row < gameBoard.getNumRows(); row++) {
                 for (int col = 0; col < gameBoard.getNumCol(); col++) {
                     for (int r = 0; r < gameBoard.getNumRows(); r++) {
                         for (int c = 0; c < gameBoard.getNumCol(); c++) {
@@ -136,7 +145,7 @@ public class GameLogic {
                         }
                     }
                 }
-            }
+            }*/
         Log.i("hidden","" + Arrays.deepToString(hiddenBombs));
     }
     public void btnClicked(int row, int col) {
@@ -185,9 +194,9 @@ public class GameLogic {
         for (int i = 0; i < gameBoard.getNumRows(); i++){
             for (int j = 0; j <  gameBoard.getNumCol(); j++) {
                 //cells act like they know a related bomb is showing
-                if(bombIsShowing[i][j] && (i == row || j == col)){
+                /*if(bombIsShowing[i][j] && (i == row || j == col)){
                     hiddenBombs[row][col] --;
-                }
+                }*/
             }
         }
         //keeps track of cells  scaned so thet can be changed once a bomb is revield
