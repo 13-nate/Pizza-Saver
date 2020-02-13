@@ -31,7 +31,6 @@ public class GameBoard {
         return instance;
     }
 
-
     public int getNumMines() {
 
         return numMines;
