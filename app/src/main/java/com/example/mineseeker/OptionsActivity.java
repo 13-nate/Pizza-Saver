@@ -5,9 +5,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -41,7 +39,6 @@ public class OptionsActivity extends AppCompatActivity {
 
         //getSingleton
     }
-
 
 
     private void createNumberOfMinesRadioButton() {
@@ -93,7 +90,7 @@ public class OptionsActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     //Toast.makeText(OptionsActivity.this, "Selected " + numGrid + " grid", Toast.LENGTH_SHORT).show();
 
-                    //get the row and col from text
+                    //get the row and col from counterText
                     gameBoard = GameBoard.getInstance();
                     char row = numGrid.charAt(0);
 

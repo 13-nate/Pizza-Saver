@@ -10,16 +10,13 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-
-
-import java.util.Arrays;
 
 public class PlayGameActivity extends AppCompatActivity {
 
@@ -28,14 +25,22 @@ public class PlayGameActivity extends AppCompatActivity {
     // save buttons when creating
     Button buttons[][];
     // keeps track of exlopsive cells
-    TextView text;
+    TextView counterText;
+
+    MediaPlayer bombSound;
+    MediaPlayer winSound;
+    MediaPlayer laserSound;
     GameLogic logic = new GameLogic();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         gameBoard = GameBoard.getInstance();
         buttons = new Button[gameBoard.getNumRows()][gameBoard.getNumCol()];
+        bombSound = MediaPlayer.create(this, R.raw.bomb_explosion);
+        winSound = MediaPlayer.create(this,R.raw.wininng);
+        laserSound = MediaPlayer.create(this, R.raw.laser);
 
 
         super.onCreate(savedInstanceState);
@@ -47,7 +52,7 @@ public class PlayGameActivity extends AppCompatActivity {
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
         NbrOfBombsTxt.setText("Bombs Found " + logic.getBombsFound() + " of " + gameBoard.getNumMines());
 
-        text =findViewById(R.id.timesPlayed);
+        counterText =findViewById(R.id.timesPlayed);
 
         updateDate();
         populateButtons();
@@ -87,7 +92,7 @@ public class PlayGameActivity extends AppCompatActivity {
                         1.0f
                 ));
 
-                // make text not clip on small buttons
+                // make counterText not clip on small buttons
                 button.setPadding(0,0,0,0);
                 //creates anominous class
 
@@ -108,15 +113,12 @@ public class PlayGameActivity extends AppCompatActivity {
         getData();
     }
 
-
-
     private void gridButtonClicked(int row, int col) {
+        laserSound.start();
         gameBoard = GameBoard.getInstance();
         /*Toast.makeText(this, "Button clicked: " + row + ", " + col,
                 Toast.LENGTH_SHORT).show();*/
         logic.btnClicked(row,col);
-
-
 
         //update display txt on each click
         TextView scansTxt = findViewById(R.id.txtScansUsed);
@@ -133,12 +135,10 @@ public class PlayGameActivity extends AppCompatActivity {
             }
         }
 
-
-
-
-
         if(logic.getIsExplosive(row, col)) {
             displayBomb(buttons[row][col]);
+            laserSound.pause();
+            bombSound.start();
 
             if(logic.winCondition()) {
                 //all cells to show zero
@@ -151,9 +151,8 @@ public class PlayGameActivity extends AppCompatActivity {
                 //connect fragment
                 displayWinMessage();
             }
+
         }
-
-
 
     }
 
@@ -174,8 +173,8 @@ public class PlayGameActivity extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         MessageFragment dialog = new MessageFragment();
         dialog.show(manager, "MessageDialog");
+        winSound.start();
     }
-
 
 
 
@@ -212,7 +211,7 @@ public class PlayGameActivity extends AppCompatActivity {
     private void updateDate() {
         SharedPreferences myScore = this.getSharedPreferences("COUNT", Context.MODE_PRIVATE);
         count = myScore.getInt("key", 0);
-        text.setText("Times Played: " + count);
+        counterText.setText("Times Played: " + count);
     }
 
 

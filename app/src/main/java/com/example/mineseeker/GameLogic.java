@@ -1,12 +1,8 @@
 package com.example.mineseeker;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+
 import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
+
 
 import java.util.Arrays;
 
@@ -21,7 +17,9 @@ public class GameLogic {
     private boolean[][] bombIsShowing;
     private boolean[][] cellScanned;
     private int[][] hiddenBombs;
+
     GameBoard gameBoard;
+
 
 
     public GameLogic() {
@@ -30,6 +28,7 @@ public class GameLogic {
         bombIsShowing  = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
         cellScanned  = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
         hiddenBombs  = new int[gameBoard.getNumRows()][gameBoard.getNumCol()];
+
 
         for (int row = 0; row < gameBoard.getNumRows(); row++){
             for (int col = 0; col <  gameBoard.getNumCol(); col++) {
@@ -47,31 +46,31 @@ public class GameLogic {
         return scans;
     }
 
-    public void setScans(int scans) {
+    /*public void setScans(int scans) {
         this.scans = scans;
-    }
+    }*/
 
     public int getBombsFound() {
         return bombsFound;
     }
 
-    public void setBombsFound(int bombsFound) {
+   /* public void setBombsFound(int bombsFound) {
         this.bombsFound = bombsFound;
-    }
+    }*/
 
-    public int getCount() {
+ /*   public int getCount() {
         return count;
     }
 
     public void setCount(int count) {
         this.count = count;
-    }
+    }*/
 
     public boolean getIsExplosive(int row, int col) {
         return isExplosive[row][col];
     }
 
-    public void setIsExplosive(boolean[][] isExplosive) {
+    /*public void setIsExplosive(boolean[][] isExplosive) {
         this.isExplosive = isExplosive;
     }
 
@@ -81,19 +80,19 @@ public class GameLogic {
 
     public void setBombIsShowing(boolean[][] bombIsShowing) {
         this.bombIsShowing = bombIsShowing;
-    }
+    }*/
 
     public boolean getCellScanned(int row, int col) {
         return cellScanned[row][col];
     }
 
-    public void setCellScanned(boolean[][] cellScanned) {
+  /*  public void setCellScanned(boolean[][] cellScanned) {
         this.cellScanned = cellScanned;
     }
 
     public String getBtnTxt() {
         return btnTxt;
-    }
+    }*/
 
     public int getHiddenBombs(int row, int col) {
         return  hiddenBombs[row][col];

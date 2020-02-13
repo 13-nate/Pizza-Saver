@@ -29,16 +29,24 @@ public class WarningFragment extends AppCompatDialogFragment {
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                editor.clear().commit();
-                Intent intent = Game_Menu.makeIntentGameMenuActivity(getActivity());
-                startActivity(intent);
-                getActivity().finish();
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        editor.clear().commit();
+                        Intent intent = Game_Menu.makeIntentGameMenuActivity(getActivity());
+                        startActivity(intent);
+                        getActivity().finish();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        break;
+                }
+
             }
         };
 
         return new AlertDialog.Builder(getActivity()).setTitle("WARNING!")
                 .setView(v)
                 .setPositiveButton(android.R.string.ok, listener)
+                .setNegativeButton(android.R.string.cancel, listener)
                 .create();
     }
 }

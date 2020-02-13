@@ -1,8 +1,5 @@
 package com.example.mineseeker;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GameBoard {
     public static final int NUM_MINES = 6;
     public static final int NUM_ROWS = 4;
