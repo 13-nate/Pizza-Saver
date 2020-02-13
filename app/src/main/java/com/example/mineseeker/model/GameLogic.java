@@ -1,7 +1,6 @@
 package com.example.mineseeker.model;
 
 import android.util.Log;
-import android.widget.Button;
 
 import java.util.Arrays;
 
