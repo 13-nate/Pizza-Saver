@@ -5,6 +5,7 @@ package com.example.mineseeker.model;
  * bombs, it also impolemtes a singleton to keep the data consistent
  */
 public class GameBoard {
+    // start up values for the first play of the game
     public static final int NUM_MINES = 6;
     public static final int NUM_ROWS = 4;
     public static final int NUM_COL = 6;
@@ -17,7 +18,7 @@ public class GameBoard {
     // singleton support
     private static GameBoard instance;
 
-    //default values for start
+    // default values for start
     private GameBoard() {
         //default values
        this.numMines = NUM_MINES;
