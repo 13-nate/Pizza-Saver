@@ -26,11 +26,9 @@ public class PlayGameActivity extends AppCompatActivity {
 
     GameBoard gameBoard;
     int count = 0;
-    // save buttons when creating
-    Button buttons[][];
+    Button buttons[][]; // save buttons when creating
     TextView text;
     GameLogic logic = new GameLogic();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +82,7 @@ public class PlayGameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         // all buttons call same thing, make function
-                        // cant use a varaible that is outside of this class if it is not final
+                        // cant use a variable that is outside of this class if it is not final
                         gridButtonClicked(FINAL_ROW, FINAL_COL);
                     }
                 });
@@ -92,11 +90,10 @@ public class PlayGameActivity extends AppCompatActivity {
                 buttons[row][col] = button;
             }
         }
+        //create random bombs with in the game board
         logic.makeRandomBombs();
         getData();
     }
-
-
 
     private void gridButtonClicked(int row, int col) {
         gameBoard = GameBoard.getInstance();
@@ -141,15 +138,6 @@ public class PlayGameActivity extends AppCompatActivity {
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
     }
 
-    private void displayWinMessage() {
-        FragmentManager manager = getSupportFragmentManager();
-        MessageFragment dialog = new MessageFragment();
-        dialog.show(manager, "MessageDialog");
-    }
-
-
-
-
     private void lockButtonSizes() {
         gameBoard = GameBoard.getInstance();
         for (int row = 0; row < gameBoard.getNumRows(); row++) {
@@ -167,7 +155,11 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-
+    private void displayWinMessage() {
+        FragmentManager manager = getSupportFragmentManager();
+        MessageFragment dialog = new MessageFragment();
+        dialog.show(manager, "MessageDialog");
+    }
 
     public static Intent makeIntentPlayGameActivity(Context context) {
         return new Intent(context, PlayGameActivity.class);
@@ -185,6 +177,4 @@ public class PlayGameActivity extends AppCompatActivity {
         count = myScore.getInt("key", 0);
         text.setText("Times Played: " + count);
     }
-
-
 }

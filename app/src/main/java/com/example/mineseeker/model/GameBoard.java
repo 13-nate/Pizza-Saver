@@ -13,8 +13,6 @@ public class GameBoard {
     private int numRows;
     private int numCol;
 
-
-
     // singleton support
     private static GameBoard instance;
 
@@ -29,12 +27,10 @@ public class GameBoard {
         if(instance == null){
             instance = new GameBoard();
         }
-
         return instance;
     }
 
     public int getNumMines() {
-
         return numMines;
     }
 
@@ -43,7 +39,6 @@ public class GameBoard {
     }
 
     public int getNumRows() {
-
         return numRows;
     }
 

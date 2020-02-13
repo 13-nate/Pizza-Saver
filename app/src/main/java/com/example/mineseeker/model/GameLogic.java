@@ -48,7 +48,6 @@ public class GameLogic {
         return bombsFound;
     }
 
-
     public boolean getIsExplosive(int row, int col) {
         return isExplosive[row][col];
     }
