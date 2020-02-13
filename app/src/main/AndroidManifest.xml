@@ -10,22 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".OptionsActivity"
+            android:name=".com.example.mineseeker.UI.OptionsActivity"
             android:screenOrientation="sensorLandscape">
         </activity>
         <activity
-            android:name=".HelpMenuActivity"
+            android:name=".com.example.mineseeker.UI.HelpMenuActivity"
             android:screenOrientation="sensorLandscape" />
         <activity
 
-            android:name=".PlayGameActivity"
+            android:name=".com.example.mineseeker.UI.PlayGameActivity"
             android:screenOrientation="sensorLandscape"/>
         <activity
-            android:name=".Game_Menu"
+            android:name=".com.example.mineseeker.UI.GameMenu"
             android:screenOrientation="sensorLandscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".WelcomeScreenActivity"
+            android:name=".com.example.mineseeker.UI.WelcomeScreenActivity"
             android:screenOrientation="sensorLandscape"
             android:theme="@style/AppTheme.NoActionBar"
             android:enabled="true">

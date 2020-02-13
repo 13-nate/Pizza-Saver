@@ -1,18 +1,19 @@
-package com.example.mineseeker;
+package com.example.mineseeker.com.example.mineseeker.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.example.mineseeker.model.GameBoard;
+import com.example.mineseeker.R;
 
 public class OptionsActivity extends AppCompatActivity {
 

@@ -1,10 +1,9 @@
-package com.example.mineseeker;
+package com.example.mineseeker.com.example.mineseeker.UI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -12,9 +11,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Game_Menu extends AppCompatActivity {
+import com.example.mineseeker.R;
+
+public class GameMenu extends AppCompatActivity {
 
     private Button helpButton;
     private Button playGameButton;
@@ -32,7 +32,7 @@ public class Game_Menu extends AppCompatActivity {
         playGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = PlayGameActivity.makeIntentPlayGameActivity(Game_Menu.this);
+                Intent intent = PlayGameActivity.makeIntentPlayGameActivity(GameMenu.this);
                 startActivity(intent);
             }
         });
@@ -42,7 +42,7 @@ public class Game_Menu extends AppCompatActivity {
         optionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = OptionsActivity.makeIntentOptionsActivity(Game_Menu.this);
+               Intent intent = OptionsActivity.makeIntentOptionsActivity(GameMenu.this);
                startActivity(intent);
             }
         });
@@ -51,7 +51,7 @@ public class Game_Menu extends AppCompatActivity {
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = HelpMenuActivity.makeIntentHelpActivity(Game_Menu.this);
+                Intent intent = HelpMenuActivity.makeIntentHelpActivity(GameMenu.this);
                 startActivity(intent);
             }
         });
@@ -77,6 +77,6 @@ public class Game_Menu extends AppCompatActivity {
         explosionLogo.startAnimation(explotionAnimation);
     }
     public static Intent makeIntentGameMenuActivity(Context context){
-        return new Intent(context, Game_Menu.class);
+        return new Intent(context, GameMenu.class);
     }
 }
