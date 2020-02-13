@@ -31,7 +31,7 @@ public class PlayGameActivity extends AppCompatActivity {
     TextView text;
     // keeps track of exlopsive cells
     TextView counterText;
-
+    // create sound files
     MediaPlayer bombSound;
     MediaPlayer winSound;
     MediaPlayer laserSound;
@@ -111,7 +111,6 @@ public class PlayGameActivity extends AppCompatActivity {
         laserSound.start();
         gameBoard = GameBoard.getInstance();
         logic.btnClicked(row,col);
-        // update display txt on each click
 
         //update display txt on each click
         TextView scansTxt = findViewById(R.id.txtScansUsed);
