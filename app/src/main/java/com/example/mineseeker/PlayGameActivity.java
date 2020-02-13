@@ -115,8 +115,6 @@ public class PlayGameActivity extends AppCompatActivity {
         /*Toast.makeText(this, "Button clicked: " + row + ", " + col,
                 Toast.LENGTH_SHORT).show();*/
         logic.btnClicked(row,col);
-        Button btnClicked = buttons[row][col];
-        btnClicked.setText(logic.getBtnTxt());
 
 
 
@@ -126,11 +124,21 @@ public class PlayGameActivity extends AppCompatActivity {
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
         NbrOfBombsTxt.setText("Bombs Found " + logic.getBombsFound() +" of " + gameBoard.getNumMines());
 
+        for(int i = 0; i < gameBoard.getNumRows();i++) {
+            for(int j = 0; j < gameBoard.getNumCol();j++) {
+                Button button = buttons[i][j];
+                if(logic.getCellScanned(i, j)) {
+                    button.setText("" + logic.getHiddenBombs(i, j));
+                }
+            }
+        }
+
+
+
+
 
         if(logic.getIsExplosive(row, col)) {
             displayBomb(buttons[row][col]);
-
-            //decrement  related cells when the button is reveild
 
             if(logic.winCondition()) {
                 //all cells to show zero
@@ -144,6 +152,8 @@ public class PlayGameActivity extends AppCompatActivity {
                 displayWinMessage();
             }
         }
+
+
 
     }
 

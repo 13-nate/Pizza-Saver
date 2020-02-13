@@ -20,8 +20,7 @@ public class GameLogic {
     private boolean[][] isExplosive;
     private boolean[][] bombIsShowing;
     private boolean[][] cellScanned;
-    private int[][] bombs;
-
+    private int[][] hiddenBombs;
     GameBoard gameBoard;
 
 
@@ -30,16 +29,18 @@ public class GameLogic {
         isExplosive = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
         bombIsShowing  = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
         cellScanned  = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
-    }
+        hiddenBombs  = new int[gameBoard.getNumRows()][gameBoard.getNumCol()];
 
-    public GameLogic(int scans, int bombsFound, int count, boolean[][] isExplosive,
-                     boolean[][] bombIsShowing, boolean[][] cellScanned) {
-        this.scans = scans;
-        this.bombsFound = bombsFound;
-        this.count = count;
-        this.isExplosive = isExplosive;
-        this.bombIsShowing = bombIsShowing;
-        this.cellScanned = cellScanned;
+        for (int row = 0; row < gameBoard.getNumRows(); row++){
+            for (int col = 0; col <  gameBoard.getNumCol(); col++) {
+                isExplosive[row][col] = false;
+                bombIsShowing[row][col] = false;
+                cellScanned[row][col] = false;
+                hiddenBombs[row][col] = 0;
+            }
+        }
+
+
     }
 
     public int getScans() {
@@ -94,6 +95,10 @@ public class GameLogic {
         return btnTxt;
     }
 
+    public int getHiddenBombs(int row, int col) {
+        return  hiddenBombs[row][col];
+    }
+
     // sets the places for random bombs with in the the isExplosive 2D array
     public void makeRandomBombs() {
         gameBoard = GameBoard.getInstance();
@@ -112,15 +117,28 @@ public class GameLogic {
                     k = -1;
                 }
             }
+
             bombs[i][0] = tempRow;
             bombs[i][1] = tempCol;
             isExplosive[tempRow][tempCol] = true;
-            Log.i("Cheats","" + Arrays.deepToString(bombs));
-
         }
-        // check if one of the random number sets
+            Log.i("Cheats","" + Arrays.deepToString(bombs));
+        //for each cell go through all  other cells and increment the cell within the
+        // first loop for each bomb found related to it
+        //maybe make simpler by incrementing all rows and cols related to the temp row and col
+            for (int row = 0; row < gameBoard.getNumRows(); row++) {
+                for (int col = 0; col < gameBoard.getNumCol(); col++) {
+                    for (int r = 0; r < gameBoard.getNumRows(); r++) {
+                        for (int c = 0; c < gameBoard.getNumCol(); c++) {
+                            if (isExplosive[r][c] && (r == row || c == col)) {
+                                hiddenBombs[row][col]++;
+                            }
+                        }
+                    }
+                }
+            }
+        Log.i("hidden","" + Arrays.deepToString(hiddenBombs));
     }
-
     public void btnClicked(int row, int col) {
         if(isExplosive[row][col]) {
             bombFound(row,col);
@@ -144,16 +162,19 @@ public class GameLogic {
             //stops increasing the number of bombs found by clicking the found bomb
             if (!bombIsShowing[row][col]) {
                 bombsFound++;
-                //nothing to show on the button because it was not a scan
-                btnTxt = "";
-            }
+                for (int i = 0; i < gameBoard.getNumRows(); i++) {
+                    for (int j = 0; j < gameBoard.getNumCol(); j++) {
+                        //decrement
+                        if ((i == row || j == col)) {
+                            hiddenBombs[i][j]--;
+                        }
+                    }
+                }            }
             // if the bomb is showing and clicked do a scan
             //keeps track od showing bombs
+
             bombIsShowing[row][col] = true;
-
-            //not a bomb so scan row and col
         }
-
     }
 
     public void scan(int row, int col) {
@@ -161,22 +182,17 @@ public class GameLogic {
         if(!cellScanned[row][col]){
             scans++;
         }
-
-        int countBombs= 0;
         for (int i = 0; i < gameBoard.getNumRows(); i++){
             for (int j = 0; j <  gameBoard.getNumCol(); j++) {
-                if(isExplosive[i][j] &&(i == row || j == col)){
-                    countBombs++;
-                }
                 //cells act like they know a related bomb is showing
                 if(bombIsShowing[i][j] && (i == row || j == col)){
-                    countBombs --;
+                    hiddenBombs[row][col] --;
                 }
             }
         }
         //keeps track of cells  scaned so thet can be changed once a bomb is revield
         cellScanned[row][col]= true;
-        btnTxt = "" + countBombs;
+        btnTxt = "" + hiddenBombs[row][col];
     }
 
     public boolean winCondition(){
