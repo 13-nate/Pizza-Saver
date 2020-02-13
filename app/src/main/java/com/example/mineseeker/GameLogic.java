@@ -26,6 +26,10 @@ public class GameLogic {
 
 
     public GameLogic() {
+        gameBoard =GameBoard.getInstance();
+        isExplosive = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
+        bombIsShowing  = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
+        cellScanned  = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
     }
 
     public GameLogic(int scans, int bombsFound, int count, boolean[][] isExplosive,
@@ -62,8 +66,8 @@ public class GameLogic {
         this.count = count;
     }
 
-    public boolean[][] getIsExplosive() {
-        return isExplosive;
+    public boolean getIsExplosive(int row, int col) {
+        return isExplosive[row][col];
     }
 
     public void setIsExplosive(boolean[][] isExplosive) {
@@ -78,8 +82,8 @@ public class GameLogic {
         this.bombIsShowing = bombIsShowing;
     }
 
-    public boolean[][] getCellScanned() {
-        return cellScanned;
+    public boolean getCellScanned(int row, int col) {
+        return cellScanned[row][col];
     }
 
     public void setCellScanned(boolean[][] cellScanned) {
@@ -110,16 +114,11 @@ public class GameLogic {
             }
             bombs[i][0] = tempRow;
             bombs[i][1] = tempCol;
+            isExplosive[tempRow][tempCol] = true;
             Log.i("Cheats","" + Arrays.deepToString(bombs));
 
         }
         // check if one of the random number sets
-        for (int i = 0; i < gameBoard.getNumRows(); i++) {
-            for(int j = 0; j<gameBoard.getNumCol(); j++)
-            if (i == bombs[i][j] && j == bombs[i][j]) {
-                isExplosive[i][j] = true;
-            }
-        }
     }
 
     public void btnClicked(int row, int col) {
@@ -136,6 +135,9 @@ public class GameLogic {
         /*Toast.makeText(this, "Button clicked: " + row + ", " + col,
                 Toast.LENGTH_SHORT).show();*/
 
+        if(bombIsShowing[row][col]){
+            scan(row,col);
+        }
 
         //if it is a bomb show the bomb
         if(isExplosive[row][col]) {
@@ -149,11 +151,7 @@ public class GameLogic {
             //keeps track od showing bombs
             bombIsShowing[row][col] = true;
 
-
             //not a bomb so scan row and col
-        }
-        else{
-            scan(row, col);
         }
 
     }
@@ -179,6 +177,14 @@ public class GameLogic {
         //keeps track of cells  scaned so thet can be changed once a bomb is revield
         cellScanned[row][col]= true;
         btnTxt = "" + countBombs;
+    }
+
+    public boolean winCondition(){
+        gameBoard = GameBoard.getInstance();
+        if(bombsFound == gameBoard.getNumMines()){
+            return true;
+        }
+        return false;
     }
 
 }
