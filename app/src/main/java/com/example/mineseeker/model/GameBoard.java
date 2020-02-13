@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 
 
 import com.example.mineseeker.com.example.mineseeker.UI.OptionsActivity;
+import com.example.mineseeker.com.example.mineseeker.UI.QueryPreferences;
+
 import static android.preference.PreferenceManager.getDefaultSharedPreferences;
 
 /**
@@ -33,9 +35,9 @@ public class GameBoard {
         numRows = setRows.getInt("keyROWS", 6);
         numCol = setCols.getInt("keyCOLS", 4);
         numMines = setMines.getInt("keyMINES", 6);*/
-        this.numRows = ROWS;
-        this.numCol = COLS;
-        this.numMines = MINES;
+        this.numRows = QueryPreferences.getStoredQuery(OptionsActivity.contextApp, "keyROWS");
+        this.numCol = QueryPreferences.getStoredQuery(OptionsActivity.getContextApp(), "keyCOLSs");
+        this.numMines = QueryPreferences.getStoredQuery(OptionsActivity.getContextApp(), "keyMINES");
     }
     public static GameBoard getInstance() {
         if(instance == null){

@@ -24,9 +24,9 @@ public class OptionsActivity extends AppCompatActivity {
     // singleton support
     private GameBoard gameBoard;
     private Button clear;
-    int cols;
-    int rows;
-    int numMine;
+    int cols = 4;
+    int rows = 6;
+    int numMine = 6;
 
     public static Context getContextApp() {
         return contextApp;
@@ -38,10 +38,11 @@ public class OptionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_options);
         getSupportActionBar().setTitle("OPTIONS");
 
+        contextApp = getApplicationContext();
+        getData();
         createGridRadioButtons();
 
         createNumberOfMinesRadioButton();
-
         contextApp = getApplicationContext();
 
         clear = findViewById(R.id.clear_button);
@@ -105,7 +106,6 @@ public class OptionsActivity extends AppCompatActivity {
                     //Toast.makeText(OptionsActivity.this, "Selected " + numGrid + " grid", Toast.LENGTH_SHORT).show();
 
                     //get the row and col from text
-                    gameBoard = GameBoard.getInstance();
                     char row = numGrid.charAt(0);
 
                     if(row == '5'){
@@ -133,7 +133,11 @@ public class OptionsActivity extends AppCompatActivity {
         return new Intent(context, OptionsActivity.class);
     }
     private void getData() {
-        SharedPreferences preferencesRows = getSharedPreferences("ROWS", Context.MODE_PRIVATE);
+
+        QueryPreferences.setStoredQuery(this,"keyROWS", rows);
+        QueryPreferences.setStoredQuery(this, "keyCOLS", cols);
+        QueryPreferences.setStoredQuery(this,"keyMINES", numMine);
+        /*SharedPreferences preferencesRows = getSharedPreferences("ROWS", Context.MODE_PRIVATE);
         SharedPreferences preferencesCols = getSharedPreferences("COLS", Context.MODE_PRIVATE);
         SharedPreferences preferencesMines = getSharedPreferences("MINES", Context.MODE_PRIVATE);
 
@@ -148,7 +152,7 @@ public class OptionsActivity extends AppCompatActivity {
         editorRow.commit();
         editorCols.commit();
         editorMines.commit();
-//        gameBoard.setContext(getApplicationContext());
+//        gameBoard.setContext(getApplicationContext());*/
 
     }
 }

@@ -9,17 +9,16 @@ import java.util.prefs.Preferences;
  * An interface for reading and writting to the shared preference filee
  */
 public class QueryPreferences {
-    private static final String PREF_SEARCH_QUERY = "searchQuery";
 
-    public static String getStoredQuery(Context context) {
+    public static int getStoredQuery(Context context, String query) {
         return PreferenceManager.getDefaultSharedPreferences(context)
-                .getString(PREF_SEARCH_QUERY, null);
+                .getInt(query, 0);
     }
 
-    public  static  void setStoredQuery(Context context, String query) {
+    public  static  void setStoredQuery(Context context,String query, int data) {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
-                .putString(PREF_SEARCH_QUERY, query)
+                .putInt(query, data)
                 .apply();
     }
 

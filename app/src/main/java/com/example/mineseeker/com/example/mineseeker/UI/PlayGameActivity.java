@@ -173,14 +173,20 @@ public class PlayGameActivity extends AppCompatActivity {
 
     private void getData() {
         count ++;
-        SharedPreferences preferences = getSharedPreferences("COUNT", Context.MODE_PRIVATE);
+        QueryPreferences.setStoredQuery(this,"keyPLAYS", count);
+
+       /* SharedPreferences preferences = getSharedPreferences("COUNT", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("key", count);
-        editor.commit();
+        editor.commit();*/
+
     }
     private void updateDate() {
-        SharedPreferences myScore = this.getSharedPreferences("COUNT", Context.MODE_PRIVATE);
-        count = myScore.getInt("key", 0);
+        int myCount = QueryPreferences.getStoredQuery(this, "keyPLAYS");
+        count = myCount;
+
+        /*SharedPreferences myScore = this.getSharedPreferences("COUNT", Context.MODE_PRIVATE);
+        count = myScore.getInt("key", 0);*/
         text.setText("Times Played: " + count);
     }
 }
