@@ -5,7 +5,9 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -20,6 +22,10 @@ public class OptionsActivity extends AppCompatActivity {
     // singleton support
     private GameBoard gameBoard;
     private Button clear;
+    int cols;
+    int rows;
+    int setMines;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +33,7 @@ public class OptionsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("OPTIONS");
 
         createGridRadioButtons();
-
         createNumberOfMinesRadioButton();
-
         clear = findViewById(R.id.clear_button);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +46,6 @@ public class OptionsActivity extends AppCompatActivity {
 
         //getSingleton
     }
-
 
     private void createNumberOfMinesRadioButton() {
         gameBoard = GameBoard.getInstance();
@@ -60,8 +63,10 @@ public class OptionsActivity extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    gameBoard.setNumMines(numMine);
-                    Toast.makeText(OptionsActivity.this, "Selected number of mines is: " + numMine, Toast.LENGTH_SHORT).show();
+                    setMines = numMine;
+                    gameBoard.setNumMines(setMines);
+                    Toast.makeText(OptionsActivity.this, "Selected number of mines is: " + setMines, Toast.LENGTH_SHORT).show();
+                    getData();
 
                 }
             });
@@ -70,7 +75,6 @@ public class OptionsActivity extends AppCompatActivity {
     }
 
     private void createGridRadioButtons() {
-
         gameBoard = GameBoard.getInstance();
 
         RadioGroup group = findViewById(R.id.radio_group_grid_size);
@@ -81,10 +85,7 @@ public class OptionsActivity extends AppCompatActivity {
         for (int i = 0; i < numGrids.length; i++){
             String numGrid = numGrids[i];
 
-
             //change txt to ints to be passed into singleton
-
-
             RadioButton button = new RadioButton(this);
             button.setText(numGrid);
 
@@ -93,12 +94,9 @@ public class OptionsActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     //Toast.makeText(OptionsActivity.this, "Selected " + numGrid + " grid", Toast.LENGTH_SHORT).show();
 
-                    //get the row and col from counterText
-                    gameBoard = GameBoard.getInstance();
+                    //get the row and col from text
                     char row = numGrid.charAt(0);
 
-
-                    int cols;
                     if(row == '5'){
                         cols = 10;
                     }else if (row == '6') {
@@ -107,23 +105,48 @@ public class OptionsActivity extends AppCompatActivity {
                         cols = 6;
                     }
 
-                    int rows = Integer.parseInt(String.valueOf(row));
-
+                    rows = Integer.parseInt(String.valueOf(row));
                     gameBoard = GameBoard.getInstance();
                     gameBoard.setNumRows(rows);
                     gameBoard.setNumCol(cols);
 
                     Toast.makeText(OptionsActivity.this, "Selected rows " + rows + " and columns " + cols, Toast.LENGTH_SHORT).show();
-
+                    getData();
                 }
             });
             group.addView(button);
-
         }
-
-
     }
+
     public static Intent makeIntentOptionsActivity(Context context){
         return new Intent(context, OptionsActivity.class);
+    }
+    private void getData() {
+        gameBoard = GameBoard.getInstance();
+        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"keyROWS", rows);
+        QueryPreferences.setStoredQuery(GameMenu.getContextApp(), "keyCOLS", cols);
+        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"keyMINES", setMines);
+        gameBoard.setState(this);
+        gameBoard.setIsStateChanged(true);
+        Log.i("Cheats","r = " + QueryPreferences.getStoredQuery(this, "keyROWS")
+                + "c = " + QueryPreferences.getStoredQuery(this, "keyCOLS")
+        + "m = " + QueryPreferences.getStoredQuery(this, "keyMINES"));
+
+        /*SharedPreferences preferencesRows = getSharedPreferences("ROWS", Context.MODE_PRIVATE);
+        SharedPreferences preferencesCols = getSharedPreferences("COLS", Context.MODE_PRIVATE);
+        SharedPreferences preferencesMines = getSharedPreferences("MINES", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editorRow = preferencesRows.edit();
+        SharedPreferences.Editor editorCols = preferencesCols.edit();
+        SharedPreferences.Editor editorMines = preferencesMines.edit();
+
+        editorRow.putInt("keyROWS", rows);
+        editorCols.putInt("keyCOLS", cols);
+        editorCols.putInt("keyMINES", numMine);
+
+        editorRow.commit();
+        editorCols.commit();
+        editorMines.commit();
+//       gameBoard.setContext(getApplicationContext());*/
     }
 }

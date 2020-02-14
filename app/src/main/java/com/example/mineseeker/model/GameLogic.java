@@ -1,6 +1,10 @@
 package com.example.mineseeker.model;
 
+import android.content.Context;
 import android.util.Log;
+
+import com.example.mineseeker.com.example.mineseeker.UI.GameMenu;
+import com.example.mineseeker.com.example.mineseeker.UI.QueryPreferences;
 
 import java.util.Arrays;
 
@@ -23,7 +27,7 @@ public class GameLogic {
 
     //initialize arrays and other game board data
     public GameLogic() {
-        gameBoard =GameBoard.getInstance();
+        gameBoard = GameBoard.getInstance();
         isExplosive = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
         isBombFound = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
         isCellScanned = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
@@ -53,6 +57,10 @@ public class GameLogic {
 
     public boolean getCellScanned(int row, int col) {
         return isCellScanned[row][col];
+    }
+
+    public boolean getIsBombFound(int row, int col) {
+        return isBombFound[row][col];
     }
 
     public int getHiddenBombs(int row, int col) {
@@ -141,10 +149,13 @@ public class GameLogic {
                    hiddenBombs[i][j] = 0;
                 }
             }
+            QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"HIGHSCORE", scans);
+
             return true;
         }
         return false;
     }
+
 
 }
 

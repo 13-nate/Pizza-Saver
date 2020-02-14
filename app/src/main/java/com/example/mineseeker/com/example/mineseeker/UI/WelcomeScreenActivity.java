@@ -20,9 +20,8 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     private TextView textLogo;
     private TextView authorLogo;
     private ImageButton skipButton;
-    final private static int ANIMATION_TIME_OUT = 4000;
+    final private static int ANIMATION_TIME_OUT = 6000;
     final Handler handler = new Handler();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +47,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
 
     }
     private void delayAnimation() {
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -55,8 +55,6 @@ public class WelcomeScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 handler.removeCallbacksAndMessages(null);
                 finish();
-
-
             }
         }, ANIMATION_TIME_OUT);
     }
@@ -68,8 +66,5 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         textLogo.startAnimation(topAnim);
         logo.startAnimation(logoAnim);
         authorLogo.startAnimation(authorAnim);
-
     }
-
-
 }
