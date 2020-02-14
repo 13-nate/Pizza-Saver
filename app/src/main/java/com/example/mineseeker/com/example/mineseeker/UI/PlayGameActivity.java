@@ -12,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -125,6 +126,14 @@ public class PlayGameActivity extends AppCompatActivity {
         //not a bomb so play scan sound
         if(!logic.getIsExplosive(row, col)){
             laserSound.start();
+        }
+        for(int i = 0; i < gameBoard.getNumRows();i++) {
+            for(int j = 0; j < gameBoard.getNumCol();j++) {
+                if(i == row || j == col){
+                    Button button =buttons[i][j];
+                    button.startAnimation(AnimationUtils.loadAnimation(this,R.anim.btn_shake));
+                }
+            }
         }
         //update display txt on each click
         scansTxt = findViewById(R.id.txtScansUsed);

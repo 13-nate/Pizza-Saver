@@ -36,6 +36,8 @@ public class HelpMenuActivity extends AppCompatActivity {
         TextView txtScanSound = findViewById(R.id.txtScanSound);
         txtScanSound.setMovementMethod(LinkMovementMethod.getInstance());
 
+        TextView txtAuthors = findViewById(R.id.txtAuthor);
+        txtAuthors.setMovementMethod(LinkMovementMethod.getInstance());
 
     }
     public static Intent makeIntentHelpActivity(Context context){
