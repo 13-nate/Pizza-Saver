@@ -23,7 +23,7 @@ public class GameLogic {
 
     //initialize arrays and other game board data
     public GameLogic() {
-        gameBoard =GameBoard.getInstance();
+        gameBoard = GameBoard.getInstance();
         isExplosive = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
         isBombFound = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];
         isCellScanned = new boolean[gameBoard.getNumRows()][gameBoard.getNumCol()];

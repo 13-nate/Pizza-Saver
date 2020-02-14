@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,11 +36,16 @@ public class PlayGameActivity extends AppCompatActivity {
     MediaPlayer laserSound;
     GameLogic logic = new GameLogic();
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         gameBoard = GameBoard.getInstance();
+        // change the state of the game board if it has been changed somewhere else
+        gameBoard.getState(GameMenu.getContextApp());
+        //create game logic after getting the state so that it can use the correct values
+        // through out the app
+        logic = new GameLogic();
+
+
         buttons = new Button[gameBoard.getNumRows()][gameBoard.getNumCol()];
         bombSound = MediaPlayer.create(this, R.raw.bomb_explosion);
         winSound = MediaPlayer.create(this,R.raw.wininng);
@@ -192,14 +196,11 @@ public class PlayGameActivity extends AppCompatActivity {
 
     private void getData() {
         count ++;
-        SharedPreferences preferences = getSharedPreferences("COUNT", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("key", count);
-        editor.commit();
+        QueryPreferences.setStoredQuery(this,"keyPLAYS", count);
     }
     private void updateDate() {
-        SharedPreferences myScore = this.getSharedPreferences("COUNT", Context.MODE_PRIVATE);
-        count = myScore.getInt("key", 0);
-        counterText.setText("Times Played: " + count);
+        int myCount = QueryPreferences.getStoredQuery(this, "keyPLAYS");
+        count = myCount;
+        text.setText("Times Played: " + count);
     }
 }

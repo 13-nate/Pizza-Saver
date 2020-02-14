@@ -1,5 +1,14 @@
 package com.example.mineseeker.model;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
+
+import com.example.mineseeker.com.example.mineseeker.UI.OptionsActivity;
+import com.example.mineseeker.com.example.mineseeker.UI.QueryPreferences;
+
+import static android.preference.PreferenceManager.getDefaultSharedPreferences;
+
 /**
  * Game board keeps track of the basic states of the game like its rows, collumns and number of
  * bombs, it also impolemtes a singleton to keep the data consistent
@@ -12,16 +21,25 @@ public class GameBoard {
     private int numMines;
     private int numRows;
     private int numCol;
-
+    // keeps track if a state changed has occurs so that the game can update to the new state
+    private boolean isStateChanged;
     // singleton support
     private static GameBoard instance;
 
     // default values for start
     private GameBoard() {
-        //default values
-       this.numMines = NUM_MINES;
-       this.numRows = NUM_ROWS;
-       this.numCol = NUM_COL;
+        this.numMines = NUM_MINES;
+        this.numRows = NUM_ROWS;
+        this.numCol = NUM_COL;
+        this.isStateChanged = false;
+        //default or saved values frim option screen
+        /*SharedPreferences setRows = context.getSharedPreferences("ROWS",Context.MODE_PRIVATE);
+        SharedPreferences setCols = context.getSharedPreferences("COLS",Context.MODE_PRIVATE);
+        SharedPreferences setMines = context.getSharedPreferences("MINES",Context.MODE_PRIVATE);
+
+        numRows = setRows.getInt("keyROWS", 6);
+        numCol = setCols.getInt("keyCOLS", 4);
+        numMines = setMines.getInt("keyMINES", 6);*/
     }
     public static GameBoard getInstance() {
         if(instance == null){
@@ -29,7 +47,6 @@ public class GameBoard {
         }
         return instance;
     }
-
     public int getNumMines() {
         return numMines;
     }
@@ -50,8 +67,28 @@ public class GameBoard {
 
         return numCol;
     }
-
     public void setNumCol(int numCol) {
         this.numCol = numCol;
+    }
+
+
+    public boolean getIsStateChanged() {
+        return isStateChanged;
+    }
+
+    public void setIsStateChanged(boolean stateChanged) {
+        isStateChanged = stateChanged;
+    }
+
+    public void getState(Context context) {
+        this.numRows = QueryPreferences.getStoredQuery(context, "keyROWS");
+        this.numCol = QueryPreferences.getStoredQuery(context, "keyCOLS");
+        this.numMines = QueryPreferences.getStoredQuery(context, "keyMINES");
+    }
+
+    public void setState(Context context) {
+       QueryPreferences.setStoredQuery(context, "keyROWS", numRows);
+       QueryPreferences.setStoredQuery(context, "keyCOLS", numCol);
+       QueryPreferences.setStoredQuery(context, "keyMINES", numMines);
     }
 }

@@ -23,7 +23,6 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     final private static int ANIMATION_TIME_OUT = 6000;
     final Handler handler = new Handler();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +55,6 @@ public class WelcomeScreenActivity extends AppCompatActivity {
                 startActivity(intent);
                 handler.removeCallbacksAndMessages(null);
                 finish();
-
             }
         }, ANIMATION_TIME_OUT);
     }
@@ -68,8 +66,5 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         textLogo.startAnimation(topAnim);
         logo.startAnimation(logoAnim);
         authorLogo.startAnimation(authorAnim);
-
     }
-
-
 }
