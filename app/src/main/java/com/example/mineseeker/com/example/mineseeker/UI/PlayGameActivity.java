@@ -115,6 +115,10 @@ public class PlayGameActivity extends AppCompatActivity {
         gameBoard = GameBoard.getInstance();
         logic.btnClicked(row,col);
 
+        //not a bomb so play scan sound
+        if(!logic.getIsExplosive(row, col)){
+            laserSound.start();
+        }
         //update display txt on each click
         TextView scansTxt = findViewById(R.id.txtScansUsed);
         scansTxt.setText("Scans Used: " + logic.getScans());
@@ -126,20 +130,18 @@ public class PlayGameActivity extends AppCompatActivity {
         for(int i = 0; i < gameBoard.getNumRows();i++) {
             for(int j = 0; j < gameBoard.getNumCol();j++) {
                 Button button = buttons[i][j];
-                // the sound execution on a click checks if it should act as a scan first then moves
-                // onto playing a bomb sound to stop both sounds from playing
                 if(logic.getCellScanned(i, j)) {
-                    laserSound.start();
                     button.setText("" + logic.getHiddenBombs(i, j));
                 }
             }
         }
         // if the cell is a bomb display the image
-
         if(logic.getIsExplosive(row, col)) {
             //stops both sounds from playing
             if(!logic.getCellScanned(row,col)){
                 bombSound.start();
+            } else {
+                laserSound.start();
             }
             displayBomb(buttons[row][col]);
             // check for win condition when a bomb is found

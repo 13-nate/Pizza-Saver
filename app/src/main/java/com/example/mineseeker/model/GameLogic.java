@@ -55,6 +55,10 @@ public class GameLogic {
         return isCellScanned[row][col];
     }
 
+    public boolean getIsBombFound(int row, int col) {
+        return isBombFound[row][col];
+    }
+
     public int getHiddenBombs(int row, int col) {
         return  hiddenBombs[row][col];
     }
