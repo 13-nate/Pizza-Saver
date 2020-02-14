@@ -43,7 +43,6 @@ public class WarningFragment extends AppCompatDialogFragment {
                     case DialogInterface.BUTTON_NEGATIVE:
                         break;
                 }
-
             }
         };
 

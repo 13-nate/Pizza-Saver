@@ -2,4 +2,8 @@
     <string name="app_name">MineSeeker</string>
     <string name="action_settings">Settings</string>
     <string name="mine_seeker">MINE SEEKER</string>
+    <string name="win_sound">Win Sound</string>
+    <string name="bomb_sound">Bomb Image</string>
+    <string name="scan_sound">Scan Sound</string>'
+    <string name="bomb_link"><a href ="https://www.cleanpng.com/png-tsar-bomba-cartoon-weapon-gray-cartoon-bombs-204186/"> Bomb Image</a></string>
 </resources>
