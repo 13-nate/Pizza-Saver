@@ -24,7 +24,7 @@ public class OptionsActivity extends AppCompatActivity {
     private Button clear;
     int cols;
     int rows;
-    int numMine;
+    int setMines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class OptionsActivity extends AppCompatActivity {
         RadioGroup groupMines =findViewById(R.id.radio_group_mines_number);
         int[] numMines = getResources().getIntArray(R.array.number_of_mines);
         for (int i = 0; i < numMines.length; i++){
-            numMine = numMines[i];
+            int numMine = numMines[i];
 
 
 
@@ -63,8 +63,10 @@ public class OptionsActivity extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    gameBoard.setNumMines(numMine);
-                    Toast.makeText(OptionsActivity.this, "Selected number of mines is: " + numMine, Toast.LENGTH_SHORT).show();
+                    setMines = numMine;
+                    gameBoard.setNumMines(setMines);
+                    Toast.makeText(OptionsActivity.this, "Selected number of mines is: " + setMines, Toast.LENGTH_SHORT).show();
+                    getData();
 
                 }
             });
@@ -123,7 +125,7 @@ public class OptionsActivity extends AppCompatActivity {
         gameBoard = GameBoard.getInstance();
         QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"keyROWS", rows);
         QueryPreferences.setStoredQuery(GameMenu.getContextApp(), "keyCOLS", cols);
-        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"keyMINES", numMine);
+        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"keyMINES", setMines);
         gameBoard.setState(this);
         gameBoard.setIsStateChanged(true);
         Log.i("Cheats","r = " + QueryPreferences.getStoredQuery(this, "keyROWS")

@@ -15,7 +15,7 @@ public class QueryPreferences {
                 .getInt(query, 0);
     }
 
-    public  static  void setStoredQuery(Context context,String query, int data) {
+    public static void setStoredQuery(Context context,String query, int data) {
         PreferenceManager.getDefaultSharedPreferences(context)
                 .edit()
                 .putInt(query, data)
