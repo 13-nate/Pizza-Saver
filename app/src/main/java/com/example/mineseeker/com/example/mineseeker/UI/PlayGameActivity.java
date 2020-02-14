@@ -45,8 +45,6 @@ public class PlayGameActivity extends AppCompatActivity {
         // through out the app
         logic = new GameLogic();
 
-
-
         buttons = new Button[gameBoard.getNumRows()][gameBoard.getNumCol()];
         bombSound = MediaPlayer.create(this, R.raw.bomb_explosion);
         winSound = MediaPlayer.create(this,R.raw.wininng);
@@ -64,6 +62,7 @@ public class PlayGameActivity extends AppCompatActivity {
         updateDate();
         populateButtons();
     }
+
 
     private void populateButtons() {
         TableLayout table = findViewById(R.id.tableForButtons);
@@ -197,10 +196,10 @@ public class PlayGameActivity extends AppCompatActivity {
 
     private void getData() {
         count ++;
-        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"keyPLAYS", count);
+        QueryPreferences.setStoredQuery(this,"keyPLAYS", count);
     }
     private void updateDate() {
-        count = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), "keyPLAYS");
+        count = QueryPreferences.getStoredQuery(this, "keyPLAYS");
         counterText.setText("Times Played: " + count);
     }
 }

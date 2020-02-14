@@ -34,7 +34,8 @@ public class WarningFragment extends AppCompatDialogFragment {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
-                        editor.clear().commit();
+                        editor.remove("keyPLAYS");
+                        editor.apply();
                         Intent intent = GameMenu.makeIntentGameMenuActivity(getActivity());
                         startActivity(intent);
                         getActivity().finish();
