@@ -43,6 +43,8 @@ public class WelcomeScreenActivity extends AppCompatActivity {
                 finish();
             }
         });
+        handler.removeCallbacksAndMessages(null);
+
     }
     private void delayAnimation() {
 

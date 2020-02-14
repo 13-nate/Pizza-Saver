@@ -5,11 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +28,14 @@ public class PlayGameActivity extends AppCompatActivity {
     int count = 0;
     Button buttons[][]; // save buttons when creating
     TextView text;
+    // keeps track of exlopsive cells
+    TextView counterText;
+    // create sound files
+    MediaPlayer bombSound;
+    MediaPlayer winSound;
+    MediaPlayer laserSound;
     GameLogic logic = new GameLogic();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         gameBoard = GameBoard.getInstance();
@@ -37,7 +44,12 @@ public class PlayGameActivity extends AppCompatActivity {
         //create game logic after getting the state so that it can use the correct values
         // through out the app
         logic = new GameLogic();
+
+
         buttons = new Button[gameBoard.getNumRows()][gameBoard.getNumCol()];
+        bombSound = MediaPlayer.create(this, R.raw.bomb_explosion);
+        winSound = MediaPlayer.create(this,R.raw.wininng);
+        laserSound = MediaPlayer.create(this, R.raw.laser);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
@@ -46,7 +58,7 @@ public class PlayGameActivity extends AppCompatActivity {
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
         NbrOfBombsTxt.setText("Bombs Found " + logic.getBombsFound() + " of " + gameBoard.getNumMines());
 
-        text =findViewById(R.id.timesPlayed);
+        counterText =findViewById(R.id.timesPlayed);
 
         updateDate();
         populateButtons();
@@ -100,9 +112,11 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void gridButtonClicked(int row, int col) {
+        laserSound.start();
         gameBoard = GameBoard.getInstance();
         logic.btnClicked(row,col);
-        // update display txt on each click
+
+        //update display txt on each click
         TextView scansTxt = findViewById(R.id.txtScansUsed);
         scansTxt.setText("Scans Used: " + logic.getScans());
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
@@ -119,9 +133,13 @@ public class PlayGameActivity extends AppCompatActivity {
             }
         }
         // if the cell is a bomb display the image
+
         if(logic.getIsExplosive(row, col)) {
             displayBomb(buttons[row][col]);
             // check for win condition when a bomb is found
+            laserSound.pause();
+            bombSound.start();
+
             if(logic.winCondition()) {
                 for(int i = 0; i < gameBoard.getNumRows();i++) {
                     for(int j = 0; j < gameBoard.getNumCol();j++) {
@@ -169,6 +187,7 @@ public class PlayGameActivity extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         MessageFragment dialog = new MessageFragment();
         dialog.show(manager, "MessageDialog");
+        winSound.start();
     }
 
     public static Intent makeIntentPlayGameActivity(Context context) {
@@ -178,19 +197,10 @@ public class PlayGameActivity extends AppCompatActivity {
     private void getData() {
         count ++;
         QueryPreferences.setStoredQuery(this,"keyPLAYS", count);
-
-       /* SharedPreferences preferences = getSharedPreferences("COUNT", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("key", count);
-        editor.commit();*/
-
     }
     private void updateDate() {
         int myCount = QueryPreferences.getStoredQuery(this, "keyPLAYS");
         count = myCount;
-
-        /*SharedPreferences myScore = this.getSharedPreferences("COUNT", Context.MODE_PRIVATE);
-        count = myScore.getInt("key", 0);*/
         text.setText("Times Played: " + count);
     }
 }

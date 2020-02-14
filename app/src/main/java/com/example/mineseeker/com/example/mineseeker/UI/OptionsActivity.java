@@ -19,8 +19,6 @@ import com.example.mineseeker.R;
 
 public class OptionsActivity extends AppCompatActivity {
 
-
-
     // singleton support
     private GameBoard gameBoard;
     private Button clear;
@@ -75,8 +73,6 @@ public class OptionsActivity extends AppCompatActivity {
     }
 
     private void createGridRadioButtons() {
-
-//        getData();
         gameBoard = GameBoard.getInstance();
 
         RadioGroup group = findViewById(R.id.radio_group_grid_size);
