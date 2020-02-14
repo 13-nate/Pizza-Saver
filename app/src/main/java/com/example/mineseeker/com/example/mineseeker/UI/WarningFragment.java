@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,7 @@ public class WarningFragment extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.clear_warning_message,null );
-        SharedPreferences clearData = this.getActivity().getSharedPreferences("COUNT", Context.MODE_PRIVATE);
+        SharedPreferences clearData = PreferenceManager.getDefaultSharedPreferences(GameMenu.getContextApp());
         SharedPreferences.Editor editor = clearData.edit();
 
 
