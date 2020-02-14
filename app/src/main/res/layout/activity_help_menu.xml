@@ -7,4 +7,124 @@
     android:background="#FFD53B"
     tools:context=".com.example.mineseeker.UI.HelpMenuActivity">
 
+    <TextView
+        android:id="@+id/txtAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="643dp"
+        android:fontFamily="@font/finger_paint"
+        android:text="About:"
+        android:textColor="#3F51B5"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHowToDescription" />
+
+    <TextView
+        android:id="@+id/txtHowToPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="553dp"
+        android:fontFamily="@font/finger_paint"
+        android:text="How To Play:"
+        android:textColor="#3F51B5"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtHowToDescription"
+        android:layout_width="712dp"
+        android:layout_height="144dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:lineSpacingMultiplier="1.5"
+        android:text="1. The goal of the game is to find all the hidden bombs with the fewest scans.\n
+2. Tap on a button to look for a bomb.\n
+3. If the button does not contain a bomb it will  perform a scan.\n
+4. A scan shows the number of hidden bombs in the column and row related to that button\n
+5. You can click on a bomb after it has been found to perform a scan on that button"
+        android:textColor="#3F51B5"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHowToPlay" />
+
+    <TextView
+        android:id="@+id/txtAuthor"
+        android:layout_width="319dp"
+        android:layout_height="23dp"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="40dp"
+        android:singleLine="false"
+        android:text="By: Kevin Chen Su and  Nathan Simms"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/bigshot_one"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/logo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBombFoundSound"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtBombImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="642dp"
+        android:text="@string/bomb_link"
+        app:layout_constraintBottom_toTopOf="@+id/txtScanSound"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAbout"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtWinSound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/win_sound"
+        app:layout_constraintBottom_toBottomOf="@+id/txtBombFoundSound"
+        app:layout_constraintStart_toEndOf="@+id/txtBombFoundSound"
+        app:layout_constraintTop_toTopOf="@+id/txtBombFoundSound"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtBombFoundSound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/bomb_sound"
+        app:layout_constraintBottom_toBottomOf="@+id/txtScanSound"
+        app:layout_constraintStart_toEndOf="@+id/txtScanSound"
+        app:layout_constraintTop_toTopOf="@+id/txtScanSound" />
+
+    <TextView
+        android:id="@+id/txtScanSound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/scan_sound"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtBombImage" />
 </androidx.constraintlayout.widget.ConstraintLayout>
