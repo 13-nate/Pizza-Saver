@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -18,19 +19,14 @@ import com.example.mineseeker.R;
 
 public class OptionsActivity extends AppCompatActivity {
 
-   public static Context contextApp;
 
 
     // singleton support
     private GameBoard gameBoard;
     private Button clear;
-    int cols = 4;
-    int rows = 6;
-    int numMine = 6;
-
-    public static Context getContextApp() {
-        return contextApp;
-    }
+    int cols;
+    int rows;
+    int numMine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +34,8 @@ public class OptionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_options);
         getSupportActionBar().setTitle("OPTIONS");
 
-        contextApp = getApplicationContext();
-        getData();
         createGridRadioButtons();
-
         createNumberOfMinesRadioButton();
-        contextApp = getApplicationContext();
-
         clear = findViewById(R.id.clear_button);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,10 +124,16 @@ public class OptionsActivity extends AppCompatActivity {
         return new Intent(context, OptionsActivity.class);
     }
     private void getData() {
+        gameBoard = GameBoard.getInstance();
+        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"keyROWS", rows);
+        QueryPreferences.setStoredQuery(GameMenu.getContextApp(), "keyCOLS", cols);
+        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"keyMINES", numMine);
+        gameBoard.setState(this);
+        gameBoard.setIsStateChanged(true);
+        Log.i("Cheats","r = " + QueryPreferences.getStoredQuery(this, "keyROWS")
+                + "c = " + QueryPreferences.getStoredQuery(this, "keyCOLS")
+        + "m = " + QueryPreferences.getStoredQuery(this, "keyMINES"));
 
-        QueryPreferences.setStoredQuery(this,"keyROWS", rows);
-        QueryPreferences.setStoredQuery(this, "keyCOLS", cols);
-        QueryPreferences.setStoredQuery(this,"keyMINES", numMine);
         /*SharedPreferences preferencesRows = getSharedPreferences("ROWS", Context.MODE_PRIVATE);
         SharedPreferences preferencesCols = getSharedPreferences("COLS", Context.MODE_PRIVATE);
         SharedPreferences preferencesMines = getSharedPreferences("MINES", Context.MODE_PRIVATE);
@@ -152,7 +149,6 @@ public class OptionsActivity extends AppCompatActivity {
         editorRow.commit();
         editorCols.commit();
         editorMines.commit();
-//        gameBoard.setContext(getApplicationContext());*/
-
+//       gameBoard.setContext(getApplicationContext());*/
     }
 }

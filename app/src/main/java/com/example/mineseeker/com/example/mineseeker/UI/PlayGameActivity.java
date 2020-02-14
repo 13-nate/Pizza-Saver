@@ -29,10 +29,14 @@ public class PlayGameActivity extends AppCompatActivity {
     Button buttons[][]; // save buttons when creating
     TextView text;
     GameLogic logic = new GameLogic();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         gameBoard = GameBoard.getInstance();
+        // change the state of the game board if it has been changed somewhere else
+        gameBoard.getState(GameMenu.getContextApp());
+        //create game logic after getting the state so that it can use the correct values
+        // through out the app
+        logic = new GameLogic();
         buttons = new Button[gameBoard.getNumRows()][gameBoard.getNumCol()];
 
         super.onCreate(savedInstanceState);

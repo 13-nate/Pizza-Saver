@@ -15,18 +15,23 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
  */
 public class GameBoard {
     // start up values for the first play of the game
-    int MINES = 6;
-    int COLS = 6;
-    int ROWS = 4;
+    public static final int NUM_MINES = 6;
+    public static final int NUM_ROWS = 4;
+    public static final int NUM_COL = 6;
     private int numMines;
     private int numRows;
     private int numCol;
-    private Context context;
+    // keeps track if a state changed has occurs so that the game can update to the new state
+    private boolean isStateChanged;
     // singleton support
     private static GameBoard instance;
 
     // default values for start
     private GameBoard() {
+        this.numMines = NUM_MINES;
+        this.numRows = NUM_ROWS;
+        this.numCol = NUM_COL;
+        this.isStateChanged = false;
         //default or saved values frim option screen
         /*SharedPreferences setRows = context.getSharedPreferences("ROWS",Context.MODE_PRIVATE);
         SharedPreferences setCols = context.getSharedPreferences("COLS",Context.MODE_PRIVATE);
@@ -35,9 +40,6 @@ public class GameBoard {
         numRows = setRows.getInt("keyROWS", 6);
         numCol = setCols.getInt("keyCOLS", 4);
         numMines = setMines.getInt("keyMINES", 6);*/
-        this.numRows = QueryPreferences.getStoredQuery(OptionsActivity.contextApp, "keyROWS");
-        this.numCol = QueryPreferences.getStoredQuery(OptionsActivity.getContextApp(), "keyCOLSs");
-        this.numMines = QueryPreferences.getStoredQuery(OptionsActivity.getContextApp(), "keyMINES");
     }
     public static GameBoard getInstance() {
         if(instance == null){
@@ -45,11 +47,6 @@ public class GameBoard {
         }
         return instance;
     }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
     public int getNumMines() {
         return numMines;
     }
@@ -70,18 +67,28 @@ public class GameBoard {
 
         return numCol;
     }
-
     public void setNumCol(int numCol) {
         this.numCol = numCol;
     }
 
-    private void updateDate() {
-        Context context = OptionsActivity.getContextApp();
-        SharedPreferences prefs = getDefaultSharedPreferences(context);
-        numRows = prefs.getInt("ROWS", 0);
-        numCol = prefs.getInt("COLS", 0);
-        numMines = prefs.getInt("ROWS", 0);
 
+    public boolean getIsStateChanged() {
+        return isStateChanged;
+    }
 
+    public void setIsStateChanged(boolean stateChanged) {
+        isStateChanged = stateChanged;
+    }
+
+    public void getState(Context context) {
+        this.numRows = QueryPreferences.getStoredQuery(context, "keyROWS");
+        this.numCol = QueryPreferences.getStoredQuery(context, "keyCOLS");
+        this.numMines = QueryPreferences.getStoredQuery(context, "keyMINES");
+    }
+
+    public void setState(Context context) {
+       QueryPreferences.setStoredQuery(context, "keyROWS", numRows);
+       QueryPreferences.setStoredQuery(context, "keyCOLS", numCol);
+       QueryPreferences.setStoredQuery(context, "keyMINES", numMines);
     }
 }

@@ -21,11 +21,15 @@ public class GameMenu extends AppCompatActivity {
     private Button optionButton;
     private ImageView explosionLogo;
 
+    public static Context contextApp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game__menu);
 
+        contextApp = getApplicationContext();
+
+        setContentView(R.layout.activity_game__menu);
         startAnimation();
 
         playGameButton = findViewById(R.id.playGame_button);
@@ -57,6 +61,10 @@ public class GameMenu extends AppCompatActivity {
         });
 
 
+    }
+
+    public static Context getContextApp() {
+        return contextApp;
     }
 
     private void startAnimation() {
