@@ -63,7 +63,6 @@ public class PlayGameActivity extends AppCompatActivity {
         populateButtons();
     }
 
-
     private void populateButtons() {
         TableLayout table = findViewById(R.id.tableForButtons);
         for (int row = 0; row < gameBoard.getNumRows(); row++){
@@ -112,7 +111,6 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void gridButtonClicked(int row, int col) {
-        laserSound.start();
         gameBoard = GameBoard.getInstance();
         logic.btnClicked(row,col);
 
@@ -129,6 +127,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 Button button = buttons[i][j];
                 if(logic.getCellScanned(i, j)) {
                     button.setText("" + logic.getHiddenBombs(i, j));
+                    laserSound.start();
                 }
             }
         }
@@ -136,10 +135,12 @@ public class PlayGameActivity extends AppCompatActivity {
 
         if(logic.getIsExplosive(row, col)) {
             displayBomb(buttons[row][col]);
+            //play bombSound only if it hasNot been scanned so the sounds dont play
+            //at the same time
+            if(!logic.getCellScanned(row,col)) {
+                bombSound.start();
+            }
             // check for win condition when a bomb is found
-            laserSound.pause();
-            bombSound.start();
-
             if(logic.winCondition()) {
                 for(int i = 0; i < gameBoard.getNumRows();i++) {
                     for(int j = 0; j < gameBoard.getNumCol();j++) {
