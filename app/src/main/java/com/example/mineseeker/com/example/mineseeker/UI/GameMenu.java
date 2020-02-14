@@ -21,6 +21,9 @@ public class GameMenu extends AppCompatActivity {
     private Button optionButton;
     private ImageView explosionLogo;
 
+    // used the link below to help use shared preferences with material from the
+    // Android Programming Big Nerd Ranch guide page: 533
+    // https://stackoverflow.com/questions/7491287/android-how-to-use-sharedpreferences-in-non-activity-class
     public static Context contextApp;
 
     @Override
@@ -59,8 +62,6 @@ public class GameMenu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     public static Context getContextApp() {
