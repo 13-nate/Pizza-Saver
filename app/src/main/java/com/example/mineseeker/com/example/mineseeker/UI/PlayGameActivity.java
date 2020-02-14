@@ -56,7 +56,7 @@ public class PlayGameActivity extends AppCompatActivity {
 
         counterText =findViewById(R.id.timesPlayed);
 
-        updateDate();
+        updateData();
         populateButtons();
     }
 
@@ -197,7 +197,7 @@ public class PlayGameActivity extends AppCompatActivity {
         editor.putInt("key", count);
         editor.commit();
     }
-    private void updateDate() {
+    private void updateData() {
         SharedPreferences myScore = this.getSharedPreferences("COUNT", Context.MODE_PRIVATE);
         count = myScore.getInt("key", 0);
         counterText.setText("Times Played: " + count);
