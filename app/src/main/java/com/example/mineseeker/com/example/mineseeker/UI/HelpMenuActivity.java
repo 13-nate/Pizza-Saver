@@ -26,28 +26,16 @@ public class HelpMenuActivity extends AppCompatActivity {
 
         TextView txtBomb = findViewById(R.id.txtBombImage);
         txtBomb.setMovementMethod(LinkMovementMethod.getInstance());
-       /* TextView txtBomb = findViewById(R.id.txtBombImage);
-        txtBomb.setMovementMethod(LinkMovementMethod.getInstance());
-        String bombImageLink = "<a href='https://www.cleanpng.com/png-tsar-bomba-cartoon-weapon-gray-cartoon-bombs-204186/'> " +
-                "Bomb Image </a>";
-        txtBomb.setText(Html.fromHtml("<h2>Bomb Image</h2><br><p>Description here</p>", Html.FROM_HTML_MODE_COMPACT));
-        txtBomb.setText(fromHtml(bombImageLink, Html.FROM_HTML_MODE_COMPACT));
-*/
-        TextView txtWinSound = findViewById(R.id.txtWinSound);
-        String winSoundLink = "<a href='https://freesound.org/people/rhodesmas/sounds/320775/'> " +
-                "Win Sound</a>";
-        txtWinSound.setText(fromHtml(winSoundLink, Html.FROM_HTML_MODE_COMPACT));
 
+        TextView txtWinSound = findViewById(R.id.txtWinSound);
+        txtWinSound.setMovementMethod(LinkMovementMethod.getInstance());
 
         TextView txtBombFoundSound = findViewById(R.id.txtBombFoundSound);
-        String BombFoundSoundLink = "<a href='https://freesound.org/people/MATTIX/sounds/441497/'> " +
-                "Bomb Sound</a>";
-        txtBombFoundSound.setText(fromHtml(winSoundLink, Html.FROM_HTML_MODE_COMPACT));
+        txtBombFoundSound.setMovementMethod(LinkMovementMethod.getInstance());
 
-        TextView TxtScanSound = findViewById(R.id.txtScanSound);
-        String scanSoundLink = "<a href='https://freesound.org/people/samsara/sounds/49989/'> " +
-                "Scan Sound</a>";
-        TxtScanSound.setText(fromHtml(winSoundLink, Html.FROM_HTML_MODE_COMPACT));
+        TextView txtScanSound = findViewById(R.id.txtScanSound);
+        txtScanSound.setMovementMethod(LinkMovementMethod.getInstance());
+
 
     }
     public static Intent makeIntentHelpActivity(Context context){
