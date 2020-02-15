@@ -21,9 +21,9 @@ public class GameMenu extends AppCompatActivity {
     //stop from producing effects dynamic generated string for each instance.\
 
 
-    private Button helpButton;
-    private Button playGameButton;
-    private Button optionButton;
+    private ImageView helpButton;
+    private ImageView playGameButton;
+    private ImageView optionButton;
     private ImageView explosionLogo;
 
     // used the link below to help use shared preferences with material from the
@@ -81,9 +81,9 @@ public class GameMenu extends AppCompatActivity {
 
         explosionLogo = findViewById(R.id.explosionLogo_imageView);
         TextView menu = findViewById(R.id.mainMenu_textView);
-        Button playButton = findViewById(R.id.playGame_button);
-        Button optionButton = findViewById(R.id.options_button);
-        Button helpButton = findViewById(R.id.help_button);
+        ImageView playButton = findViewById(R.id.playGame_button);
+        ImageView optionButton = findViewById(R.id.options_button);
+        ImageView helpButton = findViewById(R.id.help_button);
 
         menu.startAnimation(menuAnimation);
         playButton.startAnimation(menuAnimation);

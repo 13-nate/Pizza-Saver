@@ -8,4 +8,5 @@
     <string name="bomb_link"><a href ="https://www.cleanpng.com/png-tsar-bomba-cartoon-weapon-gray-cartoon-bombs-204186/">Bomb Image</a></string>
     <string name="basic_game_help">1. The goal of the game is to find all the hidden bombs with the fewest scans.\n2. Tap on a button to look for a bomb.\n3. If the button does not contain a bomb it will perform a scan.\n4. A scan shows the number of hidden bombs in the column and row related to that button.\n5. You can click on a bomb after it has been found to perform a scan on that button</string>
     <string name="authors"><a href ="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">By: Kevin Chen Su and Nathan Simms</a></string>
+    <string name="help_image"><a href ="https://www.pngitem.com/middle/JbhJoo_transparent-open-book-png-open-orange-books-png/">Help Image</a></string>
 </resources>
