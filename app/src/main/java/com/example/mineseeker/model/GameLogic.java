@@ -160,17 +160,6 @@ public class GameLogic {
                 }
             }
 
-
-
-            /*if (bombsFound == 6 && score_6mines > scans){
-                QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_6mines",scans);
-            }else if (bombsFound == 10 && score_10mines > scans){
-                QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_10mines",scans);
-            }else if (bombsFound == 15 && score_15mines > scans){
-                    QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_15mines",scans);
-            }else if (bombsFound == 20 && score_20mines < scans){
-                QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_20mines",score_20mines);
-            }*/
             switch (bombsFound){
                 case 6:
 
