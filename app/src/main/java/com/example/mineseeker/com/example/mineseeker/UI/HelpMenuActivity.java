@@ -39,6 +39,9 @@ public class HelpMenuActivity extends AppCompatActivity {
         TextView txtAuthors = findViewById(R.id.txtAuthor);
         txtAuthors.setMovementMethod(LinkMovementMethod.getInstance());
 
+        TextView txtHelpImage = findViewById(R.id.txtHelpImage);
+        txtHelpImage.setMovementMethod(LinkMovementMethod.getInstance());
+
     }
     public static Intent makeIntentHelpActivity(Context context){
         return new Intent(context, HelpMenuActivity.class);
