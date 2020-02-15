@@ -2,16 +2,15 @@ package com.example.mineseeker.com.example.mineseeker.UI;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,13 +27,17 @@ public class WarningFragment extends AppCompatDialogFragment {
         SharedPreferences clearData = PreferenceManager.getDefaultSharedPreferences(GameMenu.getContextApp());
         SharedPreferences.Editor editor = clearData.edit();
 
-
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
+
                         editor.remove("keyPLAYS");
+                        editor.remove("4x6_6mines");
+                        editor.remove("4x6_10mines");
+                        editor.remove("4x6_15mines");
+                        editor.remove("4x6_20mines");
                         editor.apply();
                         Intent intent = GameMenu.makeIntentGameMenuActivity(getActivity());
                         startActivity(intent);
@@ -52,4 +55,5 @@ public class WarningFragment extends AppCompatDialogFragment {
                 .setNegativeButton(android.R.string.cancel, listener)
                 .create();
     }
+
 }

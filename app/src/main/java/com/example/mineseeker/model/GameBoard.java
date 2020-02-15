@@ -32,14 +32,7 @@ public class GameBoard {
         this.numRows = NUM_ROWS;
         this.numCol = NUM_COL;
         this.isStateChanged = false;
-        //default or saved values frim option screen
-        /*SharedPreferences setRows = context.getSharedPreferences("ROWS",Context.MODE_PRIVATE);
-        SharedPreferences setCols = context.getSharedPreferences("COLS",Context.MODE_PRIVATE);
-        SharedPreferences setMines = context.getSharedPreferences("MINES",Context.MODE_PRIVATE);
 
-        numRows = setRows.getInt("keyROWS", 6);
-        numCol = setCols.getInt("keyCOLS", 4);
-        numMines = setMines.getInt("keyMINES", 6);*/
     }
     public static GameBoard getInstance() {
         if(instance == null){

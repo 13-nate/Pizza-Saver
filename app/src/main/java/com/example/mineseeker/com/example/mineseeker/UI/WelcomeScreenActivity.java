@@ -48,16 +48,24 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     }
     private void delayAnimation() {
 
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = GameMenu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
-                startActivity(intent);
-                handler.removeCallbacksAndMessages(null);
-                finish();
-            }
-        }, ANIMATION_TIME_OUT);
+      final Runnable runnable =  new Runnable() {
+          @Override
+          public void run() {
+              Intent intent = GameMenu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
+              startActivity(intent);
+              finish();
+
+          }
+      };
+      handler.postDelayed(runnable, 4000);
     }
+    @Override
+    public void onBackPressed() {
+        handler.removeCallbacksAndMessages(null);
+
+        super.onBackPressed();
+    }
+
 
     private void startAnimation() {
         Animation logoAnim = AnimationUtils.loadAnimation(this,R.anim.welcomescreenanimation);
@@ -67,4 +75,5 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         logo.startAnimation(logoAnim);
         authorLogo.startAnimation(authorAnim);
     }
+
 }

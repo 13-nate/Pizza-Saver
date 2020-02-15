@@ -132,21 +132,6 @@ public class OptionsActivity extends AppCompatActivity {
                 + "c = " + QueryPreferences.getStoredQuery(this, "keyCOLS")
         + "m = " + QueryPreferences.getStoredQuery(this, "keyMINES"));
 
-        /*SharedPreferences preferencesRows = getSharedPreferences("ROWS", Context.MODE_PRIVATE);
-        SharedPreferences preferencesCols = getSharedPreferences("COLS", Context.MODE_PRIVATE);
-        SharedPreferences preferencesMines = getSharedPreferences("MINES", Context.MODE_PRIVATE);
 
-        SharedPreferences.Editor editorRow = preferencesRows.edit();
-        SharedPreferences.Editor editorCols = preferencesCols.edit();
-        SharedPreferences.Editor editorMines = preferencesMines.edit();
-
-        editorRow.putInt("keyROWS", rows);
-        editorCols.putInt("keyCOLS", cols);
-        editorCols.putInt("keyMINES", numMine);
-
-        editorRow.commit();
-        editorCols.commit();
-        editorMines.commit();
-//       gameBoard.setContext(getApplicationContext());*/
     }
 }

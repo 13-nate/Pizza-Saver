@@ -16,6 +16,11 @@ import com.example.mineseeker.R;
 
 public class GameMenu extends AppCompatActivity {
 
+    // ask him about the QueryPreference? model?
+    //back button on Welcome Screen, and option activity after reset, stop the timer and/or animation.
+    //stop from producing effects dynamic generated string for each instance.\
+
+
     private Button helpButton;
     private Button playGameButton;
     private Button optionButton;
@@ -62,6 +67,7 @@ public class GameMenu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     public static Context getContextApp() {

@@ -1,9 +1,11 @@
 package com.example.mineseeker.model;
 
-import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.mineseeker.com.example.mineseeker.UI.GameMenu;
+import com.example.mineseeker.com.example.mineseeker.UI.PlayGameActivity;
 import com.example.mineseeker.com.example.mineseeker.UI.QueryPreferences;
 
 import java.util.Arrays;
@@ -16,6 +18,12 @@ import java.util.Arrays;
 public class GameLogic {
     private int scans;
     private int bombsFound;
+    private int score_6mines;
+    private int score_10mines;
+    private int score_15mines;
+    private int score_20mines;
+
+
 
     //arrays keep track of the different cell states
     private boolean[][] isExplosive;
@@ -41,6 +49,11 @@ public class GameLogic {
                 hiddenBombs[row][col] = 0;
             }
         }
+        score_6mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_6mines");
+        score_10mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_10mines");
+        score_15mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_15mines");
+        score_20mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_20mines");
+
     }
 
     public int getScans() {
@@ -86,7 +99,6 @@ public class GameLogic {
                     k = -1;
                 }
             }
-
             bombs[i][0] = tempRow;
             bombs[i][1] = tempCol;
             isExplosive[tempRow][tempCol] = true;
@@ -101,6 +113,7 @@ public class GameLogic {
         }
         Log.i("Cheats","" + Arrays.deepToString(bombs));
         Log.i("hidden","" + Arrays.deepToString(hiddenBombs));
+
     }
     // two paths based on the cell's data, it has a bomb or else it doesn't, perform functions
     // accordingly
@@ -111,7 +124,6 @@ public class GameLogic {
             scan(row, col);
         }
     }
-
     public void bombClicked(int row, int col) {
         gameBoard = GameBoard.getInstance();
         if(isBombFound[row][col]){
@@ -129,7 +141,6 @@ public class GameLogic {
             isBombFound[row][col] = true;
         }
     }
-
     // keeps track of the number of scans and changes the isCellScanned to be true, so that
     // cells that have been scanned can be updated to display the correct number
     public void scan(int row, int col) {
@@ -139,7 +150,6 @@ public class GameLogic {
         //keeps track of cells  scaned so thet can be changed once a bomb is revield
         isCellScanned[row][col]= true;
     }
-
     // change all hiddenBombs to be zero and return true
     public boolean winCondition(){
         gameBoard = GameBoard.getInstance();
@@ -149,7 +159,68 @@ public class GameLogic {
                    hiddenBombs[i][j] = 0;
                 }
             }
-            QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"HIGHSCORE", scans);
+
+
+
+            /*if (bombsFound == 6 && score_6mines > scans){
+                QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_6mines",scans);
+            }else if (bombsFound == 10 && score_10mines > scans){
+                QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_10mines",scans);
+            }else if (bombsFound == 15 && score_15mines > scans){
+                    QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_15mines",scans);
+            }else if (bombsFound == 20 && score_20mines < scans){
+                QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_20mines",score_20mines);
+            }*/
+            switch (bombsFound){
+                case 6:
+
+                    if (score_6mines == 0){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_6mines", scans);
+                    }else if (score_6mines > scans){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_6mines",scans);
+                    } else{
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_6mines",score_6mines);
+                    }
+                    break;
+
+                case 10:
+
+                    if (score_10mines == 0){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_10mines", scans);
+                    }else if (score_10mines > scans){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_10mines",scans);
+                    } else{
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_10mines",score_10mines);
+                    }
+                    break;
+
+                case 15:
+
+                    if (score_15mines == 0){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_15mines", scans);
+                    }else if (score_15mines > scans){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_15mines",scans);
+                    } else{
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_15mines",score_15mines);
+                    }
+                    break;
+
+                case 20:
+
+                    if (score_20mines == 0){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_20mines", scans);
+                    }else if (score_20mines > scans){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_20mines",scans);
+                    } else{
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_20mines",score_20mines);
+                    }
+                    break;
+
+
+            }
+
+
+
 
             return true;
         }

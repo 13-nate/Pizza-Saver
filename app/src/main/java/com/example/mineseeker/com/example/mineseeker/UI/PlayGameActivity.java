@@ -28,7 +28,6 @@ public class PlayGameActivity extends AppCompatActivity {
     GameBoard gameBoard;
     int count = 0;
     int highScore = 0;
-    int highscore;
     Button buttons[][]; // save buttons when creating
     // keeps track of exlopsive cells
     TextView counterText;
@@ -64,12 +63,11 @@ public class PlayGameActivity extends AppCompatActivity {
         counterText =findViewById(R.id.timesPlayed);
         highScoreTxt = findViewById(R.id.highScoreLabel);
 
-
         updateData();
+        updateHighScore();
         populateButtons();
 
     }
-
 
     private void populateButtons() {
         TableLayout table = findViewById(R.id.tableForButtons);
@@ -222,9 +220,24 @@ public class PlayGameActivity extends AppCompatActivity {
     private void updateData() {
         count = QueryPreferences.getStoredQuery(this, "keyPLAYS");
         counterText.setText("Times Played: " + count);
-
-       highScore = QueryPreferences.getStoredQuery(this,"HIGHSCORE");
-        highScoreTxt.setText("High Score: " + highScore);
-
     }
+    private void updateHighScore() {
+
+        if(gameBoard.getNumMines() == 6){
+            highScore = QueryPreferences.getStoredQuery(this, "4x6_6mines");
+            highScoreTxt.setText("High Score: " + highScore);
+
+        } else if (gameBoard.getNumMines() == 10){
+            highScore = QueryPreferences.getStoredQuery(this, "4x6_10mines");
+            highScoreTxt.setText("High Score: " + highScore);
+        } else if (gameBoard.getNumMines() == 15) {
+            highScore = QueryPreferences.getStoredQuery(this, "4x6_15mines");
+            highScoreTxt.setText("High Score: " + highScore);
+        } else if (gameBoard.getNumMines() == 20) {
+                highScore = QueryPreferences.getStoredQuery(this, "4x6_20mines");
+                highScoreTxt.setText("High Score: " + highScore);
+          }
+    }
+
+
 }
