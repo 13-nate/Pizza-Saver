@@ -1,6 +1,7 @@
 Sources
 
 https://www.cleanpng.com/png-tsar-bomba-cartoon-weapon-gray-cartoon-bombs-204186/
+https://www.pngitem.com/download/hwmRRmT_spine-clipart-open-book-book-icon-png-white/
 
 sound files:
 
