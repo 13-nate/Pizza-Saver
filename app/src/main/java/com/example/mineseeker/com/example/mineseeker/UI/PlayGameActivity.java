@@ -1,6 +1,7 @@
 package com.example.mineseeker.com.example.mineseeker.UI;
 
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import android.content.Context;
@@ -27,6 +28,7 @@ public class PlayGameActivity extends AppCompatActivity {
 
     GameBoard gameBoard;
     int count = 0;
+    int highScore = 0;
     Button buttons[][]; // save buttons when creating
     // keeps track of exlopsive cells
     TextView counterText;
@@ -219,9 +221,24 @@ public class PlayGameActivity extends AppCompatActivity {
     }
     private void updateHighScore() {
 
-        String boardSettings = "" + gameBoard.getNumRows()+gameBoard.getNumCol()+gameBoard.getNumMines();
-        int highScore = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), boardSettings);
+        String boardSettings = "" + gameBoard.getNumRows() + gameBoard.getNumCol()
+                + gameBoard.getNumMines();
+        highScore = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), boardSettings);
         highScoreTxt.setText("High Score: " + highScore);
+        /*if(gameBoard.getNumMines() == 6){
+            highScore = QueryPreferences.getStoredQuery(this, "4x6_6mines");
+            highScoreTxt.setText("High Score: " + highScore);
+
+        } else if (gameBoard.getNumMines() == 10){
+            highScore = QueryPreferences.getStoredQuery(this, "4x6_10mines");
+            highScoreTxt.setText("High Score: " + highScore);
+        } else if (gameBoard.getNumMines() == 15) {
+            highScore = QueryPreferences.getStoredQuery(this, "4x6_15mines");
+            highScoreTxt.setText("High Score: " + highScore);
+        } else if (gameBoard.getNumMines() == 20) {
+                highScore = QueryPreferences.getStoredQuery(this, "4x6_20mines");
+                highScoreTxt.setText("High Score: " + highScore);
+          }*/
     }
     public void onBackPressed() {
         Intent intent = GameMenu.makeIntentGameMenuActivity(PlayGameActivity.this);

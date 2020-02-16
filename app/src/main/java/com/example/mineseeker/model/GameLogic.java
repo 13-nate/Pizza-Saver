@@ -18,13 +18,19 @@ import java.util.Arrays;
 public class GameLogic {
     private int scans;
     private int bombsFound;
+    private int score_6mines;
+    private int score_10mines;
+    private int score_15mines;
+    private int score_20mines;
+    private String boardSettings;
+
 
     //arrays keep track of the different cell states
     private boolean[][] isExplosive;
     private boolean[][] isBombFound;
     private boolean[][] isCellScanned;
     private int[][] hiddenBombs;
-    GameBoard gameBoard;
+    private GameBoard gameBoard;
 
 
     //initialize arrays and other game board data
@@ -44,7 +50,12 @@ public class GameLogic {
             }
         }
 
-
+        boardSettings ="" + gameBoard.getNumCol() + gameBoard.getNumCol() + gameBoard.getNumMines();
+        /*score_6mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_6mines");
+        score_10mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_10mines");
+        score_15mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_15mines");
+        score_20mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_20mines");
+*/
     }
 
     public int getScans() {
@@ -144,25 +155,67 @@ public class GameLogic {
     // change all hiddenBombs to be zero and return true
     public boolean winCondition(){
         gameBoard = GameBoard.getInstance();
-        if(bombsFound == gameBoard.getNumMines()){
+        if(bombsFound == gameBoard.getNumMines()) {
             for (int i = 0; i < gameBoard.getNumRows(); i++) {
-                for (int j = 0; j <  gameBoard.getNumCol(); j++) {
-                   hiddenBombs[i][j] = 0;
+                for (int j = 0; j < gameBoard.getNumCol(); j++) {
+                    hiddenBombs[i][j] = 0;
                 }
-
             }
-
-            String boardSettings = "" + gameBoard.getNumRows()+gameBoard.getNumCol()+gameBoard.getNumMines();
+            String boardSettings = "" + gameBoard.getNumRows() + gameBoard.getNumCol()
+                    + gameBoard.getNumMines();
             int highScore = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), boardSettings);
 
-            if (highScore == 0){
+            if(highScore == 0) {
                 QueryPreferences.setStoredQuery(GameMenu.getContextApp(), boardSettings, scans);
-            }else if (scans > highScore){
-                QueryPreferences.setStoredQuery(GameMenu.getContextApp(),boardSettings, highScore);
-            }else {
+            } else if(scans < highScore) {
                 QueryPreferences.setStoredQuery(GameMenu.getContextApp(), boardSettings, scans);
             }
 
+            /*switch (bombsFound){
+                case 6:
+
+                    if (score_6mines == 0){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_6mines", scans);
+                    }else if (score_6mines > scans){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_6mines",scans);
+                    } else{
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_6mines",score_6mines);
+                    }
+                    break;
+            }
+
+                case 10:
+
+                    if (score_10mines == 0){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_10mines", scans);
+                    }else if (score_10mines > scans){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_10mines",scans);
+                    } else{
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_10mines",score_10mines);
+                    }
+                    break;
+
+                case 15:
+
+                    if (score_15mines == 0){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_15mines", scans);
+                    }else if (score_15mines > scans){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_15mines",scans);
+                    } else{
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_15mines",score_15mines);
+                    }
+                    break;
+
+                case 20:
+
+                    if (score_20mines == 0){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_20mines", scans);
+                    }else if (score_20mines > scans){
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_20mines",scans);
+                    } else{
+                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_20mines",score_20mines);
+                    }
+                    break;*/
             return true;
         }
         return false;
