@@ -64,7 +64,6 @@ public class GameBoard {
         this.numCol = numCol;
     }
 
-
     public boolean getIsStateChanged() {
         return isStateChanged;
     }
@@ -74,6 +73,7 @@ public class GameBoard {
     }
 
     public void getState(Context context) {
+
         this.numRows = QueryPreferences.getStoredQuery(context, "keyROWS");
         this.numCol = QueryPreferences.getStoredQuery(context, "keyCOLS");
         this.numMines = QueryPreferences.getStoredQuery(context, "keyMINES");
