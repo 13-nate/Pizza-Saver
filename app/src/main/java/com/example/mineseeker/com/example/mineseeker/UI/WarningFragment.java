@@ -27,23 +27,20 @@ public class WarningFragment extends AppCompatDialogFragment {
         SharedPreferences clearData = PreferenceManager.getDefaultSharedPreferences(GameMenu.getContextApp());
         SharedPreferences.Editor editor = clearData.edit();
         String boardSettings = "" + gameBoard.getNumRows()+gameBoard.getNumCol()+gameBoard.getNumMines();
-        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which){
-                    case DialogInterface.BUTTON_POSITIVE:
+        DialogInterface.OnClickListener listener = (dialog, which) -> {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
 
-                        editor.remove("keyPLAYS");
-                        editor.remove(boardSettings);
+                    editor.remove("keyPLAYS");
+                    editor.remove(boardSettings);
 
-                        editor.apply();
-                        Intent intent = GameMenu.makeIntentGameMenuActivity(getActivity());
-                        startActivity(intent);
-                        getActivity().finish();
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        break;
-                }
+                    editor.apply();
+                    Intent intent = GameMenu.makeIntentGameMenuActivity(getActivity());
+                    startActivity(intent);
+                    getActivity().finish();
+                    break;
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
             }
         };
 

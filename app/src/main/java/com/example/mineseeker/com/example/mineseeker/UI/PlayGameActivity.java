@@ -98,13 +98,10 @@ public class PlayGameActivity extends AppCompatActivity {
                 // make text not clip on small buttons
                 button.setPadding(0,0,0,0);
                 // creates anominous class
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // all buttons call same thing, make function
-                        // cant use a variable that is outside of this class if it is not final
-                        gridButtonClicked(FINAL_ROW, FINAL_COL);
-                    }
+                button.setOnClickListener(v -> {
+                    // all buttons call same thing, make function
+                    // cant use a variable that is outside of this class if it is not final
+                    gridButtonClicked(FINAL_ROW, FINAL_COL);
                 });
                 tableRow.addView(button);
                 buttons[row][col] = button;
