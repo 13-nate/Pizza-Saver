@@ -2,6 +2,8 @@ Sources
 
 https://www.cleanpng.com/png-tsar-bomba-cartoon-weapon-gray-cartoon-bombs-204186/
 https://www.pngitem.com/middle/JbhJoo_transparent-open-book-png-open-orange-books-png/
+https://www.pngguru.com/free-transparent-background-png-clipart-bdbxa/download
+
 sound files:
 
 https://freesound.org/people/rhodesmas/sounds/320775/
