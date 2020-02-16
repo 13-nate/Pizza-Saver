@@ -1,6 +1,7 @@
 package com.example.mineseeker.com.example.mineseeker.UI;
 
 
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import android.content.Context;
@@ -223,7 +224,11 @@ public class PlayGameActivity extends AppCompatActivity {
     }
     private void updateHighScore() {
 
-        if(gameBoard.getNumMines() == 6){
+        String boardSettings = "" + gameBoard.getNumRows() + gameBoard.getNumCol()
+                + gameBoard.getNumMines();
+        highScore = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), boardSettings);
+        highScoreTxt.setText("High Score: " + highScore);
+        /*if(gameBoard.getNumMines() == 6){
             highScore = QueryPreferences.getStoredQuery(this, "4x6_6mines");
             highScoreTxt.setText("High Score: " + highScore);
 
@@ -236,7 +241,7 @@ public class PlayGameActivity extends AppCompatActivity {
         } else if (gameBoard.getNumMines() == 20) {
                 highScore = QueryPreferences.getStoredQuery(this, "4x6_20mines");
                 highScoreTxt.setText("High Score: " + highScore);
-          }
+          }*/
     }
 
 

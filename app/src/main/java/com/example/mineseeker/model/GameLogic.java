@@ -22,7 +22,7 @@ public class GameLogic {
     private int score_10mines;
     private int score_15mines;
     private int score_20mines;
-
+    private String boardSettings;
 
 
     //arrays keep track of the different cell states
@@ -49,11 +49,13 @@ public class GameLogic {
                 hiddenBombs[row][col] = 0;
             }
         }
-        score_6mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_6mines");
+
+        boardSettings ="" + gameBoard.getNumCol() + gameBoard.getNumCol() + gameBoard.getNumMines();
+        /*score_6mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_6mines");
         score_10mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_10mines");
         score_15mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_15mines");
         score_20mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_20mines");
-
+*/
     }
 
     public int getScans() {
@@ -153,14 +155,22 @@ public class GameLogic {
     // change all hiddenBombs to be zero and return true
     public boolean winCondition(){
         gameBoard = GameBoard.getInstance();
-        if(bombsFound == gameBoard.getNumMines()){
+        if(bombsFound == gameBoard.getNumMines()) {
             for (int i = 0; i < gameBoard.getNumRows(); i++) {
-                for (int j = 0; j <  gameBoard.getNumCol(); j++) {
-                   hiddenBombs[i][j] = 0;
+                for (int j = 0; j < gameBoard.getNumCol(); j++) {
+                    hiddenBombs[i][j] = 0;
                 }
             }
+            String boardSettings = "" + gameBoard.getNumRows() + gameBoard.getNumCol()
+                    + gameBoard.getNumMines();
+            int highScore = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), boardSettings);
+            if(highScore == 0) {
+                QueryPreferences.setStoredQuery(GameMenu.getContextApp(), boardSettings, scans);
+            } else if(scans < highScore) {
+                QueryPreferences.setStoredQuery(GameMenu.getContextApp(), boardSettings, scans);
+            }
 
-            switch (bombsFound){
+            /*switch (bombsFound){
                 case 6:
 
                     if (score_6mines == 0){
@@ -203,14 +213,7 @@ public class GameLogic {
                     } else{
                         QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_20mines",score_20mines);
                     }
-                    break;
-
-
-            }
-
-
-
-
+                    break;*/
             return true;
         }
         return false;
