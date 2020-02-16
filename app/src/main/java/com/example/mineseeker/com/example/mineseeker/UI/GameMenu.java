@@ -25,6 +25,8 @@ public class GameMenu extends AppCompatActivity {
     private ImageView playGameButton;
     private ImageView optionButton;
     private ImageView explosionLogo;
+    Animation menuAnimation;
+    Animation explotionAnimation;
 
     // used the link below to help use shared preferences with material from the
     // Android Programming Big Nerd Ranch guide page: 533
@@ -41,31 +43,22 @@ public class GameMenu extends AppCompatActivity {
         startAnimation();
 
         playGameButton = findViewById(R.id.playGame_button);
-        playGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = PlayGameActivity.makeIntentPlayGameActivity(GameMenu.this);
-                startActivity(intent);
-            }
+        playGameButton.setOnClickListener(v -> {
+            Intent intent = PlayGameActivity.makeIntentPlayGameActivity(GameMenu.this);
+            startActivity(intent);
         });
 
 
         optionButton = findViewById(R.id.options_button);
-        optionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Intent intent = OptionsActivity.makeIntentOptionsActivity(GameMenu.this);
-               startActivity(intent);
-            }
+        optionButton.setOnClickListener(v -> {
+           Intent intent = OptionsActivity.makeIntentOptionsActivity(GameMenu.this);
+           startActivity(intent);
         });
 
         helpButton = findViewById(R.id.help_button);
-        helpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = HelpMenuActivity.makeIntentHelpActivity(GameMenu.this);
-                startActivity(intent);
-            }
+        helpButton.setOnClickListener(v -> {
+            Intent intent = HelpMenuActivity.makeIntentHelpActivity(GameMenu.this);
+            startActivity(intent);
         });
 
     }
@@ -76,8 +69,8 @@ public class GameMenu extends AppCompatActivity {
 
     private void startAnimation() {
 
-        Animation menuAnimation = AnimationUtils.loadAnimation(this, R.anim.lefttoright);
-        Animation explotionAnimation = AnimationUtils.loadAnimation(this,R.anim.explosion_logo_animation);
+        menuAnimation = AnimationUtils.loadAnimation(this, R.anim.lefttoright);
+        explotionAnimation = AnimationUtils.loadAnimation(this,R.anim.explosion_logo_animation);
 
         explosionLogo = findViewById(R.id.explosionLogo_imageView);
         TextView menu = findViewById(R.id.mainMenu_textView);
@@ -93,5 +86,13 @@ public class GameMenu extends AppCompatActivity {
     }
     public static Intent makeIntentGameMenuActivity(Context context){
         return new Intent(context, GameMenu.class);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        menuAnimation.cancel();
+        explotionAnimation.cancel();
+        super.onBackPressed();
     }
 }

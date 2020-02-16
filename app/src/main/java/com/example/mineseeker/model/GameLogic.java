@@ -30,7 +30,7 @@ public class GameLogic {
     private boolean[][] isBombFound;
     private boolean[][] isCellScanned;
     private int[][] hiddenBombs;
-    GameBoard gameBoard;
+    private GameBoard gameBoard;
 
 
     //initialize arrays and other game board data
@@ -164,6 +164,7 @@ public class GameLogic {
             String boardSettings = "" + gameBoard.getNumRows() + gameBoard.getNumCol()
                     + gameBoard.getNumMines();
             int highScore = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), boardSettings);
+
             if(highScore == 0) {
                 QueryPreferences.setStoredQuery(GameMenu.getContextApp(), boardSettings, scans);
             } else if(scans < highScore) {
@@ -181,6 +182,7 @@ public class GameLogic {
                         QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_6mines",score_6mines);
                     }
                     break;
+            }
 
                 case 10:
 

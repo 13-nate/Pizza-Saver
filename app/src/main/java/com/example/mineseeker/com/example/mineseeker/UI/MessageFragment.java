@@ -21,14 +21,11 @@ public class MessageFragment extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_message,null );
 
-        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = GameMenu.makeIntentGameMenuActivity(getActivity());
-                startActivity(intent);
-                getActivity().finish();
+        DialogInterface.OnClickListener listener = (dialog, which) -> {
+            Intent intent = GameMenu.makeIntentGameMenuActivity(getActivity());
+            startActivity(intent);
+            getActivity().finish();
 
-            }
         };
 
         return new AlertDialog.Builder(getActivity()).setTitle("GAME OVER")

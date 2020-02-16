@@ -35,13 +35,10 @@ public class OptionsActivity extends AppCompatActivity {
         createGridRadioButtons();
         createNumberOfMinesRadioButton();
         clear = findViewById(R.id.clear_button);
-        clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager manager = getSupportFragmentManager();
-                WarningFragment dialog = new WarningFragment();
-                dialog.show(manager, "Message");
-            }
+        clear.setOnClickListener(v -> {
+            FragmentManager manager = getSupportFragmentManager();
+            WarningFragment dialog = new WarningFragment();
+            dialog.show(manager, "Message");
         });
 
         //getSingleton
@@ -60,15 +57,12 @@ public class OptionsActivity extends AppCompatActivity {
             RadioButton button = new RadioButton(this);
             button.setText(numMine + " mines");
 
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setMines = numMine;
-                    gameBoard.setNumMines(setMines);
-                    Toast.makeText(OptionsActivity.this, "Selected number of mines is: " + setMines, Toast.LENGTH_SHORT).show();
-                    getData();
+            button.setOnClickListener(v -> {
+                setMines = numMine;
+                gameBoard.setNumMines(setMines);
+                Toast.makeText(OptionsActivity.this, "Selected number of mines is: " + setMines, Toast.LENGTH_SHORT).show();
+                getData();
 
-                }
             });
             groupMines.addView(button);
         }
@@ -89,30 +83,26 @@ public class OptionsActivity extends AppCompatActivity {
             RadioButton button = new RadioButton(this);
             button.setText(numGrid);
 
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Toast.makeText(OptionsActivity.this, "Selected " + numGrid + " grid", Toast.LENGTH_SHORT).show();
+            button.setOnClickListener(v -> {
 
-                    //get the row and col from text
-                    char row = numGrid.charAt(0);
+                //get the row and col from text
+                char row = numGrid.charAt(0);
 
-                    if(row == '5'){
-                        cols = 10;
-                    }else if (row == '6') {
-                        cols = 15;
-                    } else {
-                        cols = 6;
-                    }
-
-                    rows = Integer.parseInt(String.valueOf(row));
-                    gameBoard = GameBoard.getInstance();
-                    gameBoard.setNumRows(rows);
-                    gameBoard.setNumCol(cols);
-
-                    Toast.makeText(OptionsActivity.this, "Selected rows " + rows + " and columns " + cols, Toast.LENGTH_SHORT).show();
-                    getData();
+                if(row == '5'){
+                    cols = 10;
+                }else if (row == '6') {
+                    cols = 15;
+                } else {
+                    cols = 6;
                 }
+
+                rows = Integer.parseInt(String.valueOf(row));
+                gameBoard = GameBoard.getInstance();
+                gameBoard.setNumRows(rows);
+                gameBoard.setNumCol(cols);
+
+                Toast.makeText(OptionsActivity.this, "Selected rows " + rows + " and columns " + cols, Toast.LENGTH_SHORT).show();
+                getData();
             });
             group.addView(button);
         }
