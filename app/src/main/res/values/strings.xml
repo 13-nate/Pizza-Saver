@@ -9,4 +9,16 @@
     <string name="basic_game_help">1. The goal of the game is to find all the hidden bombs with the fewest scans.\n2. Tap on a button to look for a bomb.\n3. If the button does not contain a bomb it will perform a scan.\n4. A scan shows the number of hidden bombs in the column and row related to that button.\n5. You can click on a bomb after it has been found to perform a scan on that button</string>
     <string name="authors"><a href ="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">By: Kevin Chen Su and Nathan Simms</a></string>
     <string name="help_image"><a href ="https://www.pngitem.com/middle/JbhJoo_transparent-open-book-png-open-orange-books-png/">Help Image</a></string>
+    <string name="bombs_found_0_of">Bombs found 0 of</string>
+    <string name="scans_used_0">Scans used: 0</string>
+    <string name="times_played">Times Played:</string>
+    <string name="high_score">High Score:</string>
+    <string name="winner">WINNER!</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="by_kevin_chen_su_and_nathan_simms">By: Kevin Chen Su and Nathan Simms</string>
+    <string name="todo">TODO</string>
+    <string name="skip">skip</string>
+    <string name="board_size">Board Size</string>
+    <string name="number_of_mines">Number of Mines</string>
+    <string name="reset_times_played_and_selected_highscores">RESET TIMES PLAYED and SELECTED HIGHSCORES</string>
 </resources>

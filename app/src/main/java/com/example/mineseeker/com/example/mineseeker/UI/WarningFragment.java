@@ -6,27 +6,27 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.mineseeker.R;
+import com.example.mineseeker.model.GameBoard;
 
 public class WarningFragment extends AppCompatDialogFragment {
+    GameBoard gameBoard = GameBoard.getInstance();
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.clear_warning_message,null );
         SharedPreferences clearData = PreferenceManager.getDefaultSharedPreferences(GameMenu.getContextApp());
         SharedPreferences.Editor editor = clearData.edit();
-
+        String boardSettings = "" + gameBoard.getNumRows()+gameBoard.getNumCol()+gameBoard.getNumMines();
         DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -34,10 +34,8 @@ public class WarningFragment extends AppCompatDialogFragment {
                     case DialogInterface.BUTTON_POSITIVE:
 
                         editor.remove("keyPLAYS");
-                        editor.remove("4x6_6mines");
-                        editor.remove("4x6_10mines");
-                        editor.remove("4x6_15mines");
-                        editor.remove("4x6_20mines");
+                        editor.remove(boardSettings);
+
                         editor.apply();
                         Intent intent = GameMenu.makeIntentGameMenuActivity(getActivity());
                         startActivity(intent);
