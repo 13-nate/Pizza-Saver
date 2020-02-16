@@ -223,6 +223,12 @@ public class PlayGameActivity extends AppCompatActivity {
         int highScore = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), boardSettings);
         highScoreTxt.setText("High Score: " + highScore);
     }
+    public void onBackPressed() {
+        Intent intent = GameMenu.makeIntentGameMenuActivity(PlayGameActivity.this);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
 
 
 }
