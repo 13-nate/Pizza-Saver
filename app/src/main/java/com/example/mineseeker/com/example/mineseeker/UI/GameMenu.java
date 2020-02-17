@@ -28,6 +28,7 @@ public class GameMenu extends AppCompatActivity {
     Animation menuAnimation;
     Animation explotionAnimation;
 
+
     // used the link below to help use shared preferences with material from the
     // Android Programming Big Nerd Ranch guide page: 533
     // https://stackoverflow.com/questions/7491287/android-how-to-use-sharedpreferences-in-non-activity-class
@@ -38,14 +39,15 @@ public class GameMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         contextApp = getApplicationContext();
-
         setContentView(R.layout.activity_game__menu);
         startAnimation();
-
         playGameButton = findViewById(R.id.playGame_button);
         playGameButton.setOnClickListener(v -> {
             Intent intent = PlayGameActivity.makeIntentPlayGameActivity(GameMenu.this);
             startActivity(intent);
+           finish();
+
+
         });
 
 
@@ -53,12 +55,18 @@ public class GameMenu extends AppCompatActivity {
         optionButton.setOnClickListener(v -> {
            Intent intent = OptionsActivity.makeIntentOptionsActivity(GameMenu.this);
            startActivity(intent);
+            finish();
+
+
         });
 
         helpButton = findViewById(R.id.help_button);
         helpButton.setOnClickListener(v -> {
             Intent intent = HelpMenuActivity.makeIntentHelpActivity(GameMenu.this);
             startActivity(intent);
+            finish();
+
+
         });
 
     }
@@ -77,22 +85,14 @@ public class GameMenu extends AppCompatActivity {
         ImageView playButton = findViewById(R.id.playGame_button);
         ImageView optionButton = findViewById(R.id.options_button);
         ImageView helpButton = findViewById(R.id.help_button);
-
         menu.startAnimation(menuAnimation);
         playButton.startAnimation(menuAnimation);
         optionButton.startAnimation(menuAnimation);
         helpButton.startAnimation(menuAnimation);
         explosionLogo.startAnimation(explotionAnimation);
+
     }
     public static Intent makeIntentGameMenuActivity(Context context){
         return new Intent(context, GameMenu.class);
-    }
-
-    @Override
-    public void onBackPressed() {
-
-        menuAnimation.cancel();
-        explotionAnimation.cancel();
-        super.onBackPressed();
     }
 }

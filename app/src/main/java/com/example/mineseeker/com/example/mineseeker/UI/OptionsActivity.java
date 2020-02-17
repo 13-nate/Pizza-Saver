@@ -5,10 +5,8 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -60,7 +58,7 @@ public class OptionsActivity extends AppCompatActivity {
             button.setOnClickListener(v -> {
                 setMines = numMine;
                 gameBoard.setNumMines(setMines);
-                Toast.makeText(OptionsActivity.this, "Selected number of mines is: " + setMines, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(OptionsActivity.this, "Selected number of mines is: " + setMines, Toast.LENGTH_SHORT).show();
                 getData();
 
             });
@@ -101,7 +99,7 @@ public class OptionsActivity extends AppCompatActivity {
                 gameBoard.setNumRows(rows);
                 gameBoard.setNumCol(cols);
 
-                Toast.makeText(OptionsActivity.this, "Selected rows " + rows + " and columns " + cols, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(OptionsActivity.this, "Selected rows " + rows + " and columns " + cols, Toast.LENGTH_SHORT).show();
                 getData();
             });
             group.addView(button);
@@ -122,5 +120,11 @@ public class OptionsActivity extends AppCompatActivity {
         + "m = " + QueryPreferences.getStoredQuery(this, "keyMINES"));
 
 
+    }
+    public void onBackPressed() {
+        Intent intent = GameMenu.makeIntentGameMenuActivity(OptionsActivity.this);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
     }
 }

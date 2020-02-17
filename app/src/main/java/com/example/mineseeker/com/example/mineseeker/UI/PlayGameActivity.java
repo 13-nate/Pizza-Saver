@@ -12,7 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-
+import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -123,7 +123,6 @@ public class PlayGameActivity extends AppCompatActivity {
         if(!logic.getIsExplosive(row, col)){
             laserSound.start();
         }
-        //button animation for scan
         for(int i = 0; i < gameBoard.getNumRows();i++) {
             for(int j = 0; j < gameBoard.getNumCol();j++) {
                 if(i == row || j == col){
@@ -226,5 +225,11 @@ public class PlayGameActivity extends AppCompatActivity {
                 + gameBoard.getNumMines();
         highScore = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), boardSettings);
         highScoreTxt.setText("High Score: " + highScore);
+    }
+    public void onBackPressed() {
+        Intent intent = GameMenu.makeIntentGameMenuActivity(PlayGameActivity.this);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
     }
 }

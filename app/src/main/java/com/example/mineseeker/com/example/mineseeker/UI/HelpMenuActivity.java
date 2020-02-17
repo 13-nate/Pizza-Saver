@@ -46,4 +46,10 @@ public class HelpMenuActivity extends AppCompatActivity {
     public static Intent makeIntentHelpActivity(Context context){
         return new Intent(context, HelpMenuActivity.class);
     }
+    public void onBackPressed() {
+        Intent intent = GameMenu.makeIntentGameMenuActivity(HelpMenuActivity.this);
+        startActivity(intent);
+        super.onBackPressed();
+        finish();
+    }
 }

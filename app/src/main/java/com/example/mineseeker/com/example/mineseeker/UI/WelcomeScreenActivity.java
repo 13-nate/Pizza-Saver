@@ -21,6 +21,9 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     private TextView authorLogo;
     private ImageButton skipButton;
     final Handler handler = new Handler();
+    Animation logoAnim;
+    Animation topAnim;
+    Animation authorAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +57,18 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        handler.removeCallbacksAndMessages(0);
-
+        handler.removeCallbacksAndMessages(null);
+        logoAnim.cancel();
+        topAnim.cancel();
+        authorAnim.cancel();
         super.onBackPressed();
+        finish();
     }
 
     private void startAnimation() {
-        Animation logoAnim = AnimationUtils.loadAnimation(this,R.anim.welcomescreenanimation);
-        Animation topAnim = AnimationUtils.loadAnimation(this,R.anim.topanimation);
-        Animation authorAnim = AnimationUtils.loadAnimation(this, R.anim.bottomtotop);
+        logoAnim = AnimationUtils.loadAnimation(this,R.anim.welcomescreenanimation);
+        topAnim = AnimationUtils.loadAnimation(this,R.anim.topanimation);
+        authorAnim = AnimationUtils.loadAnimation(this, R.anim.bottomtotop);
         textLogo.startAnimation(topAnim);
         logo.startAnimation(logoAnim);
         authorLogo.startAnimation(authorAnim);
