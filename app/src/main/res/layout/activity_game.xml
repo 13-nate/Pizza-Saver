@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ufo_fight">
+    android:background="@drawable/space_with_planet">
 
     <TableLayout
         android:id="@+id/tableForButtons"
@@ -24,6 +24,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="-33dp"
+        android:background="#00030303"
         android:text="@string/bombs_found_0_of"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#EE0A0A"
