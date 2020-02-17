@@ -24,7 +24,7 @@ public class GameMenu extends AppCompatActivity {
     private ImageView helpButton;
     private ImageView playGameButton;
     private ImageView optionButton;
-    private ImageView explosionLogo;
+   // private ImageView explosionLogo;
     Animation menuAnimation;
     Animation explotionAnimation;
 
@@ -80,7 +80,7 @@ public class GameMenu extends AppCompatActivity {
         menuAnimation = AnimationUtils.loadAnimation(this, R.anim.lefttoright);
         explotionAnimation = AnimationUtils.loadAnimation(this,R.anim.explosion_logo_animation);
 
-        explosionLogo = findViewById(R.id.explosionLogo_imageView);
+        //explosionLogo = findViewById(R.id.explosionLogo_imageView);
         TextView menu = findViewById(R.id.mainMenu_textView);
         ImageView playButton = findViewById(R.id.playGame_button);
         ImageView optionButton = findViewById(R.id.options_button);
@@ -89,7 +89,7 @@ public class GameMenu extends AppCompatActivity {
         playButton.startAnimation(menuAnimation);
         optionButton.startAnimation(menuAnimation);
         helpButton.startAnimation(menuAnimation);
-        explosionLogo.startAnimation(explotionAnimation);
+       // explosionLogo.startAnimation(explotionAnimation);
 
     }
     public static Intent makeIntentGameMenuActivity(Context context){

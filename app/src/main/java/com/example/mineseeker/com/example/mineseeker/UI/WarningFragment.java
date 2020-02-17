@@ -26,15 +26,13 @@ public class WarningFragment extends AppCompatDialogFragment {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.clear_warning_message,null );
         SharedPreferences clearData = PreferenceManager.getDefaultSharedPreferences(GameMenu.getContextApp());
         SharedPreferences.Editor editor = clearData.edit();
-        String boardSettings = "" + gameBoard.getNumRows()+gameBoard.getNumCol()+gameBoard.getNumMines();
         DialogInterface.OnClickListener listener = (dialog, which) -> {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
 
-                    editor.remove("keyPLAYS");
-                    editor.remove(boardSettings);
-
+                    editor.clear();
                     editor.apply();
+
                     Intent intent = GameMenu.makeIntentGameMenuActivity(getActivity());
                     startActivity(intent);
                     getActivity().finish();

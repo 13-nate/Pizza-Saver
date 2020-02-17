@@ -21,5 +21,4 @@ public class QueryPreferences {
                 .putInt(query, data)
                 .apply();
     }
-
 }
