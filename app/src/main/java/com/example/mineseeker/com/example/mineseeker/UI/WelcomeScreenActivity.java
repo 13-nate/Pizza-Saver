@@ -59,7 +59,6 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-
     private void startAnimation() {
         Animation logoAnim = AnimationUtils.loadAnimation(this,R.anim.welcomescreenanimation);
         Animation topAnim = AnimationUtils.loadAnimation(this,R.anim.topanimation);
@@ -68,5 +67,4 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         logo.startAnimation(logoAnim);
         authorLogo.startAnimation(authorAnim);
     }
-
 }

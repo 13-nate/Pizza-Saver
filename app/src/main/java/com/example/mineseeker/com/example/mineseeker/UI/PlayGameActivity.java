@@ -12,7 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.View;
+
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -30,7 +30,7 @@ public class PlayGameActivity extends AppCompatActivity {
     int count = 0;
     int highScore = 0;
     Button buttons[][]; // save buttons when creating
-    // keeps track of exlopsive cells
+    // keeps track of explosive cells
     TextView counterText;
     // create sound files
     MediaPlayer bombSound;
@@ -123,6 +123,7 @@ public class PlayGameActivity extends AppCompatActivity {
         if(!logic.getIsExplosive(row, col)){
             laserSound.start();
         }
+        //button animation for scan
         for(int i = 0; i < gameBoard.getNumRows();i++) {
             for(int j = 0; j < gameBoard.getNumCol();j++) {
                 if(i == row || j == col){
@@ -225,21 +226,5 @@ public class PlayGameActivity extends AppCompatActivity {
                 + gameBoard.getNumMines();
         highScore = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), boardSettings);
         highScoreTxt.setText("High Score: " + highScore);
-        /*if(gameBoard.getNumMines() == 6){
-            highScore = QueryPreferences.getStoredQuery(this, "4x6_6mines");
-            highScoreTxt.setText("High Score: " + highScore);
-
-        } else if (gameBoard.getNumMines() == 10){
-            highScore = QueryPreferences.getStoredQuery(this, "4x6_10mines");
-            highScoreTxt.setText("High Score: " + highScore);
-        } else if (gameBoard.getNumMines() == 15) {
-            highScore = QueryPreferences.getStoredQuery(this, "4x6_15mines");
-            highScoreTxt.setText("High Score: " + highScore);
-        } else if (gameBoard.getNumMines() == 20) {
-                highScore = QueryPreferences.getStoredQuery(this, "4x6_20mines");
-                highScoreTxt.setText("High Score: " + highScore);
-          }*/
     }
-
-
 }

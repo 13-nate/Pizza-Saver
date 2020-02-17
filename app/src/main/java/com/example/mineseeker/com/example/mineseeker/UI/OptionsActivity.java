@@ -117,7 +117,6 @@ public class OptionsActivity extends AppCompatActivity {
         QueryPreferences.setStoredQuery(GameMenu.getContextApp(), "keyCOLS", cols);
         QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"keyMINES", setMines);
         gameBoard.setState(this);
-        gameBoard.setIsStateChanged(true);
         Log.i("Cheats","r = " + QueryPreferences.getStoredQuery(this, "keyROWS")
                 + "c = " + QueryPreferences.getStoredQuery(this, "keyCOLS")
         + "m = " + QueryPreferences.getStoredQuery(this, "keyMINES"));
