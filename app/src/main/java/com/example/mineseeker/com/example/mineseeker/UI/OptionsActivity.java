@@ -10,7 +10,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.example.mineseeker.model.GameBoard;
 import com.example.mineseeker.R;
@@ -116,11 +115,10 @@ public class OptionsActivity extends AppCompatActivity {
         QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"keyMINES", setMines);
         gameBoard.setState(this);
         gameBoard.setIsStateChanged(true);
-        Log.i("Cheats","r = " + QueryPreferences.getStoredQuery(this, "keyROWS")
+    /*    Log.i("Cheats","r = " + QueryPreferences.getStoredQuery(this, "keyROWS")
                 + "c = " + QueryPreferences.getStoredQuery(this, "keyCOLS")
         + "m = " + QueryPreferences.getStoredQuery(this, "keyMINES"));
-
-
+        */
     }
     public void onBackPressed() {
         Intent intent = GameMenu.makeIntentGameMenuActivity(OptionsActivity.this);
