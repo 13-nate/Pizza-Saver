@@ -177,7 +177,7 @@ public class PlayGameActivity extends AppCompatActivity {
         //scale image to button
         int newWidth = button.getWidth();
         int newHeight = button.getHeight();
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.bomb);
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.pizza_ufo);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
