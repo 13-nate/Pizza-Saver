@@ -54,7 +54,8 @@ public class OptionsActivity extends AppCompatActivity {
 
 
             RadioButton button = new RadioButton(this);
-            button.setText(numMine + R.string.mines);
+            String mines = getString(R.string.mines_chosen);
+            button.setText("" + numMine + mines);
             button.setTextColor(Color.parseColor("#EE0A0A"));
 
             button.setOnClickListener(v -> {
@@ -83,7 +84,6 @@ public class OptionsActivity extends AppCompatActivity {
             RadioButton button = new RadioButton(this);
             button.setText(numGrid);
             button.setTextColor(Color.parseColor("#EE0A0A"));
-            button.setHighlightColor(Color.parseColor("#EE0A0A"));
 
             button.setOnClickListener(v -> {
 

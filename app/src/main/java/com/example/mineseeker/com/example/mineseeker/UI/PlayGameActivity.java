@@ -136,6 +136,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 Button button = buttons[i][j];
                 if(logic.getCellScanned(i, j)) {
                     button.setText("" + logic.getHiddenBombs(i, j));
+                    laserSound.start();
                 }
             }
         }
