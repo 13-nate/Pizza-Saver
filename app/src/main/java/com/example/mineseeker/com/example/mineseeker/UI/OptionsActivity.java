@@ -28,7 +28,7 @@ public class OptionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
-        getSupportActionBar().setTitle("OPTIONS");
+        getSupportActionBar().setTitle(R.string.options);
 
         createGridRadioButtons();
         createNumberOfMinesRadioButton();
@@ -53,7 +53,8 @@ public class OptionsActivity extends AppCompatActivity {
 
 
             RadioButton button = new RadioButton(this);
-            button.setText(numMine + " mines");
+            String mines = getString(R.string.mines_chosen);
+            button.setText("" + numMine + mines);
             button.setTextColor(Color.parseColor("#EE0A0A"));
 
             button.setOnClickListener(v -> {
@@ -82,7 +83,6 @@ public class OptionsActivity extends AppCompatActivity {
             RadioButton button = new RadioButton(this);
             button.setText(numGrid);
             button.setTextColor(Color.parseColor("#EE0A0A"));
-            button.setHighlightColor(Color.parseColor("#EE0A0A"));
 
             button.setOnClickListener(v -> {
 
@@ -102,7 +102,6 @@ public class OptionsActivity extends AppCompatActivity {
                 gameBoard.setNumRows(rows);
                 gameBoard.setNumCol(cols);
 
-                //Toast.makeText(OptionsActivity.this, "Selected rows " + rows + " and columns " + cols, Toast.LENGTH_SHORT).show();
                 getData();
             });
             group.addView(button);
@@ -118,11 +117,6 @@ public class OptionsActivity extends AppCompatActivity {
         QueryPreferences.setStoredQuery(GameMenu.getContextApp(), "keyCOLS", cols);
         QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"keyMINES", setMines);
         gameBoard.setState(this);
-        Log.i("Cheats","r = " + QueryPreferences.getStoredQuery(this, "keyROWS")
-                + "c = " + QueryPreferences.getStoredQuery(this, "keyCOLS")
-        + "m = " + QueryPreferences.getStoredQuery(this, "keyMINES"));
-
-
     }
     public void onBackPressed() {
         Intent intent = GameMenu.makeIntentGameMenuActivity(OptionsActivity.this);

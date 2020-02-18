@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 import java.util.prefs.Preferences;
 
 /**
- * An interface for reading and writting to the shared preference filee
+ * An interface for reading and writing to the shared preference file
  */
 public class QueryPreferences {
 
