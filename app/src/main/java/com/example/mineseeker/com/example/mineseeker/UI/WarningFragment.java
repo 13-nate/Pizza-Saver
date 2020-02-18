@@ -42,7 +42,7 @@ public class WarningFragment extends AppCompatDialogFragment {
             }
         };
 
-        return new AlertDialog.Builder(getActivity()).setTitle("WARNING!")
+        return new AlertDialog.Builder(getActivity()).setTitle(R.string.warning)
                 .setView(v)
                 .setPositiveButton(android.R.string.ok, listener)
                 .setNegativeButton(android.R.string.cancel, listener)

@@ -1,7 +1,6 @@
 package com.example.mineseeker.com.example.mineseeker.UI;
 
 
-import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import android.content.Context;
@@ -12,7 +11,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -56,10 +54,10 @@ public class PlayGameActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        getSupportActionBar().setTitle("PLAY");
+        getSupportActionBar().setTitle(R.string.save_the_za);
 
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
-        NbrOfBombsTxt.setText("Bombs Found " + logic.getBombsFound() + " of " + gameBoard.getNumMines());
+        NbrOfBombsTxt.setText(R.string.bombs_found_+ logic.getBombsFound() + R.string._of_+ gameBoard.getNumMines());
 
         counterText =findViewById(R.id.timesPlayed);
         highScoreTxt = findViewById(R.id.highScoreLabel);
@@ -122,20 +120,14 @@ public class PlayGameActivity extends AppCompatActivity {
         //not a bomb so play scan sound
         if(!logic.getIsExplosive(row, col)){
             laserSound.start();
+            wiggleAnimation(row, col);
         }
-        for(int i = 0; i < gameBoard.getNumRows();i++) {
-            for(int j = 0; j < gameBoard.getNumCol();j++) {
-                if(i == row || j == col){
-                    Button button =buttons[i][j];
-                    button.startAnimation(AnimationUtils.loadAnimation(this,R.anim.btn_shake));
-                }
-            }
-        }
+
         //update display txt on each click
         scansTxt = findViewById(R.id.txtScansUsed);
-        scansTxt.setText("Scans Used: " + logic.getScans());
+        scansTxt.setText(R.string.scans_used + logic.getScans());
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
-        NbrOfBombsTxt.setText("Bombs Found " + logic.getBombsFound() +" of " + gameBoard.getNumMines());
+        NbrOfBombsTxt.setText(R.string.bombs_found_ + logic.getBombsFound() + R.string._of_ + gameBoard.getNumMines());
 
         // sets the text for each button, the text should only be displayed if a scan has
         // been performed
@@ -154,6 +146,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 bombSound.start();
             } else {
                 laserSound.start();
+                wiggleAnimation(row, col);
             }
             displayBomb(buttons[row][col]);
             // check for win condition when a bomb is found
@@ -167,6 +160,17 @@ public class PlayGameActivity extends AppCompatActivity {
                 // connect fragment
                 displayWinMessage();
                 }
+        }
+    }
+
+    private void wiggleAnimation(int row, int col) {
+        for(int i = 0; i < gameBoard.getNumRows();i++) {
+            for(int j = 0; j < gameBoard.getNumCol();j++) {
+                if(i == row || j == col){
+                    Button button =buttons[i][j];
+                    button.startAnimation(AnimationUtils.loadAnimation(this,R.anim.btn_shake));
+                }
+            }
         }
     }
 
@@ -217,14 +221,14 @@ public class PlayGameActivity extends AppCompatActivity {
     }
     private void updateData() {
         count = QueryPreferences.getStoredQuery(this, "keyPLAYS");
-        counterText.setText("Times Played: " + count);
+        counterText.setText(R.string.times_played + count);
     }
     private void updateHighScore() {
 
         String boardSettings = "" + gameBoard.getNumRows() + gameBoard.getNumCol()
                 + gameBoard.getNumMines();
         highScore = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), boardSettings);
-        highScoreTxt.setText("High Score: " + highScore);
+        highScoreTxt.setText(R.string.high_score + highScore);
     }
     public void onBackPressed() {
         Intent intent = GameMenu.makeIntentGameMenuActivity(PlayGameActivity.this);

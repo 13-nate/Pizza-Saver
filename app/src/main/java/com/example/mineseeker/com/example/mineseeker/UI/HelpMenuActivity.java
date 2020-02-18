@@ -22,7 +22,7 @@ public class HelpMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_menu);
-        getSupportActionBar().setTitle("HELP");
+        getSupportActionBar().setTitle(R.string.help);
 
         TextView txtBomb = findViewById(R.id.txtBombImage);
         txtBomb.setMovementMethod(LinkMovementMethod.getInstance());

@@ -29,7 +29,6 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
-        //logo = findViewById(R.id.logo);
         textLogo = findViewById(R.id.welcomeLogo_textView);
         authorLogo = findViewById(R.id.author_textView);
         skipButton = findViewById(R.id.skip_imageButton);
@@ -70,7 +69,6 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         topAnim = AnimationUtils.loadAnimation(this,R.anim.topanimation);
         authorAnim = AnimationUtils.loadAnimation(this, R.anim.bottomtotop);
         textLogo.startAnimation(topAnim);
-       // logo.startAnimation(logoAnim);
         authorLogo.startAnimation(authorAnim);
     }
 }
