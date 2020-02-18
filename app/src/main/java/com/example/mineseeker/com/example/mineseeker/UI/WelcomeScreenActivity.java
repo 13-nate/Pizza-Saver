@@ -16,7 +16,7 @@ import com.example.mineseeker.R;
 
 public class WelcomeScreenActivity extends AppCompatActivity {
 
-    private ImageView logo;
+    //private ImageView logo;
     private TextView textLogo;
     private TextView authorLogo;
     private ImageButton skipButton;
@@ -29,7 +29,6 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
-        logo = findViewById(R.id.logo);
         textLogo = findViewById(R.id.welcomeLogo_textView);
         authorLogo = findViewById(R.id.author_textView);
         skipButton = findViewById(R.id.skip_imageButton);
@@ -65,14 +64,11 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         finish();
     }
 
-
     private void startAnimation() {
         logoAnim = AnimationUtils.loadAnimation(this,R.anim.welcomescreenanimation);
         topAnim = AnimationUtils.loadAnimation(this,R.anim.topanimation);
         authorAnim = AnimationUtils.loadAnimation(this, R.anim.bottomtotop);
         textLogo.startAnimation(topAnim);
-        logo.startAnimation(logoAnim);
         authorLogo.startAnimation(authorAnim);
     }
-
 }

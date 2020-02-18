@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".com.example.mineseeker.UI.OptionsActivity"
-    android:background="#FFD53B">
+    android:background="@drawable/ufo_fight"
+    tools:context=".com.example.mineseeker.UI.OptionsActivity">
 
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/trade_winds"
         android:text="@string/action_settings"
-        android:textColor="#3F51B5"
+        android:textColor="#EE0A0A"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/trade_winds"
         android:text="@string/board_size"
-        android:textColor="#3F51B5"
+        android:textColor="#EE0A0A"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/trade_winds"
         android:text="@string/number_of_mines"
-        android:textColor="#3F51B5"
+        android:textColor="#EE0A0A"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -98,7 +98,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:background="#FFD53B"
+        android:buttonTint="@color/myRed"
+        android:backgroundTint="@color/myRed"
+        android:textColor="#EE0A0A"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/numberOfMines_label"
         app:layout_constraintEnd_toEndOf="@+id/boardSize_label"
         app:layout_constraintHorizontal_bias="0.102"
@@ -110,6 +113,8 @@
         android:id="@+id/radio_group_mines_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#EE0A0A"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/numberOfMines_label"
         app:layout_constraintHorizontal_bias="0.083"
@@ -121,13 +126,13 @@
         android:id="@+id/clear_button"
         android:layout_width="190dp"
         android:layout_height="99dp"
-        android:layout_marginStart="68dp"
+        android:layout_marginStart="48dp"
+        android:background="#000000"
         android:fontFamily="@font/bigshot_one"
         android:text="@string/reset_times_played_and_selected_highscores"
-        android:textColor="#3F51B5"
+        android:textColor="#EE0A0A"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/numberOfMines_label"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/numberOfMines_label"
-        app:layout_constraintTop_toTopOf="@+id/numberOfMines_label"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

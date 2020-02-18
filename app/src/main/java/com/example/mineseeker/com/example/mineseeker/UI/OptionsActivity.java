@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -53,6 +54,7 @@ public class OptionsActivity extends AppCompatActivity {
 
             RadioButton button = new RadioButton(this);
             button.setText(numMine + " mines");
+            button.setTextColor(Color.parseColor("#EE0A0A"));
 
             button.setOnClickListener(v -> {
                 setMines = numMine;
@@ -79,6 +81,8 @@ public class OptionsActivity extends AppCompatActivity {
             //change txt to ints to be passed into singleton
             RadioButton button = new RadioButton(this);
             button.setText(numGrid);
+            button.setTextColor(Color.parseColor("#EE0A0A"));
+            button.setHighlightColor(Color.parseColor("#EE0A0A"));
 
             button.setOnClickListener(v -> {
 
@@ -114,11 +118,11 @@ public class OptionsActivity extends AppCompatActivity {
         QueryPreferences.setStoredQuery(GameMenu.getContextApp(), "keyCOLS", cols);
         QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"keyMINES", setMines);
         gameBoard.setState(this);
-        gameBoard.setIsStateChanged(true);
-    /*    Log.i("Cheats","r = " + QueryPreferences.getStoredQuery(this, "keyROWS")
+        Log.i("Cheats","r = " + QueryPreferences.getStoredQuery(this, "keyROWS")
                 + "c = " + QueryPreferences.getStoredQuery(this, "keyCOLS")
         + "m = " + QueryPreferences.getStoredQuery(this, "keyMINES"));
-        */
+
+
     }
     public void onBackPressed() {
         Intent intent = GameMenu.makeIntentGameMenuActivity(OptionsActivity.this);

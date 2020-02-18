@@ -30,7 +30,7 @@ public class PlayGameActivity extends AppCompatActivity {
     int count = 0;
     int highScore = 0;
     Button buttons[][]; // save buttons when creating
-    // keeps track of exlopsive cells
+    // keeps track of explosive cells
     TextView counterText;
     // create sound files
     MediaPlayer bombSound;
@@ -177,7 +177,7 @@ public class PlayGameActivity extends AppCompatActivity {
         //scale image to button
         int newWidth = button.getWidth();
         int newHeight = button.getHeight();
-        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.bomb);
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.pizza_ufo);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
@@ -225,20 +225,6 @@ public class PlayGameActivity extends AppCompatActivity {
                 + gameBoard.getNumMines();
         highScore = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), boardSettings);
         highScoreTxt.setText("High Score: " + highScore);
-        /*if(gameBoard.getNumMines() == 6){
-            highScore = QueryPreferences.getStoredQuery(this, "4x6_6mines");
-            highScoreTxt.setText("High Score: " + highScore);
-
-        } else if (gameBoard.getNumMines() == 10){
-            highScore = QueryPreferences.getStoredQuery(this, "4x6_10mines");
-            highScoreTxt.setText("High Score: " + highScore);
-        } else if (gameBoard.getNumMines() == 15) {
-            highScore = QueryPreferences.getStoredQuery(this, "4x6_15mines");
-            highScoreTxt.setText("High Score: " + highScore);
-        } else if (gameBoard.getNumMines() == 20) {
-                highScore = QueryPreferences.getStoredQuery(this, "4x6_20mines");
-                highScoreTxt.setText("High Score: " + highScore);
-          }*/
     }
     public void onBackPressed() {
         Intent intent = GameMenu.makeIntentGameMenuActivity(PlayGameActivity.this);
@@ -246,6 +232,4 @@ public class PlayGameActivity extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
-
-
 }

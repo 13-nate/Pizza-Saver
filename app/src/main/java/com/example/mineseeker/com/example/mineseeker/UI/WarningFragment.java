@@ -14,10 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.mineseeker.R;
-import com.example.mineseeker.model.GameBoard;
+
 
 public class WarningFragment extends AppCompatDialogFragment {
-    GameBoard gameBoard = GameBoard.getInstance();
 
     @NonNull
     @Override
@@ -26,18 +25,29 @@ public class WarningFragment extends AppCompatDialogFragment {
         View v = LayoutInflater.from(getActivity()).inflate(R.layout.clear_warning_message,null );
         SharedPreferences clearData = PreferenceManager.getDefaultSharedPreferences(GameMenu.getContextApp());
         SharedPreferences.Editor editor = clearData.edit();
-        String boardSettings = "" + gameBoard.getNumRows()+gameBoard.getNumCol()+gameBoard.getNumMines();
         DialogInterface.OnClickListener listener = (dialog, which) -> {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
 
                     editor.remove("keyPLAYS");
-                    editor.remove(boardSettings);
-
+                    editor.remove("466");
+                    editor.remove("4610");
+                    editor.remove("4615");
+                    editor.remove("4620");
+                    editor.remove("5106");
+                    editor.remove("51010");
+                    editor.remove("51015");
+                    editor.remove("51020");
+                    editor.remove("6156");
+                    editor.remove("61510");
+                    editor.remove("61515");
+                    editor.remove("61520");
                     editor.apply();
+
                     Intent intent = GameMenu.makeIntentGameMenuActivity(getActivity());
                     startActivity(intent);
                     getActivity().finish();
+
                     break;
                 case DialogInterface.BUTTON_NEGATIVE:
                     break;

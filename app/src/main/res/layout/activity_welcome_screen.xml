@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/logo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFD53B"
+    android:background="@drawable/ufo_pizza_abduction"
     tools:context=".com.example.mineseeker.UI.WelcomeScreenActivity">
 
 
@@ -12,83 +13,81 @@
         android:id="@+id/welcomeLogo_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mine_seeker"
+        android:layout_marginTop="92dp"
+        android:text="UFO DESTROYER"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        android:textColor="#3F51B5"
+        android:textColor="#EE0A0A"
         android:textStyle="bold"
         app:fontFamily="@font/finger_paint"
-        app:layout_constraintBottom_toTopOf="@+id/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="290dp"
-        android:layout_height="273dp"
-        android:layout_marginStart="232dp"
-        android:layout_marginLeft="232dp"
-        android:layout_marginBottom="16dp"
-        android:src="@mipmap/bomb"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.069" />
+
+    <TextView
+        android:id="@+id/txtSaveTheZa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="206dp"
+        android:text="SAVE THE ZA"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="#EE0A0A"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/finger_paint"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeLogo_textView" />
 
     <TextView
         android:id="@+id/author_textView"
-        android:layout_width="158dp"
-        android:layout_height="64dp"
+        android:layout_width="165dp"
+        android:layout_height="40dp"
 
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:singleLine="false"
         android:text="@string/by_kevin_chen_su_and_nathan_simms"
+        android:textColor="#EE0A0A"
         android:textSize="18sp"
         android:textStyle="bold"
         app:fontFamily="@font/bigshot_one"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/logo"
-        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeLogo_textView"
-        app:layout_constraintVertical_bias="0.915" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageButton
         android:id="@+id/skip_imageButton"
-        android:layout_width="57dp"
-        android:layout_height="60dp"
-        android:background="#3F51B5"
+        android:layout_width="134dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="313dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#EE0A0A"
         android:contentDescription="@string/todo"
-        app:layout_constraintBottom_toBottomOf="@+id/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.802"
-        app:layout_constraintStart_toEndOf="@+id/logo"
-        app:layout_constraintTop_toTopOf="@+id/logo"
-        app:layout_constraintVertical_bias="0.957"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_skip_next_black_24dp" />
-
-    <TextView
-        android:id="@+id/skip_textView"
-        android:layout_width="69dp"
-        android:layout_height="36dp"
-        android:text="@string/skip"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:fontFamily="@font/vast_shadow"
-        app:layout_constraintBottom_toBottomOf="@+id/skip_imageButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/skip_imageButton"
-        app:layout_constraintTop_toTopOf="@+id/logo"
-        app:layout_constraintVertical_bias="0.736" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="731dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.94" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.94"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"

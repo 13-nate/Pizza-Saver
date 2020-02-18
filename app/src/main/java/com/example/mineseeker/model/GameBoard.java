@@ -21,8 +21,7 @@ public class GameBoard {
     private int numMines;
     private int numRows;
     private int numCol;
-    // keeps track if a state changed has occurs so that the game can update to the new state
-    private boolean isStateChanged;
+
     // singleton support
     private static GameBoard instance;
 
@@ -31,7 +30,6 @@ public class GameBoard {
         this.numMines = NUM_MINES;
         this.numRows = NUM_ROWS;
         this.numCol = NUM_COL;
-        this.isStateChanged = false;
 
     }
     public static GameBoard getInstance() {
@@ -62,14 +60,6 @@ public class GameBoard {
     }
     public void setNumCol(int numCol) {
         this.numCol = numCol;
-    }
-
-    public boolean getIsStateChanged() {
-        return isStateChanged;
-    }
-
-    public void setIsStateChanged(boolean stateChanged) {
-        isStateChanged = stateChanged;
     }
 
     public void getState(Context context) {

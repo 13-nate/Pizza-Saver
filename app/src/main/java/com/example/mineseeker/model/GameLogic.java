@@ -18,20 +18,17 @@ import java.util.Arrays;
 public class GameLogic {
     private int scans;
     private int bombsFound;
-    private int score_6mines;
-    private int score_10mines;
-    private int score_15mines;
-    private int score_20mines;
     private String boardSettings;
 
-
     //arrays keep track of the different cell states
+    //which cells have a bombs
     private boolean[][] isExplosive;
+    // if that cells bomb has been found, so that a scan can be performed
     private boolean[][] isBombFound;
     private boolean[][] isCellScanned;
+    // keeps track of the number of hidden bombs in the row and column related to each cell
     private int[][] hiddenBombs;
     private GameBoard gameBoard;
-
 
     //initialize arrays and other game board data
     public GameLogic() {
@@ -51,11 +48,6 @@ public class GameLogic {
         }
 
         boardSettings ="" + gameBoard.getNumCol() + gameBoard.getNumCol() + gameBoard.getNumMines();
-        /*score_6mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_6mines");
-        score_10mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_10mines");
-        score_15mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_15mines");
-        score_20mines = QueryPreferences.getStoredQuery(GameMenu.getContextApp(),"4x6_20mines");
-*/
     }
 
     public int getScans() {
@@ -72,10 +64,6 @@ public class GameLogic {
 
     public boolean getCellScanned(int row, int col) {
         return isCellScanned[row][col];
-    }
-
-    public boolean getIsBombFound(int row, int col) {
-        return isBombFound[row][col];
     }
 
     public int getHiddenBombs(int row, int col) {
@@ -170,52 +158,6 @@ public class GameLogic {
             } else if(scans < highScore) {
                 QueryPreferences.setStoredQuery(GameMenu.getContextApp(), boardSettings, scans);
             }
-
-            /*switch (bombsFound){
-                case 6:
-
-                    if (score_6mines == 0){
-                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_6mines", scans);
-                    }else if (score_6mines > scans){
-                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_6mines",scans);
-                    } else{
-                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_6mines",score_6mines);
-                    }
-                    break;
-            }
-
-                case 10:
-
-                    if (score_10mines == 0){
-                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_10mines", scans);
-                    }else if (score_10mines > scans){
-                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_10mines",scans);
-                    } else{
-                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_10mines",score_10mines);
-                    }
-                    break;
-
-                case 15:
-
-                    if (score_15mines == 0){
-                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_15mines", scans);
-                    }else if (score_15mines > scans){
-                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_15mines",scans);
-                    } else{
-                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_15mines",score_15mines);
-                    }
-                    break;
-
-                case 20:
-
-                    if (score_20mines == 0){
-                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_20mines", scans);
-                    }else if (score_20mines > scans){
-                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_20mines",scans);
-                    } else{
-                        QueryPreferences.setStoredQuery(GameMenu.getContextApp(),"4x6_20mines",score_20mines);
-                    }
-                    break;*/
             return true;
         }
         return false;
