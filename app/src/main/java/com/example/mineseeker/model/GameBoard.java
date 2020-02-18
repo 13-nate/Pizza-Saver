@@ -18,9 +18,9 @@ public class GameBoard {
     public static final int NUM_MINES = 6;
     public static final int NUM_ROWS = 4;
     public static final int NUM_COL = 6;
-    private int numMines;
-    private int numRows;
-    private int numCol;
+    public int numMines;
+    public int numRows;
+    public int numCol;
 
     // singleton support
     private static GameBoard instance;
