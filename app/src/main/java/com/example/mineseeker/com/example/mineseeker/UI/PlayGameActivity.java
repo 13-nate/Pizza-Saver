@@ -54,10 +54,11 @@ public class PlayGameActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        getSupportActionBar().setTitle(R.string.save_the_za);
+        getSupportActionBar().setTitle(getString(R.string.save_the_za));
 
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
-        NbrOfBombsTxt.setText(R.string.bombs_found_+ logic.getBombsFound() + R.string._of_+ gameBoard.getNumMines());
+        NbrOfBombsTxt.setText(getString(R.string.bombs_found_)+ " " + logic.getBombsFound() + " "
+                                + getString(R.string._of_) + " " + gameBoard.getNumMines());
 
         counterText =findViewById(R.id.timesPlayed);
         highScoreTxt = findViewById(R.id.highScoreLabel);
@@ -127,7 +128,8 @@ public class PlayGameActivity extends AppCompatActivity {
         scansTxt = findViewById(R.id.txtScansUsed);
         scansTxt.setText(R.string.scans_used + logic.getScans());
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
-        NbrOfBombsTxt.setText(R.string.bombs_found_ + logic.getBombsFound() + R.string._of_ + gameBoard.getNumMines());
+        NbrOfBombsTxt.setText(R.string.bombs_found_ + logic.getBombsFound() + " " + R.string._of_ + " "
+                                + gameBoard.getNumMines());
 
         // sets the text for each button, the text should only be displayed if a scan has
         // been performed
@@ -222,14 +224,14 @@ public class PlayGameActivity extends AppCompatActivity {
     }
     private void updateData() {
         count = QueryPreferences.getStoredQuery(this, "keyPLAYS");
-        counterText.setText(R.string.times_played + count);
+        counterText.setText(getString(R.string.times_played) + " " + count);
     }
     private void updateHighScore() {
 
         String boardSettings = "" + gameBoard.getNumRows() + gameBoard.getNumCol()
                 + gameBoard.getNumMines();
         highScore = QueryPreferences.getStoredQuery(GameMenu.getContextApp(), boardSettings);
-        highScoreTxt.setText(R.string.high_score + highScore);
+        highScoreTxt.setText(getString(R.string.high_score) + " " + highScore);
     }
     public void onBackPressed() {
         Intent intent = GameMenu.makeIntentGameMenuActivity(PlayGameActivity.this);
