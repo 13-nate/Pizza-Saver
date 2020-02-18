@@ -11,7 +11,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.example.mineseeker.model.GameBoard;
 import com.example.mineseeker.R;

@@ -14,10 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.mineseeker.R;
-import com.example.mineseeker.model.GameBoard;
+
 
 public class WarningFragment extends AppCompatDialogFragment {
-    GameBoard gameBoard = GameBoard.getInstance();
 
     @NonNull
     @Override
@@ -30,12 +29,25 @@ public class WarningFragment extends AppCompatDialogFragment {
             switch (which){
                 case DialogInterface.BUTTON_POSITIVE:
 
-                    editor.clear();
+                    editor.remove("keyPLAYS");
+                    editor.remove("466");
+                    editor.remove("4610");
+                    editor.remove("4615");
+                    editor.remove("4620");
+                    editor.remove("5106");
+                    editor.remove("51010");
+                    editor.remove("51015");
+                    editor.remove("51020");
+                    editor.remove("6156");
+                    editor.remove("61510");
+                    editor.remove("61515");
+                    editor.remove("61520");
                     editor.apply();
 
                     Intent intent = GameMenu.makeIntentGameMenuActivity(getActivity());
                     startActivity(intent);
                     getActivity().finish();
+
                     break;
                 case DialogInterface.BUTTON_NEGATIVE:
                     break;
