@@ -55,7 +55,7 @@ public class OptionsActivity extends AppCompatActivity {
             RadioButton button = new RadioButton(this);
             String mines = getString(R.string.mines_chosen);
             button.setText("" + numMine + mines);
-            button.setTextColor(Color.parseColor("#EE0A0A"));
+            button.setTextColor(Color.parseColor("#FFFFFF"));
 
             button.setOnClickListener(v -> {
                 setMines = numMine;
@@ -82,7 +82,7 @@ public class OptionsActivity extends AppCompatActivity {
             //change txt to ints to be passed into singleton
             RadioButton button = new RadioButton(this);
             button.setText(numGrid);
-            button.setTextColor(Color.parseColor("#EE0A0A"));
+            button.setTextColor(Color.parseColor("#FFFFFF"));
 
             button.setOnClickListener(v -> {
 
