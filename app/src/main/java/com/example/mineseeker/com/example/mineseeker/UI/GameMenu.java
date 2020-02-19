@@ -22,10 +22,12 @@ public class GameMenu extends AppCompatActivity {
 
 
     private ImageView helpButton;
+    private  ImageView playButton;
     private ImageView playGameButton;
     private ImageView optionButton;
-    Animation menuAnimation;
-    Animation explotionAnimation;
+    private TextView mainMenuText;
+    private Animation menuAnimation;
+    private Animation explosionAnimation;
 
 
     // used the link below to help use shared preferences with material from the
@@ -64,8 +66,6 @@ public class GameMenu extends AppCompatActivity {
             Intent intent = HelpMenuActivity.makeIntentHelpActivity(GameMenu.this);
             startActivity(intent);
             finish();
-
-
         });
 
     }
@@ -77,16 +77,17 @@ public class GameMenu extends AppCompatActivity {
     private void startAnimation() {
 
         menuAnimation = AnimationUtils.loadAnimation(this, R.anim.lefttoright);
-        explotionAnimation = AnimationUtils.loadAnimation(this,R.anim.explosion_logo_animation);
+        explosionAnimation = AnimationUtils.loadAnimation(this,R.anim.explosion_logo_animation);
 
-        TextView menu = findViewById(R.id.mainMenu_textView);
-        ImageView playButton = findViewById(R.id.playGame_button);
-        ImageView optionButton = findViewById(R.id.options_button);
-        ImageView helpButton = findViewById(R.id.help_button);
-//        menu.startAnimation(menuAnimation);
-        playButton.startAnimation(menuAnimation);
-        optionButton.startAnimation(menuAnimation);
-        helpButton.startAnimation(menuAnimation);
+
+        playButton = findViewById(R.id.playGame_button);
+        optionButton = findViewById(R.id.options_button);
+        helpButton = findViewById(R.id.help_button);
+        mainMenuText = findViewById(R.id.mainMenu_textView);
+        mainMenuText.startAnimation(menuAnimation);
+        playButton.startAnimation(explosionAnimation);
+        optionButton.startAnimation(explosionAnimation);
+        helpButton.startAnimation(explosionAnimation);
 
     }
     public static Intent makeIntentGameMenuActivity(Context context){
