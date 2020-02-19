@@ -58,7 +58,7 @@ public class PlayGameActivity extends AppCompatActivity {
 
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
         NbrOfBombsTxt.setText(getString(R.string.bombs_found_)+ " " + logic.getBombsFound() + " "
-                                + getString(R.string._of_) + " " + gameBoard.getNumMines());
+                                + getString(R.string.of) + " " + gameBoard.getNumMines());
 
         counterText =findViewById(R.id.timesPlayed);
         highScoreTxt = findViewById(R.id.highScoreLabel);
@@ -126,9 +126,9 @@ public class PlayGameActivity extends AppCompatActivity {
 
         //update display txt on each click
         scansTxt = findViewById(R.id.txtScansUsed);
-        scansTxt.setText(getString(R.string.scans_used) +""+ logic.getScans());
+        scansTxt.setText(getString(R.string.scans_used) +" "+ logic.getScans());
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
-        NbrOfBombsTxt.setText(getString(R.string.bombs_found_ )+""+ logic.getBombsFound() + " " + getString(R.string._of_)  + " "
+        NbrOfBombsTxt.setText(getString(R.string.bombs_found_ )+" "+ logic.getBombsFound() + " " + getString(R.string.of)  + " "
                                 + gameBoard.getNumMines());
 
         // sets the text for each button, the text should only be displayed if a scan has
@@ -138,7 +138,6 @@ public class PlayGameActivity extends AppCompatActivity {
                 Button button = buttons[i][j];
                 if(logic.getCellScanned(i, j)) {
                     button.setText("" + logic.getHiddenBombs(i, j));
-                    laserSound.start();
                 }
             }
         }

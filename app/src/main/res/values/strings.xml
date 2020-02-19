@@ -31,7 +31,7 @@
     <string name="help">HELP</string>
     <string name="mines_chosen">mines</string>
     <string name="bombs_found_">Bombs Found </string>
-    <string name="_of_"> of </string>
+    <string name="of"> of </string>
     <string name="scans_used">Scans Used: </string>
     <string name="times_played">Times Played: </string>
     <string name="high_score">High Score: </string>
