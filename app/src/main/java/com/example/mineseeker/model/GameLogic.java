@@ -70,6 +70,10 @@ public class GameLogic {
         return  hiddenBombs[row][col];
     }
 
+    public boolean getIsBombFound(int row, int col) {
+        return isBombFound[row][col];
+    }
+
     // sets the places for random bombs with in the the isExplosive 2D array
     // sets the number of hidden bombs related to each cell's row and column
     public void makeRandomBombs() {
