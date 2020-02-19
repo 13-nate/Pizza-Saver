@@ -126,9 +126,9 @@ public class PlayGameActivity extends AppCompatActivity {
 
         //update display txt on each click
         scansTxt = findViewById(R.id.txtScansUsed);
-        scansTxt.setText(R.string.scans_used + logic.getScans());
+        scansTxt.setText(getString(R.string.scans_used) +""+ logic.getScans());
         TextView NbrOfBombsTxt = findViewById(R.id.txtBombsFound);
-        NbrOfBombsTxt.setText(R.string.bombs_found_ + logic.getBombsFound() + " " + R.string._of_ + " "
+        NbrOfBombsTxt.setText(getString(R.string.bombs_found_ )+""+ logic.getBombsFound() + " " + getString(R.string._of_)  + " "
                                 + gameBoard.getNumMines());
 
         // sets the text for each button, the text should only be displayed if a scan has
@@ -146,7 +146,10 @@ public class PlayGameActivity extends AppCompatActivity {
         if(logic.getIsExplosive(row, col)) {
             //stops both sounds from playing
             if(!logic.getCellScanned(row,col)){
+                laserSound.pause();
                 bombSound.start();
+
+
             } else {
                 laserSound.start();
                 wiggleAnimation(row, col);
@@ -178,16 +181,15 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private void displayBomb(Button button1) {
-        Button button = button1;
         //locks Button size
         lockButtonSizes();
         //scale image to button
-        int newWidth = button.getWidth();
-        int newHeight = button.getHeight();
+        int newWidth = button1.getWidth();
+        int newHeight = button1.getHeight();
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.pizza_ufo);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
-        button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+        button1.setBackground(new BitmapDrawable(resource, scaledBitmap));
     }
 
     private void lockButtonSizes() {
