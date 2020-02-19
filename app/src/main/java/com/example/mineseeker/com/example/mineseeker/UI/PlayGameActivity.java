@@ -146,7 +146,7 @@ public class PlayGameActivity extends AppCompatActivity {
         if(logic.getIsExplosive(row, col)) {
             //stops both sounds from playing
             if(!logic.getCellScanned(row,col)){
-                laserSound.pause();
+
                 bombSound.start();
 
 
