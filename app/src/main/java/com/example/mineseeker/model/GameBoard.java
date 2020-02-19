@@ -15,12 +15,12 @@ import static android.preference.PreferenceManager.getDefaultSharedPreferences;
  */
 public class GameBoard {
     // start up values for the first play of the game
-    public static final int NUM_MINES = 6;
-    public static final int NUM_ROWS = 4;
-    public static final int NUM_COL = 6;
-    public int numMines;
-    public int numRows;
-    public int numCol;
+    private static final int NUM_MINES = 6;
+    private static final int NUM_ROWS = 4;
+    private static final int NUM_COL = 6;
+    private int numMines;
+    private int numRows;
+    private int numCol;
 
     // singleton support
     private static GameBoard instance;
