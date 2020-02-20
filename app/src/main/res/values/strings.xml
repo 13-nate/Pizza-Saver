@@ -6,12 +6,12 @@
     <string name="bomb_sound"><a href ="https://freesound.org/people/MATTIX/sounds/441497/">Bomb Sound</a></string>
     <string name="scan_sound"><a href ="https://freesound.org/people/samsara/sounds/49989/">Scan Sound</a></string>'
     <string name="UFO_link"><a href ="https://www.nicepng.com/ourpic/u2y3a9t4t4o0y3u2_ftealiens-pizza-alien-ufo-brightcolors-aliens-aliens-abducting/">UFO Image</a></string>
-    <string name="basic_game_help">1. Aliens have invaded earth to steal its greatest creation ... PIZZA!\n
-        2. The goal of the game is find all the aliens hidden in space and save the pizza.\n
-        3. Tap a button to look for a an alien and get our pizza back!.\n
-        4. If the button does not contain an alien it will perform a scan.\n
-        5. A scan shows the number of hidden aliens in the column and row related to that button.\n
-        6. Click on an alien after it has been found to perform a scan</string>
+    <string name="basic_game_help"> 1. Aliens have invaded earth to steal its greatest creation ... PIZZA!\n
+2. The goal of the game is find all the aliens hidden in space and save the pizza.\n
+3. Tap a button to look for a an alien and get our pizza back!.\n
+4. If the button does not contain an alien it will perform a scan.\n
+5. A scan shows the number of hidden aliens in the column and row related to that button.\n
+6. Click on an alien after it has been found to perform a scan</string>
     <string name="authors"><a href ="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">By: Kevin Chen Su and Nathan Simms</a></string>
     <string name="help_image"><a href ="https://www.pngitem.com/middle/JbhJoo_transparent-open-book-png-open-orange-books-png/">Help Image</a></string>
     <string name="bombs_found_0_of">Bombs found 0 of </string>
