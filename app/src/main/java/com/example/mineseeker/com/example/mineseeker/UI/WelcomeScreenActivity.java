@@ -20,10 +20,13 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     private TextView textLogo;
     private TextView authorLogo;
     private ImageButton skipButton;
+    private ImageView ufo_left;
+    private ImageView ufo_right;
     final Handler handler = new Handler();
     Animation logoAnim;
     Animation topAnim;
     Animation authorAnim;
+    Animation ufoAnim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,10 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         textLogo = findViewById(R.id.welcomeLogo_textView);
         authorLogo = findViewById(R.id.author_textView);
         skipButton = findViewById(R.id.skip_imageButton);
+        ufo_left = findViewById(R.id.left_ufo_imageView);
+        ufo_right  = findViewById(R.id.right_ufo_imageView);
+
+
 
         startAnimation();
         delayAnimation();
@@ -60,14 +67,20 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         logoAnim.cancel();
         topAnim.cancel();
         authorAnim.cancel();
+        ufoAnim.cancel();
         super.onBackPressed();
         finish();
     }
 
     private void startAnimation() {
+
         logoAnim = AnimationUtils.loadAnimation(this,R.anim.welcomescreenanimation);
         topAnim = AnimationUtils.loadAnimation(this,R.anim.topanimation);
         authorAnim = AnimationUtils.loadAnimation(this, R.anim.bottomtotop);
+        ufoAnim = AnimationUtils.loadAnimation(this, R.anim.explosion_logo_animation);
+
+        ufo_left.startAnimation(ufoAnim);
+        ufo_right.startAnimation(ufoAnim);
         textLogo.startAnimation(topAnim);
         authorLogo.startAnimation(authorAnim);
     }

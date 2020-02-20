@@ -77,7 +77,7 @@ public class GameMenu extends AppCompatActivity {
     private void startAnimation() {
 
         menuAnimation = AnimationUtils.loadAnimation(this, R.anim.lefttoright);
-        explosionAnimation = AnimationUtils.loadAnimation(this,R.anim.explosion_logo_animation);
+        explosionAnimation = AnimationUtils.loadAnimation(this,R.anim.explosion_logo);
 
 
         playButton = findViewById(R.id.playGame_button);

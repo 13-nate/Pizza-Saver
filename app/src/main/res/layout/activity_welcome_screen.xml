@@ -97,7 +97,7 @@
         app:layout_constraintGuide_percent="0.17" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/left_ufo_imageView"
         android:layout_width="93dp"
         android:layout_height="83dp"
         app:layout_constraintEnd_toStartOf="@+id/welcomeLogo_textView"
@@ -105,7 +105,7 @@
         app:srcCompat="@drawable/pizza_ufo" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/right_ufo_imageView"
         android:layout_width="93dp"
         android:layout_height="83dp"
         app:layout_constraintStart_toEndOf="@+id/welcomeLogo_textView"

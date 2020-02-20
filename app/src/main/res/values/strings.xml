@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">SAVE THE ZA</string>
+    <string name="app_name">UFO DESTROYER</string>
     <string name="action_settings">Settings</string>
-    <string name="mine_seeker">SAVE THE ZA</string>
+    <string name="mine_seeker">UFO DESTROYER</string>
     <string name="win_sound"><a href ="https://freesound.org/people/rhodesmas/sounds/320775/">Win Sound</a></string>
     <string name="bomb_sound"><a href ="https://freesound.org/people/MATTIX/sounds/441497/">Bomb Sound</a></string>
     <string name="scan_sound"><a href ="https://freesound.org/people/samsara/sounds/49989/">Scan Sound</a></string>'
