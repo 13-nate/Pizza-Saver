@@ -8,6 +8,45 @@
     tools:context=".com.example.mineseeker.UI.HelpMenuActivity">
 
     <TextView
+        android:id="@+id/txtWelcomeScreenBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/welcome_screen_background"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textColorLink="@color/design_default_color_on_secondary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/txtHelpImage"
+        app:layout_constraintStart_toEndOf="@+id/txtHelpImage"
+        app:layout_constraintTop_toTopOf="@+id/txtHelpImage" />
+
+    <TextView
+        android:id="@+id/txtPlayGameBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/play_game_background"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textColorLink="@color/design_default_color_on_secondary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/txtWelcomeScreenBg"
+        app:layout_constraintStart_toEndOf="@+id/txtWelcomeScreenBg"
+        app:layout_constraintTop_toTopOf="@+id/txtWelcomeScreenBg" />
+
+    <TextView
+        android:id="@+id/txtPizzaImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/pizza_image"
+        android:textColor="@color/design_default_color_on_secondary"
+        android:textColorLink="@color/design_default_color_on_secondary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtUFOImage" />
+
+    <TextView
         android:id="@+id/txtAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -75,13 +114,13 @@
         app:layout_constraintTop_toBottomOf="@+id/txtBombFoundSound" />
 
     <TextView
-        android:id="@+id/txtBombImage"
+        android:id="@+id/txtUFOImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="642dp"
-        android:text="@string/bomb_link"
+        android:text="@string/UFO_link"
         android:textColor="@color/design_default_color_on_secondary"
         android:textColorLink="@color/design_default_color_on_secondary"
         android:textStyle="bold"
@@ -124,13 +163,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:text="@string/scan_sound"
         android:textColor="@color/design_default_color_on_secondary"
         android:textColorLink="@color/design_default_color_on_secondary"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtBombImage" />
+        app:layout_constraintBottom_toBottomOf="@+id/txtPizzaImage"
+        app:layout_constraintStart_toEndOf="@+id/txtPizzaImage"
+        app:layout_constraintTop_toTopOf="@+id/txtPizzaImage" />
 
     <TextView
         android:id="@+id/txtHelpImage"
@@ -141,7 +180,8 @@
         android:textColor="@color/design_default_color_on_secondary"
         android:textColorLink="@color/design_default_color_on_secondary"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/txtBombImage"
-        app:layout_constraintStart_toEndOf="@+id/txtBombImage"
-        app:layout_constraintTop_toTopOf="@+id/txtBombImage" />
+        app:layout_constraintBottom_toBottomOf="@+id/txtUFOImage"
+        app:layout_constraintStart_toEndOf="@+id/txtUFOImage"
+        app:layout_constraintTop_toTopOf="@+id/txtUFOImage" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

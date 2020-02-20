@@ -96,5 +96,21 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.17" />
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="93dp"
+        android:layout_height="83dp"
+        app:layout_constraintEnd_toStartOf="@+id/welcomeLogo_textView"
+        app:layout_constraintTop_toTopOf="@+id/txtSaveTheZa"
+        app:srcCompat="@drawable/pizza_ufo" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="93dp"
+        android:layout_height="83dp"
+        app:layout_constraintStart_toEndOf="@+id/welcomeLogo_textView"
+        app:layout_constraintTop_toTopOf="@+id/txtSaveTheZa"
+        app:srcCompat="@drawable/pizza_ufo" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
