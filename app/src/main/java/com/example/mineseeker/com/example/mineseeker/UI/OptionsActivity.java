@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,6 +58,22 @@ public class OptionsActivity extends AppCompatActivity {
             button.setText("" + numMine + mines);
             button.setTextColor(Color.parseColor("#FFFFFF"));
 
+            //taken from
+            //https://stackoverflow.com/questions/17120199/change-circle-color-of-radio-button
+            ColorStateList colorStateList = new ColorStateList(
+                    new int[][]{
+
+                            new int[]{android.R.attr.state_enabled} //enabled
+                    },
+                    new int[] {
+
+                            Color.BLACK //disabled
+                            ,Color.WHITE //enabled
+
+                    }
+            );
+
+            button.setButtonTintList(colorStateList);//set the color tint list
             button.setOnClickListener(v -> {
                 setMines = numMine;
                 gameBoard.setNumMines(setMines);
@@ -83,6 +100,25 @@ public class OptionsActivity extends AppCompatActivity {
             RadioButton button = new RadioButton(this);
             button.setText(numGrid);
             button.setTextColor(Color.parseColor("#FFFFFF"));
+
+            //taken from
+            //https://stackoverflow.com/questions/17120199/change-circle-color-of-radio-button
+            ColorStateList colorStateList = new ColorStateList(
+                    new int[][]{
+
+                            new int[]{android.R.attr.state_enabled} //enabled
+                    },
+                    new int[] {
+
+                            Color.BLACK //disabled
+                            ,Color.WHITE //enabled
+
+                    }
+            );
+
+
+            button.setButtonTintList(colorStateList);//set the color tint list
+            button.invalidate(); //could not be necessary
 
             button.setOnClickListener(v -> {
 
