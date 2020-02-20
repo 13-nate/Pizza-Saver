@@ -5,14 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.widget.TextView;
 
 import com.example.mineseeker.R;
-
-import java.util.regex.Pattern;
 
 import static android.text.Html.fromHtml;
 
@@ -24,7 +20,7 @@ public class HelpMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_help_menu);
         getSupportActionBar().setTitle(R.string.help);
 
-        TextView txtBomb = findViewById(R.id.txtBombImage);
+        TextView txtBomb = findViewById(R.id.txtUFOImage);
         txtBomb.setMovementMethod(LinkMovementMethod.getInstance());
 
         TextView txtWinSound = findViewById(R.id.txtWinSound);
@@ -42,6 +38,14 @@ public class HelpMenuActivity extends AppCompatActivity {
         TextView txtHelpImage = findViewById(R.id.txtHelpImage);
         txtHelpImage.setMovementMethod(LinkMovementMethod.getInstance());
 
+        TextView txtWelcomeScreenBg = findViewById(R.id.txtWelcomeScreenBg);
+        txtWelcomeScreenBg.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView txtPlayGameBg = findViewById(R.id.txtPlayGameBg);
+        txtPlayGameBg.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView txtPizzaImage = findViewById(R.id.txtPizzaImage);
+        txtPizzaImage.setMovementMethod(LinkMovementMethod.getInstance());
     }
     public static Intent makeIntentHelpActivity(Context context){
         return new Intent(context, HelpMenuActivity.class);
