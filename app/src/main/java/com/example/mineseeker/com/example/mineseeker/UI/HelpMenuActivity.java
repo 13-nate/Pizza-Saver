@@ -46,6 +46,9 @@ public class HelpMenuActivity extends AppCompatActivity {
 
         TextView txtPizzaImage = findViewById(R.id.txtPizzaImage);
         txtPizzaImage.setMovementMethod(LinkMovementMethod.getInstance());
+
+        TextView txtHelpBg = findViewById(R.id.txtHelpBg);
+        txtHelpBg.setMovementMethod(LinkMovementMethod.getInstance());
     }
     public static Intent makeIntentHelpActivity(Context context){
         return new Intent(context, HelpMenuActivity.class);

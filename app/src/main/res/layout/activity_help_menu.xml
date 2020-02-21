@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/earth_from_space"
+    android:background="@drawable/spacepizza"
     tools:context=".com.example.mineseeker.UI.HelpMenuActivity">
 
     <TextView
@@ -12,13 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/welcome_screen_background"
         android:textColor="@color/design_default_color_on_primary"
         android:textColorLink="@color/design_default_color_on_primary"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/txtHelpImage"
-        app:layout_constraintStart_toEndOf="@+id/txtHelpImage"
-        app:layout_constraintTop_toTopOf="@+id/txtHelpImage" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAbout" />
 
     <TextView
         android:id="@+id/txtPlayGameBg"
@@ -34,17 +34,31 @@
         app:layout_constraintTop_toTopOf="@+id/txtWelcomeScreenBg" />
 
     <TextView
+        android:id="@+id/txtHelpBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/help_screen_background"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textColorLink="@color/design_default_color_on_primary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPlayGameBg"
+        app:layout_constraintStart_toEndOf="@+id/txtPlayGameBg"
+        app:layout_constraintTop_toTopOf="@+id/txtPlayGameBg"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/txtPizzaImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:text="@string/pizza_image"
         android:textColor="@color/design_default_color_on_primary"
         android:textColorLink="@color/design_default_color_on_primary"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUFOImage" />
+        app:layout_constraintBottom_toBottomOf="@+id/txtHelpImage"
+        app:layout_constraintStart_toEndOf="@+id/txtHelpImage"
+        app:layout_constraintTop_toTopOf="@+id/txtHelpImage" />
 
     <TextView
         android:id="@+id/txtAbout"
@@ -119,17 +133,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="642dp"
         android:text="@string/UFO_link"
         android:textColor="@color/design_default_color_on_primary"
         android:textColorLink="@color/design_default_color_on_primary"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtScanSound"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAbout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/txtWelcomeScreenBg" />
 
     <TextView
         android:id="@+id/txtWinSound"

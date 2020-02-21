@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,21 +58,43 @@ public class OptionsActivity extends AppCompatActivity {
             button.setText("" + numMine + mines);
             button.setTextColor(Color.parseColor("#FFFFFF"));
 
+            //Used to get white radio buttons
+            //https://stackoverflow.com/questions/17120199/change-circle-color-of-radio-button
+            ColorStateList colorStateList = new ColorStateList(
+                    new int[][]{
+
+                            new int[]{-android.R.attr.state_enabled}, //disabled
+                            new int[]{android.R.attr.state_enabled} //enabled
+                    },
+                    new int[] {
+
+                            Color.BLACK //disabled
+                            ,Color.WHITE //enabled
+
+                    }
+            );
+
+            button.setButtonTintList(colorStateList);//set the color tint list
             button.setOnClickListener(v -> {
                 setMines = numMine;
                 gameBoard.setNumMines(setMines);
-                //Toast.makeText(OptionsActivity.this, "Selected number of mines is: " + setMines, Toast.LENGTH_SHORT).show();
+                int index = groupMines.indexOfChild(findViewById(groupMines.getCheckedRadioButtonId()));
+                QueryPreferences.setStoredQuery(this,"keyNUMMINESSELECTED", index);
                 getData();
-
             });
             groupMines.addView(button);
         }
+        // used to get index of clicked button and set so user can see what the current setting are
+        //https://stackoverflow.com/questions/6440259/how-to-get-the-selected-index-of-a-radiogroup-in-android
+        // https://stackoverflow.com/questions/9175635/how-to-set-radio-button-checked-as-default-in-radiogroup
+        int indexSelected  = QueryPreferences.getStoredQuery(this,"keyNUMMINESSELECTED");
+        ((RadioButton)groupMines.getChildAt(indexSelected)).setChecked(true);
     }
 
     private void createGridRadioButtons() {
         gameBoard = GameBoard.getInstance();
 
-        RadioGroup group = findViewById(R.id.radio_group_grid_size);
+        RadioGroup groupNumGrid = findViewById(R.id.radio_group_grid_size);
 
         //create radiobuttons
         String[] numGrids = getResources().getStringArray(R.array.grid_dimensions);
@@ -84,6 +107,24 @@ public class OptionsActivity extends AppCompatActivity {
             button.setText(numGrid);
             button.setTextColor(Color.parseColor("#FFFFFF"));
 
+            // Used to get white radio buttons
+            // https://stackoverflow.com/questions/17120199/change-circle-color-of-radio-button
+            ColorStateList colorStateList = new ColorStateList(
+                    new int[][]{
+
+                            new int[]{-android.R.attr.state_enabled}, //disabled
+                            new int[]{android.R.attr.state_enabled} //enabled
+                    },
+                    new int[] {
+
+                            Color.BLACK //disabled
+                            ,Color.WHITE //enabled
+
+                    }
+            );
+
+            button.setButtonTintList(colorStateList);//set the color tint list
+            button.invalidate(); //could not be necessary
             button.setOnClickListener(v -> {
 
                 //get the row and col from text
@@ -96,16 +137,21 @@ public class OptionsActivity extends AppCompatActivity {
                 } else {
                     cols = 6;
                 }
-
+                // used to get index of clicked button and set so user can see what the current setting are
+                // https://stackoverflow.com/questions/6440259/how-to-get-the-selected-index-of-a-radiogroup-in-android
+                // https://stackoverflow.com/questions/9175635/how-to-set-radio-button-checked-as-default-in-radiogroup
+                int index = groupNumGrid.indexOfChild(findViewById(groupNumGrid.getCheckedRadioButtonId()));
+                QueryPreferences.setStoredQuery(this,"keyNUMGRIDSELECTED", index);
                 rows = Integer.parseInt(String.valueOf(row));
                 gameBoard = GameBoard.getInstance();
                 gameBoard.setNumRows(rows);
                 gameBoard.setNumCol(cols);
-
                 getData();
             });
-            group.addView(button);
+            groupNumGrid.addView(button);
         }
+        int indexSelected  = QueryPreferences.getStoredQuery(this,"keyNUMGRIDSELECTED");
+        ((RadioButton)groupNumGrid.getChildAt(indexSelected)).setChecked(true);
     }
 
     public static Intent makeIntentOptionsActivity(Context context){
