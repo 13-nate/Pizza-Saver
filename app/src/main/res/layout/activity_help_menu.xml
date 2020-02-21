@@ -48,6 +48,19 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
+        android:id="@+id/txtOptionsBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/options_background"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textColorLink="@color/design_default_color_on_primary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/txtHelpBg"
+        app:layout_constraintStart_toEndOf="@+id/txtHelpBg"
+        app:layout_constraintTop_toTopOf="@+id/txtHelpBg" />
+
+    <TextView
         android:id="@+id/txtPizzaImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -153,6 +166,19 @@
         app:layout_constraintStart_toEndOf="@+id/txtBombFoundSound"
         app:layout_constraintTop_toTopOf="@+id/txtBombFoundSound"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtStartUpSound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/start_up_sound"
+        android:textColor="@color/design_default_color_on_primary"
+        android:textColorLink="@color/design_default_color_on_primary"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/txtWinSound"
+        app:layout_constraintStart_toEndOf="@+id/txtWinSound"
+        app:layout_constraintTop_toTopOf="@+id/txtWinSound" />
 
     <TextView
         android:id="@+id/txtBombFoundSound"
