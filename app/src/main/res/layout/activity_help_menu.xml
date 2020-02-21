@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Help screen Bacground"
+        android:text="@string/help_screen_background"
         android:textColor="@color/design_default_color_on_primary"
         android:textColorLink="@color/design_default_color_on_primary"
         android:textStyle="bold"
@@ -56,8 +56,9 @@
         android:textColor="@color/design_default_color_on_primary"
         android:textColorLink="@color/design_default_color_on_primary"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/txtHelpImage"
         app:layout_constraintStart_toEndOf="@+id/txtHelpImage"
-        tools:layout_editor_absoluteY="285dp" />
+        app:layout_constraintTop_toTopOf="@+id/txtHelpImage" />
 
     <TextView
         android:id="@+id/txtAbout"

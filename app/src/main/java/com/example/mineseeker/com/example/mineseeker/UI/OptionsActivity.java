@@ -58,7 +58,7 @@ public class OptionsActivity extends AppCompatActivity {
             button.setText("" + numMine + mines);
             button.setTextColor(Color.parseColor("#FFFFFF"));
 
-            //taken from
+            //Used to get white radio buttons
             //https://stackoverflow.com/questions/17120199/change-circle-color-of-radio-button
             ColorStateList colorStateList = new ColorStateList(
                     new int[][]{
@@ -84,6 +84,9 @@ public class OptionsActivity extends AppCompatActivity {
             });
             groupMines.addView(button);
         }
+        // used to get index of clicked button and set so user can see what the current setting are
+        //https://stackoverflow.com/questions/6440259/how-to-get-the-selected-index-of-a-radiogroup-in-android
+        // https://stackoverflow.com/questions/9175635/how-to-set-radio-button-checked-as-default-in-radiogroup
         int indexSelected  = QueryPreferences.getStoredQuery(this,"keyNUMMINESSELECTED");
         ((RadioButton)groupMines.getChildAt(indexSelected)).setChecked(true);
     }
@@ -104,8 +107,8 @@ public class OptionsActivity extends AppCompatActivity {
             button.setText(numGrid);
             button.setTextColor(Color.parseColor("#FFFFFF"));
 
-            //taken from
-            //https://stackoverflow.com/questions/17120199/change-circle-color-of-radio-button
+            // Used to get white radio buttons
+            // https://stackoverflow.com/questions/17120199/change-circle-color-of-radio-button
             ColorStateList colorStateList = new ColorStateList(
                     new int[][]{
 
@@ -134,6 +137,9 @@ public class OptionsActivity extends AppCompatActivity {
                 } else {
                     cols = 6;
                 }
+                // used to get index of clicked button and set so user can see what the current setting are
+                // https://stackoverflow.com/questions/6440259/how-to-get-the-selected-index-of-a-radiogroup-in-android
+                // https://stackoverflow.com/questions/9175635/how-to-set-radio-button-checked-as-default-in-radiogroup
                 int index = groupNumGrid.indexOfChild(findViewById(groupNumGrid.getCheckedRadioButtonId()));
                 QueryPreferences.setStoredQuery(this,"keyNUMGRIDSELECTED", index);
                 rows = Integer.parseInt(String.valueOf(row));
