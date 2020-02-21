@@ -12,4 +12,4 @@ Optional features:
 	     - Must store best score for each possible game configuration and display
 	       the best score for the current configuration while playing the game.
 
-We had a very long graph We only inclu
+We had a very long graph so included all the images just in case that is what you required.
