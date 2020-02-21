@@ -210,7 +210,7 @@ public class PlayGameActivity extends AppCompatActivity {
 
     private void displayWinMessage() {
         FragmentManager manager = getSupportFragmentManager();
-        MessageFragment dialog = new MessageFragment();
+        WinFragment dialog = new WinFragment();
         dialog.show(manager, "MessageDialog");
         winSound.start();
     }

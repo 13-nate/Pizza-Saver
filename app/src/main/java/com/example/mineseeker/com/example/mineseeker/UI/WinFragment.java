@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.example.mineseeker.R;
 
-public class MessageFragment extends AppCompatDialogFragment {
+public class WinFragment extends AppCompatDialogFragment {
 
     @NonNull
     @Override
@@ -28,8 +28,8 @@ public class MessageFragment extends AppCompatDialogFragment {
 
         };
 
-        return new AlertDialog.Builder(getActivity()).setTitle("GAME OVER")
-                .setMessage("Congratulations You won!")
+        return new AlertDialog.Builder(getActivity()).setTitle(getString(R.string.game_over))
+                .setMessage(getString(R.string.win_message))
                 .setView(v)
                 .setPositiveButton(android.R.string.ok, listener)
                 .create();
