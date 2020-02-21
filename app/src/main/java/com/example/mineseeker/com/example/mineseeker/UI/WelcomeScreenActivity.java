@@ -3,6 +3,7 @@ package com.example.mineseeker.com.example.mineseeker.UI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -27,11 +28,14 @@ public class WelcomeScreenActivity extends AppCompatActivity {
     Animation topAnim;
     Animation authorAnim;
     Animation ufoAnim;
+    MediaPlayer introSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
+        introSound = MediaPlayer.create(this,R.raw.welcomescreen);
+        introSound.start();
         textLogo = findViewById(R.id.welcomeLogo_textView);
         authorLogo = findViewById(R.id.author_textView);
         skipButton = findViewById(R.id.skip_imageButton);
@@ -46,6 +50,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
             Intent intent = GameMenu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
             startActivity(intent);
             handler.removeCallbacksAndMessages(null);
+            introSound.stop();
             finish();
         });
 
@@ -56,6 +61,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
       final Runnable runnable = () -> {
           Intent intent = GameMenu.makeIntentGameMenuActivity(WelcomeScreenActivity.this);
           startActivity(intent);
+          introSound.stop();
           finish();
 
       };
@@ -68,6 +74,7 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         topAnim.cancel();
         authorAnim.cancel();
         ufoAnim.cancel();
+        introSound.stop();
         super.onBackPressed();
         finish();
     }
@@ -78,7 +85,6 @@ public class WelcomeScreenActivity extends AppCompatActivity {
         topAnim = AnimationUtils.loadAnimation(this,R.anim.topanimation);
         authorAnim = AnimationUtils.loadAnimation(this, R.anim.bottomtotop);
         ufoAnim = AnimationUtils.loadAnimation(this, R.anim.explosion_logo_animation);
-
         ufo_left.startAnimation(ufoAnim);
         ufo_right.startAnimation(ufoAnim);
         textLogo.startAnimation(topAnim);
